@@ -165,12 +165,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             ),
                             _Section(
                               label: 'Next 24 hours',
+                              color: palette.kickerText,
                               child: HourlyStrip(
                                 hours: forecast.next24Hours,
+                                palette: palette,
                               ),
                             ),
                             _Section(
                               label: '7-day forecast',
+                              color: palette.kickerText,
                               child: Column(
                                 spacing: 8,
                                 children: [
@@ -189,11 +192,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         forecast.daily[i].high,
                                       ),
                                       onTap: () => context.push(Routes.day(i)),
+                                      palette: palette,
                                     ),
                                 ],
                               ),
                             ),
-                            _MetricGrid(current: current),
+                            _MetricGrid(current: current, palette: palette),
                           ],
                         ),
                       ),
@@ -399,10 +403,18 @@ class _Hero extends StatelessWidget {
 }
 
 class _Section extends StatelessWidget {
-  const _Section({required this.label, required this.child});
+  const _Section({
+    required this.label,
+    required this.child,
+    required this.color,
+  });
 
   final String label;
   final Widget child;
+
+  /// The kicker sits directly on the sky, so it takes the palette's own
+  /// on-sky colour rather than the design's hardcoded neutral-700.
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -410,7 +422,7 @@ class _Section extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: 8,
       children: [
-        SectionLabel(label),
+        SectionLabel(label, color: color),
         child,
       ],
     );
@@ -418,9 +430,10 @@ class _Section extends StatelessWidget {
 }
 
 class _MetricGrid extends ConsumerWidget {
-  const _MetricGrid({required this.current});
+  const _MetricGrid({required this.current, required this.palette});
 
   final CurrentWeather current;
+  final WeatherPalette palette;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -455,6 +468,7 @@ class _MetricGrid extends ConsumerWidget {
             icon: tiles[i].$1,
             label: tiles[i].$2,
             value: tiles[i].$3,
+            palette: palette,
             delay: Duration(milliseconds: 60 * i),
           ),
       ],

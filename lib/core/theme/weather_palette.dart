@@ -42,6 +42,53 @@ class WeatherPalette {
 
   Brightness get brightness => isDark ? Brightness.dark : Brightness.light;
 
+  // ── Card roles ─────────────────────────────────────────────────────────
+  //
+  // The design already switches its Day Detail panels on `hp.dark` — dark
+  // glass, light copy — but leaves Home's chips, rows and tiles hardcoded to
+  // the light recipe with ink text. Over a night or storm sky that is close
+  // to unreadable, so Home follows the rule the design applies one screen
+  // over rather than the literal markup.
+
+  /// Whether a *card* wants the dark glass recipe.
+  ///
+  /// Not the same question as [isDark]. That flag describes the top of the
+  /// screen, where the hero and the header sit, and a daytime rain sky is
+  /// genuinely dark there — but it ramps from neutral-700 down to
+  /// neutral-300, so by the time the eye reaches the cards the sky is light
+  /// again. Cards ask about the gradient they actually sit on instead.
+  bool get cardIsDark => gradient.colors[1].computeLuminance() < 0.25;
+
+  /// `--color-text` inside a card: the temperature, the metric reading.
+  Color get cardText => cardIsDark ? const Color(0xFFF9F4ED) : tokens.text;
+
+  /// `--color-neutral-600/700`: hour labels, metric captions, the low temp.
+  ///
+  /// The design mixes 600 and 700 here; 700 throughout, because 600 falls
+  /// under 3:1 on the grey glass a rainy daytime sky produces.
+  Color get cardSubText =>
+      cardIsDark ? Colors.white.withValues(alpha: 0.72) : tokens.neutral.s700;
+
+  /// `--color-neutral-500`: the chevron at the end of a daily row.
+  Color get cardFaintText =>
+      cardIsDark ? Colors.white.withValues(alpha: 0.5) : tokens.neutral.s500;
+
+  /// The terracotta icon role. The deep ramp step reads on a light card and
+  /// vanishes on a dark one, so the light step takes over.
+  Color get cardAccent =>
+      cardIsDark ? tokens.accentRamp.s300 : tokens.accentRamp.s700;
+
+  /// The sage second voice — the metric icons and the precipitation line.
+  Color get cardAccent2 =>
+      cardIsDark ? tokens.accent2Ramp.s300 : tokens.accent2Ramp.s700;
+
+  /// The uppercase kickers above each list. They sit on bare gradient but
+  /// well below the hero, so — unlike [subText] — they answer to the sky
+  /// down there. Neutral-800 rather than the design's 700: a daytime rain sky
+  /// is still mid-grey at that depth, where 700 disappears.
+  Color get kickerText =>
+      cardIsDark ? Colors.white.withValues(alpha: 0.8) : tokens.neutral.s800;
+
   /// `homeTextShadow` — the design lifts the hero off a dark sky with a
   /// single soft shadow, and leaves a light sky alone.
   List<Shadow> get heroTextShadow => isDark

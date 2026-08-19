@@ -8,14 +8,16 @@ import '../../../../../core/theme/motion.dart';
 import '../../../../../core/theme/weather_icons.dart';
 import '../../../../../core/widgets/screen_transition.dart';
 import '../../../../settings/application/settings_providers.dart';
+import '../../../../../core/theme/weather_palette.dart';
 import '../../../domain/forecast.dart';
 
 /// "Next 24 hours" — a horizontal strip of glass chips. Tapping one expands it
 /// to reveal its precipitation chance, and collapses whichever was open.
 class HourlyStrip extends ConsumerStatefulWidget {
-  const HourlyStrip({super.key, required this.hours});
+  const HourlyStrip({super.key, required this.hours, required this.palette});
 
   final List<HourlyPoint> hours;
+  final WeatherPalette palette;
 
   @override
   ConsumerState<HourlyStrip> createState() => _HourlyStripState();
@@ -61,6 +63,7 @@ class _HourlyStripState extends ConsumerState<HourlyStrip> {
                   expanded: _expanded == i,
                   onTap: () =>
                       setState(() => _expanded = _expanded == i ? null : i),
+                  palette: widget.palette,
                 ),
               ),
           ],
@@ -78,6 +81,7 @@ class _HourChip extends StatelessWidget {
     required this.precipitation,
     required this.expanded,
     required this.onTap,
+    required this.palette,
   });
 
   final String label;
@@ -86,6 +90,7 @@ class _HourChip extends StatelessWidget {
   final String precipitation;
   final bool expanded;
   final VoidCallback onTap;
+  final WeatherPalette palette;
 
   /// `transition:all .35s cubic-bezier(.34,1.56,.64,1)` on the chip.
   static const Duration _duration = Duration(milliseconds: 350);
@@ -93,7 +98,7 @@ class _HourChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tokens = context.tokens;
+    final dark = palette.cardIsDark;
 
     return Semantics(
       button: true,
@@ -114,7 +119,7 @@ class _HourChip extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(AtmosTokens.radiusLg),
               child: BackdropFilter(
-                filter: GlassSurface.glassFilter(dark: false),
+                filter: GlassSurface.glassFilter(dark: dark),
                 child: AnimatedContainer(
                   duration: _duration,
                   curve: _curve,
@@ -124,12 +129,17 @@ class _HourChip extends StatelessWidget {
                     horizontal: 16,
                   ),
                   decoration: BoxDecoration(
+                    // Both recipes lift a little when the chip is open.
                     color: Colors.white.withValues(
-                      alpha: expanded ? 0.65 : 0.42,
+                      alpha: dark
+                          ? (expanded ? 0.16 : 0.08)
+                          : (expanded ? 0.65 : 0.42),
                     ),
                     border: Border.all(
                       color: Colors.white.withValues(
-                        alpha: expanded ? 0.7 : 0.5,
+                        alpha: dark
+                            ? (expanded ? 0.28 : 0.16)
+                            : (expanded ? 0.7 : 0.5),
                       ),
                     ),
                     borderRadius: BorderRadius.circular(AtmosTokens.radiusLg),
@@ -141,7 +151,7 @@ class _HourChip extends StatelessWidget {
                         label,
                         style: TextStyle(
                           fontSize: 11,
-                          color: tokens.neutral.s700,
+                          color: palette.cardSubText,
                         ),
                       ),
                       Padding(
@@ -149,12 +159,12 @@ class _HourChip extends StatelessWidget {
                         child: Icon(
                           icon,
                           size: 22,
-                          color: tokens.accentRamp.s700,
+                          color: palette.cardAccent,
                         ),
                       ),
                       Text(
                         temperature,
-                        style: TextStyle(fontSize: 15, color: tokens.text),
+                        style: TextStyle(fontSize: 15, color: palette.cardText),
                       ),
                       if (expanded)
                         Padding(
@@ -163,7 +173,7 @@ class _HourChip extends StatelessWidget {
                             precipitation,
                             style: TextStyle(
                               fontSize: 10,
-                              color: tokens.accent2Ramp.s700,
+                              color: palette.cardAccent2,
                             ),
                           ),
                         ),
