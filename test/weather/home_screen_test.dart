@@ -7,6 +7,7 @@ import 'package:atmos_flow/features/weather/application/weather_providers.dart';
 import 'package:atmos_flow/features/weather/data/fake_weather_repository.dart';
 import 'package:atmos_flow/features/weather/domain/place.dart';
 import 'package:atmos_flow/features/weather/presentation/home/home_screen.dart';
+import 'package:atmos_flow/features/weather/presentation/home/widgets/refresh_puck.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -175,5 +176,41 @@ void main() {
   test('the fixture place matches the design prototype', () {
     expect(FakeWeatherRepository.savedFixtures.first, place);
     expect(FakeWeatherRepository.graphTemperatures, hasLength(24));
+  });
+
+  testWidgets('tapping the hero drops the refresh puck in', (tester) async {
+    await tester.pumpWidget(await homeUnderTest());
+    await tester.pumpAndSettle();
+
+    // The puck is mounted from the start; what changes is whether it is
+    // showing, so assert on the state it carries rather than its presence.
+    RefreshPuck puck() => tester.widget<RefreshPuck>(find.byType(RefreshPuck));
+    expect(puck().refreshing, isFalse);
+
+    await tester.tap(find.text('Feels like 20°'));
+    await tester.pump();
+    expect(puck().refreshing, isTrue);
+
+    // It arrives from 46px above at 60% scale, so it is neither in place nor
+    // at full size on the frame it starts.
+    final start = tester.widget<Transform>(
+      find
+          .descendant(of: find.byType(RefreshPuck), matching: find.byType(Transform))
+          .first,
+    );
+    expect(start.transform.getTranslation().y, lessThan(0));
+
+    await tester.pump(const Duration(milliseconds: 600));
+    final settled = tester.widget<Transform>(
+      find
+          .descendant(of: find.byType(RefreshPuck), matching: find.byType(Transform))
+          .first,
+    );
+    expect(settled.transform.getTranslation().y, closeTo(0, 0.01));
+
+    // And it leaves once the refresh has run its course.
+    await tester.pump(const Duration(milliseconds: 1200));
+    expect(puck().refreshing, isFalse);
+    await tester.pumpAndSettle();
   });
 }

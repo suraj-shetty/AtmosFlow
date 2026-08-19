@@ -32,10 +32,16 @@ abstract final class Motion {
   static const double fadeSlideUpOffset = 18;
   static const Duration metricStagger = Duration(milliseconds: 60);
 
-  /// `bounceIcon` on the pull-to-refresh affordance, and how long the
-  /// prototype pretends to refresh for.
-  static const Duration refreshBounce = Duration(milliseconds: 800);
-  static const Duration refreshMinimum = Duration(milliseconds: 900);
+  /// The refresh puck: it springs down into view, and its icon plays one
+  /// `sunSpinBounce` turn for as long as the prototype pretends to refresh.
+  static const Duration refreshMinimum = Duration(milliseconds: 1100);
+  static const Duration refreshSpin = Duration(milliseconds: 1100);
+  static const Duration refreshPuckSlide = Duration(milliseconds: 500);
+  static const Duration refreshPuckFade = Duration(milliseconds: 350);
+
+  /// Where the puck waits when it is not showing: 46px up, at 60% scale.
+  static const double refreshPuckHiddenLift = 46;
+  static const double refreshPuckHiddenScale = 0.6;
 
   /// Parallax multipliers applied to the scroll offset.
   static const double parallaxFast = -0.25; // sun

@@ -59,7 +59,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         routes: [
           GoRoute(
             path: 'day/:index',
-            pageBuilder: (context, state) => _fade(
+            pageBuilder: (context, state) => _modal(
               state,
               DayDetailScreen(
                 dayIndex: int.tryParse(state.pathParameters['index'] ?? '') ?? 0,
@@ -100,10 +100,10 @@ void dismissPresented(BuildContext context) {
   }
 }
 
-/// Search and Settings arrive the way an iOS full-screen cover does: the
-/// whole screen rises from the bottom edge and drops back out of it. Their
-/// bodies still play the design's own fade-and-lift on top, but the gradient
-/// rides the slide, so the panel reads as one surface moving.
+/// Day Detail, Search and Settings arrive the way an iOS full-screen cover
+/// does: the whole screen rises from the bottom edge and drops back out of
+/// it. Their bodies still play the design's own fade-and-lift on top, but the
+/// gradient rides the slide, so the panel reads as one surface moving.
 CustomTransitionPage<void> _modal(GoRouterState state, Widget child) {
   return CustomTransitionPage(
     key: state.pageKey,

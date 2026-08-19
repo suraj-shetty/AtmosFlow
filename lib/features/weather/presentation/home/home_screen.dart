@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/failure/app_failure.dart';
 import '../../../../core/theme/atmos_tokens.dart';
 import '../../../../core/theme/glass.dart';
+import '../../../../core/theme/motion.dart';
 import '../../../../core/theme/weather_icons.dart';
 import '../../../../core/theme/weather_palette.dart';
 import '../../../../core/widgets/screen_transition.dart';
@@ -13,10 +14,12 @@ import '../../../../routing/app_router.dart';
 import '../../../settings/application/settings_providers.dart';
 import '../../application/weather_providers.dart';
 import '../../domain/forecast.dart';
+import '../../domain/weather_condition.dart';
 import '../ambient/ambient_sky.dart';
 import 'widgets/daily_row.dart';
 import 'widgets/hourly_strip.dart';
 import 'widgets/metric_tile.dart';
+import 'widgets/refresh_puck.dart';
 
 /// The main screen: a full-bleed condition sky with the forecast scrolling
 /// over it.
@@ -30,6 +33,10 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   /// Feeds the parallax without rebuilding the content on every frame.
   final _scrollOffset = ValueNotifier<double>(0);
+
+  /// Drives the refresh puck. The pull gesture and the design's tap targets
+  /// both set it, so there is only ever one indicator on screen.
+  bool _refreshing = false;
 
   @override
   void dispose() {
@@ -45,13 +52,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Future<void> _refresh(Forecast forecast) async {
+    if (_refreshing) return;
+    setState(() => _refreshing = true);
     ref.invalidate(forecastProvider(forecast.place));
-    await Future.wait([
-      ref.read(forecastProvider(forecast.place).future),
-      // The design holds the refreshing state for a beat so the animation
-      // reads even when the network is instant.
-      Future<void>.delayed(const Duration(milliseconds: 900)),
-    ]);
+    try {
+      await Future.wait([
+        ref.read(forecastProvider(forecast.place).future),
+        // The design holds the refreshing state for a beat so the puck's spin
+        // reads even when the network is instant.
+        Future<void>.delayed(Motion.refreshMinimum),
+      ]);
+    } finally {
+      if (mounted) setState(() => _refreshing = false);
+    }
   }
 
   @override
@@ -103,11 +116,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: ScreenTransition(
               child: NotificationListener<ScrollNotification>(
                 onNotification: _onScroll,
+                // The gesture is the platform's; the indicator is the
+                // design's, so the stock spinner is drawn in nothing at all.
                 child: RefreshIndicator(
                   onRefresh: () => _refresh(forecast),
                   edgeOffset: 72,
-                  color: palette.accentText,
-                  backgroundColor: Colors.white.withValues(alpha: 0.6),
+                  elevation: 0,
+                  color: Colors.transparent,
+                  backgroundColor: Colors.transparent,
                   child: ListView(
                     padding: const EdgeInsets.only(top: 72, bottom: 104),
                     children: [
@@ -117,24 +133,34 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           spacing: 18,
                           children: [
-                            _LocationBar(
-                              name: forecast.place.name,
-                              color: palette.accentText,
-                              onSearch: () => context.push(Routes.search),
-                              onSettings: () => context.push(Routes.settings),
+                            // The design refreshes on a tap of the header
+                            // strip or the hero, either side of the controls
+                            // that sit inside them.
+                            GestureDetector(
+                              onTap: () => _refresh(forecast),
+                              child: _LocationBar(
+                                name: forecast.place.name,
+                                color: palette.accentText,
+                                onSearch: () => context.push(Routes.search),
+                                onSettings: () =>
+                                    context.push(Routes.settings),
+                              ),
                             ),
-                            _Hero(
-                              temperature: formatter.temperature(
-                                current.temperature,
-                              ),
-                              condition: current.condition.label,
-                              feelsLike: formatter.temperature(
-                                current.feelsLike,
-                              ),
-                              palette: palette,
-                              conditionIcon: WeatherIcons.forCondition(
-                                current.condition,
-                                isNight: current.isNight,
+                            GestureDetector(
+                              onTap: () => _refresh(forecast),
+                              child: _Hero(
+                                temperature: formatter.temperature(
+                                  current.temperature,
+                                ),
+                                condition: current.condition.label,
+                                feelsLike: formatter.temperature(
+                                  current.feelsLike,
+                                ),
+                                palette: palette,
+                                conditionIcon: WeatherIcons.forCondition(
+                                  current.condition,
+                                  isNight: current.isNight,
+                                ),
                               ),
                             ),
                             _Section(
@@ -162,7 +188,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       highLabel: formatter.temperature(
                                         forecast.daily[i].high,
                                       ),
-                                      onTap: () => context.go(Routes.day(i)),
+                                      onTap: () => context.push(Routes.day(i)),
                                     ),
                                 ],
                               ),
@@ -176,6 +202,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ),
             ),
+          ),
+          RefreshPuck(
+            refreshing: _refreshing,
+            // The design shows the sky's own body for a clear sky and a
+            // cloud for every other condition.
+            icon: current.condition == WeatherCondition.clear
+                ? WeatherIcons.forCondition(
+                    current.condition,
+                    isNight: current.isNight,
+                  )
+                : WeatherIcons.forCondition(WeatherCondition.cloudy),
+            color: palette.accentText,
           ),
         ],
       ),

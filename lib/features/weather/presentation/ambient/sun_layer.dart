@@ -5,23 +5,28 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/atmos_tokens.dart';
 import '../../../../core/theme/motion.dart';
 
-/// The sun: a pulsing radial glow under four rays on a very slow spin.
+/// The sun: a solid disc under four rays on a very slow spin, over a pulsing
+/// radial glow.
 ///
-/// Home draws the glow and rays only; onboarding adds a solid disc, which is
-/// what [showDisc] switches on.
+/// The design draws all three layers on Home and on onboarding alike; only
+/// the overall size and the glow's inset differ between them.
 class SunLayer extends StatefulWidget {
   const SunLayer({
     super.key,
     this.size = 220,
     this.top = 10,
-    this.showDisc = false,
+    this.glowInset = 40,
     this.spin = Motion.sunRaySpin,
     this.parallax = 0,
   });
 
   final double size;
   final double top;
-  final bool showDisc;
+
+  /// How far the glow sits inside the sun's box — `inset:40` on Home,
+  /// `inset:30` on onboarding.
+  final double glowInset;
+
   final Duration spin;
   final double parallax;
 
@@ -50,7 +55,6 @@ class _SunLayerState extends State<SunLayer> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
-    final inset = widget.size * (widget.showDisc ? 1 / 6 : 40 / 220);
 
     return Positioned(
       top: widget.top + widget.parallax,
@@ -74,7 +78,7 @@ class _SunLayerState extends State<SunLayer> with TickerProviderStateMixin {
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(inset),
+                  padding: EdgeInsets.all(widget.glowInset),
                   child: ImageFiltered(
                     imageFilter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
                     child: DecoratedBox(
@@ -103,15 +107,15 @@ class _SunLayerState extends State<SunLayer> with TickerProviderStateMixin {
                   ),
                 ),
               ),
-              if (widget.showDisc)
-                Container(
-                  width: widget.size / 3,
-                  height: widget.size / 3,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: tokens.accentRamp.s300,
-                  ),
+              // The solid body, `inset:60` on both sizes the design uses.
+              Container(
+                width: widget.size - 120,
+                height: widget.size - 120,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: tokens.accentRamp.s300,
                 ),
+              ),
             ],
           ),
         ),

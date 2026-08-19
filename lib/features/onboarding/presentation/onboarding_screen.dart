@@ -181,7 +181,7 @@ class _MoodAmbient extends StatelessWidget {
                 const SunLayer(
                   size: 180,
                   top: 70,
-                  showDisc: true,
+                  glowInset: 30,
                   spin: Duration(seconds: 90),
                 )
               else
