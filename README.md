@@ -13,8 +13,9 @@ star field — all driven by real forecast data.
 flutter run
 ```
 
-Code generation (freezed + json_serializable) runs separately, and must be run
-after pulling or after editing any model:
+Generated code (freezed + json_serializable) is committed, so a fresh clone
+compiles without a codegen step. Regenerate after editing any model, and
+commit the result alongside the change:
 
 ```bash
 dart run build_runner build --delete-conflicting-outputs
