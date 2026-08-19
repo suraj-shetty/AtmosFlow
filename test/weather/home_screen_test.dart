@@ -78,6 +78,27 @@ void main() {
     expect(find.text('12 km'), findsOneWidget);
   });
 
+  testWidgets('tapping the place name opens search', (tester) async {
+    final semantics = tester.ensureSemantics();
+    await tester.pumpWidget(await homeUnderTest());
+    await tester.pumpAndSettle();
+
+    // No router under this harness, so assert the handler is wired rather
+    // than the destination: an unwired name has no gesture recogniser.
+    expect(
+      find.ancestor(
+        of: find.text('San Francisco'),
+        matching: find.byType(GestureDetector),
+      ),
+      findsWidgets,
+    );
+    expect(
+      find.bySemanticsLabel('Change location, currently San Francisco'),
+      findsOneWidget,
+    );
+    semantics.dispose();
+  });
+
   testWidgets('tapping an hourly chip reveals its precipitation chance', (
     tester,
   ) async {

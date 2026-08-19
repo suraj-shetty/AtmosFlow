@@ -240,24 +240,41 @@ class _LocationBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        // The place name is the design's other way into Search — it carries
+        // the same handler as the search button beside it.
         Flexible(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            spacing: 6,
-            children: [
-              Icon(WeatherIcons.pin, size: 16, color: color),
-              Flexible(
-                child: Text(
-                  name,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontFamily: AtmosTokens.fontHeading,
-                    fontSize: 17,
-                    color: color,
-                  ),
+          child: Semantics(
+            button: true,
+            container: true,
+            excludeSemantics: true,
+            label: 'Change location, currently $name',
+            child: GestureDetector(
+              onTap: onSearch,
+              behavior: HitTestBehavior.opaque,
+              child: SizedBox(
+                // Matches the icon buttons opposite, so the whole header
+                // strip is a comfortable target rather than just the glyphs.
+                height: 38,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 6,
+                  children: [
+                    Icon(WeatherIcons.pin, size: 16, color: color),
+                    Flexible(
+                      child: Text(
+                        name,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontFamily: AtmosTokens.fontHeading,
+                          fontSize: 17,
+                          color: color,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
         ),
         Row(
