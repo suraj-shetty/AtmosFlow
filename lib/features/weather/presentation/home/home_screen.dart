@@ -120,8 +120,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             _LocationBar(
                               name: forecast.place.name,
                               color: palette.accentText,
-                              onSearch: () => context.go(Routes.search),
-                              onSettings: () => context.go(Routes.settings),
+                              onSearch: () => context.push(Routes.search),
+                              onSettings: () => context.push(Routes.settings),
                             ),
                             _Hero(
                               temperature: formatter.temperature(

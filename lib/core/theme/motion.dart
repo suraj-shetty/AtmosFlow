@@ -9,6 +9,14 @@ abstract final class Motion {
   static const Duration screenTransition = Duration(milliseconds: 400);
   static const Curve screenTransitionCurve = Cubic(0.22, 1, 0.36, 1);
 
+  /// Search and Settings are presented like an iOS full-screen cover: up
+  /// from the bottom edge, decelerating in and accelerating out. The design
+  /// leaves route-level motion unspecified, so these follow the platform.
+  static const Duration modalPresent = Duration(milliseconds: 420);
+  static const Duration modalDismiss = Duration(milliseconds: 330);
+  static const Curve modalPresentCurve = Cubic(0.22, 1, 0.36, 1);
+  static const Curve modalDismissCurve = Curves.easeInCubic;
+
   /// The design fades the outgoing screen for 160ms before swapping.
   static const Duration screenSwapDelay = Duration(milliseconds: 160);
 

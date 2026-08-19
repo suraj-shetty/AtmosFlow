@@ -80,7 +80,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                   children: [
                     GlassIconButton(
                       icon: WeatherIcons.chevronLeft,
-                      onPressed: () => context.go(Routes.home),
+                      onPressed: () => dismissPresented(context),
                       color: tokens.text,
                       size: 36,
                       tooltip: 'Back to forecast',
@@ -207,7 +207,7 @@ class _SavedSection extends StatelessWidget {
           children: [
             const SectionLabel('Saved Locations'),
             GestureDetector(
-              onTap: () => context.go(Routes.savedLocations),
+              onTap: () => context.push(Routes.savedLocations),
               child: Text(
                 'See all',
                 style: TextStyle(fontSize: 12, color: tokens.accentRamp.s700),

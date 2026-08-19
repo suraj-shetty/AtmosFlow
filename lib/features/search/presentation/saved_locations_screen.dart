@@ -39,7 +39,7 @@ class SavedLocationsScreen extends ConsumerWidget {
                 children: [
                   GlassIconButton(
                     icon: WeatherIcons.chevronLeft,
-                    onPressed: () => context.go(Routes.search),
+                    onPressed: () => dismissPresented(context),
                     color: tokens.text,
                     size: 36,
                     tooltip: 'Back to search',

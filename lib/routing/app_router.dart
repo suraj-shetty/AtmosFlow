@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/theme/motion.dart';
 import '../features/onboarding/presentation/onboarding_screen.dart';
 import '../features/search/presentation/saved_locations_screen.dart';
 import '../features/search/presentation/search_screen.dart';
@@ -69,22 +70,60 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: Routes.search,
-        pageBuilder: (context, state) => _fade(state, const SearchScreen()),
+        pageBuilder: (context, state) => _modal(state, const SearchScreen()),
         routes: [
           GoRoute(
             path: 'saved',
             pageBuilder: (context, state) =>
-                _fade(state, const SavedLocationsScreen()),
+                _modal(state, const SavedLocationsScreen()),
           ),
         ],
       ),
       GoRoute(
         path: Routes.settings,
-        pageBuilder: (context, state) => _fade(state, const SettingsScreen()),
+        pageBuilder: (context, state) =>
+            _modal(state, const SettingsScreen()),
       ),
     ],
   );
 });
+
+/// Closes a presented screen, dropping it back out of the bottom edge.
+///
+/// Search is also reachable straight from onboarding, where there is no
+/// forecast underneath to return to — hence the fallback.
+void dismissPresented(BuildContext context) {
+  if (context.canPop()) {
+    context.pop();
+  } else {
+    context.go(Routes.home);
+  }
+}
+
+/// Search and Settings arrive the way an iOS full-screen cover does: the
+/// whole screen rises from the bottom edge and drops back out of it. Their
+/// bodies still play the design's own fade-and-lift on top, but the gradient
+/// rides the slide, so the panel reads as one surface moving.
+CustomTransitionPage<void> _modal(GoRouterState state, Widget child) {
+  return CustomTransitionPage(
+    key: state.pageKey,
+    transitionDuration: Motion.modalPresent,
+    reverseTransitionDuration: Motion.modalDismiss,
+    child: Scaffold(body: child),
+    transitionsBuilder: (context, animation, secondary, child) {
+      return SlideTransition(
+        position: Tween(begin: const Offset(0, 1), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: animation,
+            curve: Motion.modalPresentCurve,
+            reverseCurve: Motion.modalDismissCurve,
+          ),
+        ),
+        child: child,
+      );
+    },
+  );
+}
 
 /// The design has no page-level transition of its own: every screen body
 /// fades and lifts itself in through `ScreenTransition`, so the route swap
