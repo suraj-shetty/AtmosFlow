@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The whole tile is one painted bitmap: a RemoteViews tree cannot draw the
+     design's gradients, glows and particle field, and cannot reach the app's
+     bundled Figtree either. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/atmosflow_tile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:importantForAccessibility="yes" />
+</FrameLayout>

@@ -8,7 +8,8 @@ plugins {
 android {
     namespace = "com.surajshetty.atmos_flow"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    // Several plugins need 27; NDK releases are backward compatible.
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -24,10 +25,12 @@ android {
         applicationId = "com.surajshetty.atmos_flow"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        // geocoding_android needs 24; Flutter's own floor is lower.
+        minSdk = maxOf(24, flutter.minSdkVersion)
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -41,4 +44,15 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    // `PathParser`, so the widget's icons stay the design's own SVG paths
+    // rather than a hand-retraced approximation.
+    implementation("androidx.core:core-ktx:1.13.1")
+
+    // The tile render harness: it draws every sky to a PNG on a device, which
+    // is the only place a Canvas actually rasterises.
+    androidTestImplementation("androidx.test:runner:1.6.2")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
 }

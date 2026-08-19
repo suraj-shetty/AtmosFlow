@@ -1,0 +1,4688 @@
+{
+ "Clear|Dawn": [
+  {
+   "anim": null,
+   "kind": "duskVeil",
+   "height": 0.52,
+   "color": [
+    26,
+    20,
+    36,
+    0.58
+   ]
+  },
+  {
+   "anim": {
+    "name": "sunRise",
+    "duration": 6.0,
+    "delay": 0.0
+   },
+   "box": {
+    "left": {
+     "pct": 0.5
+    },
+    "bottom": {
+     "frac": -0.225
+    },
+    "width": {
+     "frac": 0.45
+    },
+    "height": {
+     "frac": 0.45
+    },
+    "marginLeft": {
+     "frac": -0.225
+    }
+   },
+   "round": true,
+   "kind": "radial",
+   "center": [
+    0.5,
+    0.5
+   ],
+   "stops": [
+    {
+     "color": [
+      255,
+      190,
+      120,
+      0.85
+     ],
+     "at": null
+    },
+    {
+     "color": [
+      255,
+      170,
+      100,
+      0.2
+     ],
+     "at": 0.7
+    }
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 3.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": 0.08
+    },
+    "left": {
+     "pct": 0.22
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 3.6,
+    "delay": 0.8
+   },
+   "box": {
+    "top": {
+     "frac": 0.16
+    },
+    "left": {
+     "pct": 0.68
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  }
+ ],
+ "Clear|Morning": [
+  {
+   "anim": {
+    "name": "sunPulse",
+    "duration": 4.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.125
+    },
+    "right": {
+     "frac": -0.125
+    },
+    "width": {
+     "frac": 0.54
+    },
+    "height": {
+     "frac": 0.54
+    }
+   },
+   "round": true,
+   "kind": "radial",
+   "center": [
+    0.5,
+    0.5
+   ],
+   "stops": [
+    {
+     "color": [
+      255,
+      214,
+      150,
+      0.75
+     ],
+     "at": null
+    },
+    {
+     "color": [
+      0,
+      0,
+      0,
+      0.0
+     ],
+     "at": 0.7
+    }
+   ]
+  },
+  {
+   "anim": {
+    "name": "sunRaysRotate",
+    "duration": 28.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.2
+    },
+    "right": {
+     "frac": -0.2
+    },
+    "width": {
+     "frac": 0.74
+    },
+    "height": {
+     "frac": 0.74
+    }
+   },
+   "round": true,
+   "kind": "ring",
+   "strokeWidth": 2.0,
+   "color": [
+    255,
+    214,
+    150,
+    0.2
+   ]
+  }
+ ],
+ "Clear|Afternoon": [
+  {
+   "anim": {
+    "name": "sunPulse",
+    "duration": 3.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "pct": 0.5
+    },
+    "left": {
+     "pct": 0.5
+    },
+    "width": {
+     "frac": 0.64
+    },
+    "height": {
+     "frac": 0.64
+    },
+    "marginTop": {
+     "frac": -0.32
+    },
+    "marginLeft": {
+     "frac": -0.32
+    }
+   },
+   "round": true,
+   "kind": "radial",
+   "center": [
+    0.5,
+    0.5
+   ],
+   "stops": [
+    {
+     "color": [
+      255,
+      238,
+      190,
+      0.9
+     ],
+     "at": null
+    },
+    {
+     "color": [
+      0,
+      0,
+      0,
+      0.0
+     ],
+     "at": 0.68
+    }
+   ]
+  },
+  {
+   "anim": {
+    "name": "sunRaysRotate",
+    "duration": 22.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "pct": 0.5
+    },
+    "left": {
+     "pct": 0.5
+    },
+    "width": {
+     "frac": 0.86
+    },
+    "height": {
+     "frac": 0.86
+    },
+    "marginTop": {
+     "frac": -0.43
+    },
+    "marginLeft": {
+     "frac": -0.43
+    }
+   },
+   "round": true,
+   "kind": "ring",
+   "strokeWidth": 2.0,
+   "color": [
+    255,
+    235,
+    180,
+    0.28
+   ]
+  }
+ ],
+ "Clear|Evening": [
+  {
+   "anim": null,
+   "kind": "duskVeil",
+   "height": 0.52,
+   "color": [
+    26,
+    20,
+    36,
+    0.58
+   ]
+  },
+  {
+   "anim": {
+    "name": "moonGlow",
+    "duration": 5.0,
+    "delay": 0.0
+   },
+   "box": {
+    "right": {
+     "frac": 0.11
+    },
+    "bottom": {
+     "frac": -0.19
+    },
+    "width": {
+     "frac": 0.39
+    },
+    "height": {
+     "frac": 0.39
+    }
+   },
+   "round": true,
+   "kind": "radial",
+   "center": [
+    0.5,
+    0.5
+   ],
+   "stops": [
+    {
+     "color": [
+      255,
+      180,
+      110,
+      0.9
+     ],
+     "at": null
+    },
+    {
+     "color": [
+      255,
+      150,
+      90,
+      0.25
+     ],
+     "at": 0.7
+    }
+   ]
+  }
+ ],
+ "Clear|Night": [
+  {
+   "anim": {
+    "name": "moonGlow",
+    "duration": 6.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": 0.11
+    },
+    "right": {
+     "frac": 0.13
+    },
+    "width": {
+     "frac": 0.21
+    },
+    "height": {
+     "frac": 0.21
+    }
+   },
+   "round": true,
+   "kind": "radial",
+   "center": [
+    0.38,
+    0.34
+   ],
+   "stops": [
+    {
+     "color": [
+      244,
+      240,
+      226,
+      1.0
+     ],
+     "at": null
+    },
+    {
+     "color": [
+      207,
+      201,
+      180,
+      1.0
+     ],
+     "at": 0.72
+    }
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.1
+    },
+    "spread": {
+     "frac": 0.025
+    },
+    "color": [
+     230,
+     230,
+     210,
+     0.22
+    ]
+   }
+  }
+ ],
+ "Cloudy|Dawn": [
+  {
+   "anim": null,
+   "kind": "duskVeil",
+   "height": 0.52,
+   "color": [
+    26,
+    20,
+    36,
+    0.58
+   ]
+  },
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    148,
+    150,
+    166,
+    0.44
+   ]
+  },
+  {
+   "anim": {
+    "name": "cloudFloat",
+    "duration": 6.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": 0.09
+    },
+    "left": {
+     "frac": -0.28
+    },
+    "width": {
+     "frac": 0.43
+    },
+    "height": {
+     "frac": 0.24
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    0.36
+   ]
+  },
+  {
+   "anim": {
+    "name": "cloudFloat",
+    "duration": 7.0,
+    "delay": 1.5
+   },
+   "box": {
+    "top": {
+     "frac": 0.48
+    },
+    "left": {
+     "frac": -0.37
+    },
+    "width": {
+     "frac": 0.38
+    },
+    "height": {
+     "frac": 0.21
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    0.26
+   ]
+  }
+ ],
+ "Cloudy|Morning": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    148,
+    150,
+    166,
+    0.44
+   ]
+  },
+  {
+   "anim": {
+    "name": "cloudFloat",
+    "duration": 6.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": 0.09
+    },
+    "left": {
+     "frac": -0.28
+    },
+    "width": {
+     "frac": 0.43
+    },
+    "height": {
+     "frac": 0.24
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    0.36
+   ]
+  },
+  {
+   "anim": {
+    "name": "cloudFloat",
+    "duration": 7.0,
+    "delay": 1.5
+   },
+   "box": {
+    "top": {
+     "frac": 0.48
+    },
+    "left": {
+     "frac": -0.37
+    },
+    "width": {
+     "frac": 0.38
+    },
+    "height": {
+     "frac": 0.21
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    0.26
+   ]
+  }
+ ],
+ "Cloudy|Afternoon": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    148,
+    150,
+    166,
+    0.44
+   ]
+  },
+  {
+   "anim": {
+    "name": "cloudFloat",
+    "duration": 6.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": 0.09
+    },
+    "left": {
+     "frac": -0.28
+    },
+    "width": {
+     "frac": 0.43
+    },
+    "height": {
+     "frac": 0.24
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    0.36
+   ]
+  },
+  {
+   "anim": {
+    "name": "cloudFloat",
+    "duration": 7.0,
+    "delay": 1.5
+   },
+   "box": {
+    "top": {
+     "frac": 0.48
+    },
+    "left": {
+     "frac": -0.37
+    },
+    "width": {
+     "frac": 0.38
+    },
+    "height": {
+     "frac": 0.21
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    0.26
+   ]
+  }
+ ],
+ "Cloudy|Evening": [
+  {
+   "anim": null,
+   "kind": "duskVeil",
+   "height": 0.52,
+   "color": [
+    26,
+    20,
+    36,
+    0.58
+   ]
+  },
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    148,
+    150,
+    166,
+    0.44
+   ]
+  },
+  {
+   "anim": {
+    "name": "cloudFloat",
+    "duration": 6.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": 0.09
+    },
+    "left": {
+     "frac": -0.28
+    },
+    "width": {
+     "frac": 0.43
+    },
+    "height": {
+     "frac": 0.24
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    0.36
+   ]
+  },
+  {
+   "anim": {
+    "name": "cloudFloat",
+    "duration": 7.0,
+    "delay": 1.5
+   },
+   "box": {
+    "top": {
+     "frac": 0.48
+    },
+    "left": {
+     "frac": -0.37
+    },
+    "width": {
+     "frac": 0.38
+    },
+    "height": {
+     "frac": 0.21
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    0.26
+   ]
+  }
+ ],
+ "Cloudy|Night": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    148,
+    150,
+    166,
+    0.44
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 2.8,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": 0.14
+    },
+    "left": {
+     "pct": 0.18
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 3.4,
+    "delay": 0.6
+   },
+   "box": {
+    "top": {
+     "frac": 0.27
+    },
+    "left": {
+     "pct": 0.36
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 3.1,
+    "delay": 1.2
+   },
+   "box": {
+    "top": {
+     "frac": 0.12
+    },
+    "left": {
+     "pct": 0.58
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "cloudFloat",
+    "duration": 6.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": 0.09
+    },
+    "left": {
+     "frac": -0.28
+    },
+    "width": {
+     "frac": 0.43
+    },
+    "height": {
+     "frac": 0.24
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    0.36
+   ]
+  },
+  {
+   "anim": {
+    "name": "cloudFloat",
+    "duration": 7.0,
+    "delay": 1.5
+   },
+   "box": {
+    "top": {
+     "frac": 0.48
+    },
+    "left": {
+     "frac": -0.37
+    },
+    "width": {
+     "frac": 0.38
+    },
+    "height": {
+     "frac": 0.21
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    0.26
+   ]
+  }
+ ],
+ "Fog|Dawn": [
+  {
+   "anim": null,
+   "kind": "duskVeil",
+   "height": 0.52,
+   "color": [
+    26,
+    20,
+    36,
+    0.58
+   ]
+  },
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    196,
+    198,
+    206,
+    0.56
+   ]
+  },
+  {
+   "anim": {
+    "name": "mistSwirl",
+    "duration": 6.0,
+    "delay": 0.0
+   },
+   "kind": "mist",
+   "blobs": [
+    {
+     "w": 0.48,
+     "h": 0.29,
+     "x": 0.2,
+     "y": 0.3,
+     "color": [
+      226,
+      228,
+      236,
+      0.45
+     ]
+    },
+    {
+     "w": 0.57,
+     "h": 0.33,
+     "x": 0.75,
+     "y": 0.7,
+     "color": [
+      214,
+      216,
+      226,
+      0.35
+     ]
+    }
+   ]
+  }
+ ],
+ "Fog|Morning": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    196,
+    198,
+    206,
+    0.56
+   ]
+  },
+  {
+   "anim": {
+    "name": "mistSwirl",
+    "duration": 6.0,
+    "delay": 0.0
+   },
+   "kind": "mist",
+   "blobs": [
+    {
+     "w": 0.48,
+     "h": 0.29,
+     "x": 0.2,
+     "y": 0.3,
+     "color": [
+      226,
+      228,
+      236,
+      0.45
+     ]
+    },
+    {
+     "w": 0.57,
+     "h": 0.33,
+     "x": 0.75,
+     "y": 0.7,
+     "color": [
+      214,
+      216,
+      226,
+      0.35
+     ]
+    }
+   ]
+  }
+ ],
+ "Fog|Afternoon": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    196,
+    198,
+    206,
+    0.56
+   ]
+  },
+  {
+   "anim": {
+    "name": "mistSwirl",
+    "duration": 6.0,
+    "delay": 0.0
+   },
+   "kind": "mist",
+   "blobs": [
+    {
+     "w": 0.48,
+     "h": 0.29,
+     "x": 0.2,
+     "y": 0.3,
+     "color": [
+      226,
+      228,
+      236,
+      0.45
+     ]
+    },
+    {
+     "w": 0.57,
+     "h": 0.33,
+     "x": 0.75,
+     "y": 0.7,
+     "color": [
+      214,
+      216,
+      226,
+      0.35
+     ]
+    }
+   ]
+  }
+ ],
+ "Fog|Evening": [
+  {
+   "anim": null,
+   "kind": "duskVeil",
+   "height": 0.52,
+   "color": [
+    26,
+    20,
+    36,
+    0.58
+   ]
+  },
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    196,
+    198,
+    206,
+    0.56
+   ]
+  },
+  {
+   "anim": {
+    "name": "mistSwirl",
+    "duration": 6.0,
+    "delay": 0.0
+   },
+   "kind": "mist",
+   "blobs": [
+    {
+     "w": 0.48,
+     "h": 0.29,
+     "x": 0.2,
+     "y": 0.3,
+     "color": [
+      226,
+      228,
+      236,
+      0.45
+     ]
+    },
+    {
+     "w": 0.57,
+     "h": 0.33,
+     "x": 0.75,
+     "y": 0.7,
+     "color": [
+      214,
+      216,
+      226,
+      0.35
+     ]
+    }
+   ]
+  }
+ ],
+ "Fog|Night": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    196,
+    198,
+    206,
+    0.56
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 2.8,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": 0.14
+    },
+    "left": {
+     "pct": 0.18
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 3.4,
+    "delay": 0.6
+   },
+   "box": {
+    "top": {
+     "frac": 0.27
+    },
+    "left": {
+     "pct": 0.36
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 3.1,
+    "delay": 1.2
+   },
+   "box": {
+    "top": {
+     "frac": 0.12
+    },
+    "left": {
+     "pct": 0.58
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "mistSwirl",
+    "duration": 6.0,
+    "delay": 0.0
+   },
+   "kind": "mist",
+   "blobs": [
+    {
+     "w": 0.48,
+     "h": 0.29,
+     "x": 0.2,
+     "y": 0.3,
+     "color": [
+      226,
+      228,
+      236,
+      0.45
+     ]
+    },
+    {
+     "w": 0.57,
+     "h": 0.33,
+     "x": 0.75,
+     "y": 0.7,
+     "color": [
+      214,
+      216,
+      226,
+      0.35
+     ]
+    }
+   ]
+  }
+ ],
+ "Drizzle|Dawn": [
+  {
+   "anim": null,
+   "kind": "duskVeil",
+   "height": 0.52,
+   "color": [
+    26,
+    20,
+    36,
+    0.58
+   ]
+  },
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    84,
+    90,
+    112,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.6,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.1
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.8,
+    "delay": 0.35
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.35
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.7,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.6
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.9,
+    "delay": 0.45
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.8
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  }
+ ],
+ "Drizzle|Morning": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    84,
+    90,
+    112,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.6,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.1
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.8,
+    "delay": 0.35
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.35
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.7,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.6
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.9,
+    "delay": 0.45
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.8
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  }
+ ],
+ "Drizzle|Afternoon": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    84,
+    90,
+    112,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.6,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.1
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.8,
+    "delay": 0.35
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.35
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.7,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.6
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.9,
+    "delay": 0.45
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.8
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  }
+ ],
+ "Drizzle|Evening": [
+  {
+   "anim": null,
+   "kind": "duskVeil",
+   "height": 0.52,
+   "color": [
+    26,
+    20,
+    36,
+    0.58
+   ]
+  },
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    84,
+    90,
+    112,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.6,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.1
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.8,
+    "delay": 0.35
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.35
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.7,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.6
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.9,
+    "delay": 0.45
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.8
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  }
+ ],
+ "Drizzle|Night": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    84,
+    90,
+    112,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 2.8,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": 0.14
+    },
+    "left": {
+     "pct": 0.18
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 3.4,
+    "delay": 0.6
+   },
+   "box": {
+    "top": {
+     "frac": 0.27
+    },
+    "left": {
+     "pct": 0.36
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 3.1,
+    "delay": 1.2
+   },
+   "box": {
+    "top": {
+     "frac": 0.12
+    },
+    "left": {
+     "pct": 0.58
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.6,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.1
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.8,
+    "delay": 0.35
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.35
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.7,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.6
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.9,
+    "delay": 0.45
+   },
+   "box": {
+    "top": {
+     "frac": -0.1
+    },
+    "left": {
+     "pct": 0.8
+    },
+    "width": {
+     "frac": 0.009
+    },
+    "height": {
+     "frac": 0.1
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    214,
+    226,
+    244,
+    0.5
+   ]
+  }
+ ],
+ "Rain|Dawn": [
+  {
+   "anim": null,
+   "kind": "duskVeil",
+   "height": 0.52,
+   "color": [
+    26,
+    20,
+    36,
+    0.58
+   ]
+  },
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    52,
+    58,
+    80,
+    0.58
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.1,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.12
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.3,
+    "delay": 0.15
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.32
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.2,
+    "delay": 0.1
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.54
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.4,
+    "delay": 0.25
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.74
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.15,
+    "delay": 0.05
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.86
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  }
+ ],
+ "Rain|Morning": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    52,
+    58,
+    80,
+    0.58
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.1,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.12
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.3,
+    "delay": 0.15
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.32
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.2,
+    "delay": 0.1
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.54
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.4,
+    "delay": 0.25
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.74
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.15,
+    "delay": 0.05
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.86
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  }
+ ],
+ "Rain|Afternoon": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    52,
+    58,
+    80,
+    0.58
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.1,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.12
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.3,
+    "delay": 0.15
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.32
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.2,
+    "delay": 0.1
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.54
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.4,
+    "delay": 0.25
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.74
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.15,
+    "delay": 0.05
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.86
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  }
+ ],
+ "Rain|Evening": [
+  {
+   "anim": null,
+   "kind": "duskVeil",
+   "height": 0.52,
+   "color": [
+    26,
+    20,
+    36,
+    0.58
+   ]
+  },
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    52,
+    58,
+    80,
+    0.58
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.1,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.12
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.3,
+    "delay": 0.15
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.32
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.2,
+    "delay": 0.1
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.54
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.4,
+    "delay": 0.25
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.74
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.15,
+    "delay": 0.05
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.86
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  }
+ ],
+ "Rain|Night": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    52,
+    58,
+    80,
+    0.58
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 2.8,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": 0.14
+    },
+    "left": {
+     "pct": 0.18
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 3.4,
+    "delay": 0.6
+   },
+   "box": {
+    "top": {
+     "frac": 0.27
+    },
+    "left": {
+     "pct": 0.36
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 3.1,
+    "delay": 1.2
+   },
+   "box": {
+    "top": {
+     "frac": 0.12
+    },
+    "left": {
+     "pct": 0.58
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.1,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.12
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.3,
+    "delay": 0.15
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.32
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.2,
+    "delay": 0.1
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.54
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.4,
+    "delay": 0.25
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.74
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.15,
+    "delay": 0.05
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.86
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "frac": 0.17
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    206,
+    222,
+    242,
+    0.6
+   ]
+  }
+ ],
+ "Snow|Dawn": [
+  {
+   "anim": null,
+   "kind": "duskVeil",
+   "height": 0.52,
+   "color": [
+    26,
+    20,
+    36,
+    0.58
+   ]
+  },
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    214,
+    222,
+    238,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.1
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.3,
+    "delay": 0.4
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.32
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.1,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.54
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.4,
+    "delay": 0.5
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.74
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.2,
+    "delay": 0.3
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.86
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  }
+ ],
+ "Snow|Morning": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    214,
+    222,
+    238,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.1
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.3,
+    "delay": 0.4
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.32
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.1,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.54
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.4,
+    "delay": 0.5
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.74
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.2,
+    "delay": 0.3
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.86
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  }
+ ],
+ "Snow|Afternoon": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    214,
+    222,
+    238,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.1
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.3,
+    "delay": 0.4
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.32
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.1,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.54
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.4,
+    "delay": 0.5
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.74
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.2,
+    "delay": 0.3
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.86
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  }
+ ],
+ "Snow|Evening": [
+  {
+   "anim": null,
+   "kind": "duskVeil",
+   "height": 0.52,
+   "color": [
+    26,
+    20,
+    36,
+    0.58
+   ]
+  },
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    214,
+    222,
+    238,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.1
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.3,
+    "delay": 0.4
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.32
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.1,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.54
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.4,
+    "delay": 0.5
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.74
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.2,
+    "delay": 0.3
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.86
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  }
+ ],
+ "Snow|Night": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    214,
+    222,
+    238,
+    0.5
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 2.8,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": 0.14
+    },
+    "left": {
+     "pct": 0.18
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 3.4,
+    "delay": 0.6
+   },
+   "box": {
+    "top": {
+     "frac": 0.27
+    },
+    "left": {
+     "pct": 0.36
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "twinkle",
+    "duration": 3.1,
+    "delay": 1.2
+   },
+   "box": {
+    "top": {
+     "frac": 0.12
+    },
+    "left": {
+     "pct": 0.58
+    },
+    "width": {
+     "px": 2.0
+    },
+    "height": {
+     "px": 2.0
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.0,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.1
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.3,
+    "delay": 0.4
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.32
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.1,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.54
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.4,
+    "delay": 0.5
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.74
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 2.2,
+    "delay": 0.3
+   },
+   "box": {
+    "top": {
+     "frac": -0.07
+    },
+    "left": {
+     "pct": 0.86
+    },
+    "width": {
+     "frac": 0.02
+    },
+    "height": {
+     "frac": 0.02
+    }
+   },
+   "round": true,
+   "kind": "fill",
+   "color": [
+    255,
+    255,
+    255,
+    1.0
+   ],
+   "glow": {
+    "blur": {
+     "frac": 0.015
+    },
+    "spread": {
+     "px": 0.0
+    },
+    "color": [
+     255,
+     255,
+     255,
+     0.8
+    ]
+   }
+  }
+ ],
+ "Storm|Dawn": [
+  {
+   "anim": null,
+   "kind": "duskVeil",
+   "height": 0.52,
+   "color": [
+    26,
+    20,
+    36,
+    0.58
+   ]
+  },
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    24,
+    26,
+    44,
+    0.64
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.2,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.2
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.4,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.5
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.3,
+    "delay": 0.1
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.75
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFallFlash",
+    "duration": 3.2,
+    "delay": 0.0
+   },
+   "kind": "veil",
+   "color": [
+    255,
+    208,
+    120,
+    0.22
+   ]
+  }
+ ],
+ "Storm|Morning": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    24,
+    26,
+    44,
+    0.64
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.2,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.2
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.4,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.5
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.3,
+    "delay": 0.1
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.75
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFallFlash",
+    "duration": 3.2,
+    "delay": 0.0
+   },
+   "kind": "veil",
+   "color": [
+    255,
+    208,
+    120,
+    0.22
+   ]
+  }
+ ],
+ "Storm|Afternoon": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    24,
+    26,
+    44,
+    0.64
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.2,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.2
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.4,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.5
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.3,
+    "delay": 0.1
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.75
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFallFlash",
+    "duration": 3.2,
+    "delay": 0.0
+   },
+   "kind": "veil",
+   "color": [
+    255,
+    208,
+    120,
+    0.22
+   ]
+  }
+ ],
+ "Storm|Evening": [
+  {
+   "anim": null,
+   "kind": "duskVeil",
+   "height": 0.52,
+   "color": [
+    26,
+    20,
+    36,
+    0.58
+   ]
+  },
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    24,
+    26,
+    44,
+    0.64
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.2,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.2
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.4,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.5
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.3,
+    "delay": 0.1
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.75
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFallFlash",
+    "duration": 3.2,
+    "delay": 0.0
+   },
+   "kind": "veil",
+   "color": [
+    255,
+    208,
+    120,
+    0.22
+   ]
+  }
+ ],
+ "Storm|Night": [
+  {
+   "anim": null,
+   "kind": "veil",
+   "color": [
+    24,
+    26,
+    44,
+    0.64
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.2,
+    "delay": 0.0
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.2
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.4,
+    "delay": 0.2
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.5
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFall",
+    "duration": 1.3,
+    "delay": 0.1
+   },
+   "box": {
+    "top": {
+     "frac": -0.15
+    },
+    "left": {
+     "pct": 0.75
+    },
+    "width": {
+     "frac": 0.016
+    },
+    "height": {
+     "frac": 0.19
+    }
+   },
+   "round": false,
+   "kind": "fill",
+   "color": [
+    224,
+    228,
+    246,
+    0.55
+   ]
+  },
+  {
+   "anim": {
+    "name": "rainFallFlash",
+    "duration": 3.2,
+    "delay": 0.0
+   },
+   "kind": "veil",
+   "color": [
+    255,
+    208,
+    120,
+    0.22
+   ]
+  }
+ ]
+}
