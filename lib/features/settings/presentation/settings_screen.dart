@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/atmos_tokens.dart';
 import '../../../core/theme/glass.dart';
@@ -10,6 +11,7 @@ import '../../../core/theme/weather_icons.dart';
 import '../../../core/widgets/screen_transition.dart';
 import '../../../core/widgets/section_label.dart';
 import '../../../core/widgets/segmented_control.dart';
+import '../../../routing/app_router.dart';
 import '../../weather/application/weather_providers.dart';
 import '../application/settings_providers.dart';
 import '../application/unit_formatter.dart';
@@ -39,17 +41,30 @@ class SettingsScreen extends ConsumerWidget {
       ),
       child: ScreenTransition(
         child: ListView(
-          padding: const EdgeInsets.fromLTRB(20, 72, 20, 104),
+          padding: const EdgeInsets.fromLTRB(20, 72, 20, 32),
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               spacing: 16,
               children: [
-                Text(
-                  'Settings',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge?.copyWith(color: _onDark),
+                Row(
+                  spacing: 10,
+                  children: [
+                    GlassIconButton(
+                      icon: WeatherIcons.chevronLeft,
+                      onPressed: () => context.go(Routes.home),
+                      color: _onDark,
+                      size: 36,
+                      dark: true,
+                      tooltip: 'Back to forecast',
+                    ),
+                    Text(
+                      'Settings',
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleLarge?.copyWith(color: _onDark),
+                    ),
+                  ],
                 ),
                 _Card(
                   label: 'Units',
@@ -255,6 +270,7 @@ class _ManageLocationsCard extends ConsumerWidget {
             shrinkWrap: true,
             buildDefaultDragHandles: false,
             physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
             itemCount: places.length,
             onReorder: notifier.reorder,
             proxyDecorator: (child, index, animation) =>

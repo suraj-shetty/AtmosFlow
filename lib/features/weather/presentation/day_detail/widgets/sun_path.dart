@@ -126,7 +126,8 @@ class _SunPathPainter extends CustomPainter {
     final centre = Offset(size.width / 2, size.height - 10);
     final rect = Rect.fromCircle(center: centre, radius: radius);
 
-    // The whole arc as a faint dashed-free track…
+    // One flat track for the whole day, exactly as the design draws it —
+    // `stroke:var(--color-accent-200); stroke-width:3`.
     canvas.drawArc(
       rect,
       math.pi,
@@ -134,39 +135,15 @@ class _SunPathPainter extends CustomPainter {
       false,
       Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = 2.5
-        ..strokeCap = StrokeCap.round
+        ..strokeWidth = 3
         ..color = trackColor,
     );
-
-    // …and the part the sun has already travelled, in the accent. Drawing
-    // both makes the arc read as progress rather than as decoration, and
-    // means it no longer depends on one pale tint being visible.
-    if (progress > 0) {
-      canvas.drawArc(
-        rect,
-        math.pi,
-        math.pi * progress,
-        false,
-        Paint()
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 3.5
-          ..strokeCap = StrokeCap.round
-          ..color = arcColor,
-      );
-    }
 
     // Sunrise sits at π (left) and sunset at 0 (right).
     final angle = math.pi - progress * math.pi;
     final dot = Offset(
       centre.dx + radius * math.cos(angle),
       centre.dy - radius * math.sin(angle),
-    );
-    // A halo lifts the sun off whichever card it lands on.
-    canvas.drawCircle(
-      dot,
-      11,
-      Paint()..color = arcColor.withValues(alpha: 0.22),
     );
     canvas.drawCircle(dot, 7, Paint()..color = arcColor);
   }

@@ -103,7 +103,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                               style: TextStyle(
                                 fontFamily: AtmosTokens.fontHeading,
                                 fontSize: 46,
-                                height: 1.1,
+                                height: 1.12,
                                 letterSpacing: -0.01 * 46,
                                 color: mood.text,
                               ),
@@ -128,7 +128,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 28),
                     child: GlassSurface(
                       dark: mood.darkCard,
-                      padding: const EdgeInsets.all(AtmosTokens.space4),
+                      // GLASS_LIGHT pads 14, GLASS_DARK pads 16.
+                      padding: EdgeInsets.all(mood.darkCard ? 16 : 14),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         spacing: 8,

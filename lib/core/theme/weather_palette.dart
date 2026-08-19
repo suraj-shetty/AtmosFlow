@@ -42,133 +42,13 @@ class WeatherPalette {
 
   Brightness get brightness => isDark ? Brightness.dark : Brightness.light;
 
-  /// The hero temperature at 96px is WCAG "large text", so it holds 3:1
-  /// rather than 4.5:1 — which matters, because a mid-tone sky like daytime
-  /// rain has no flat colour that reaches 4.5 in either direction.
-  Color get heroText => onSkyAt(text, SkyDepth.hero, minimum: 3.0);
-
-  /// The shadow under the hero, tuned to what is behind it.
-  ///
-  /// A dark sky needs only a soft lift. A mid-tone sky is where light text
-  /// goes muddy, so it gets a tighter, stronger shadow to cut the figure out
-  /// of the ground. A light sky needs none at all.
-  List<Shadow> get heroTextShadow {
-    final luminance = skyColorAt(SkyDepth.hero).computeLuminance();
-    if (luminance > 0.45) return const [];
-    if (luminance > 0.12) {
-      return const [
-        Shadow(color: Color(0x73000000), offset: Offset(0, 1), blurRadius: 6),
-        Shadow(color: Color(0x40000000), offset: Offset(0, 2), blurRadius: 18),
-      ];
-    }
-    return const [
-      Shadow(color: Color(0x59000000), offset: Offset(0, 1), blurRadius: 12),
-    ];
-  }
-
-  // ── Card roles ─────────────────────────────────────────────────────────
-  //
-  // Home's chips, rows and tiles sit on glass over the sky, so they have to
-  // follow it: the light recipe with ink text by day, the dark recipe with
-  // light text once the sky goes dark. The prototype only ever drew the light
-  // card, which leaves its own text barely legible on the night, rain and
-  // storm gradients.
-
-  /// Whether cards over this sky use the dark glass recipe.
-  ///
-  /// This deliberately does *not* follow [isDark]. The hero sits on the raw
-  /// gradient, but a card sits on tinted glass over it, so the two can want
-  /// opposite treatments — daytime rain is the case that proves it: the sky
-  /// is dark enough for white hero text, yet its mid-tone `neutral-500` under
-  /// an 8% white tint leaves white card text at only 2.4:1. Deciding from the
-  /// luminance actually behind the glass keeps both readable.
-  bool get cardIsDark => gradient.colors[1].computeLuminance() < 0.25;
-
-  /// Primary value text inside a card — the temperature, the metric reading.
-  Color get cardText => cardIsDark ? const Color(0xFFF9F4ED) : tokens.text;
-
-  /// Captions inside a card — the hour label, the metric name.
-  Color get cardSubText =>
-      cardIsDark ? Colors.white.withValues(alpha: 0.72) : tokens.neutral.s700;
-
-  /// The terracotta icon role. The deep ramp step reads on a light card; on a
-  /// dark one it disappears, so the light step takes over.
-  Color get cardAccent =>
-      cardIsDark ? tokens.accentRamp.s300 : tokens.accentRamp.s700;
-
-  /// The sage second voice, same inversion.
-  Color get cardAccent2 =>
-      cardIsDark ? tokens.accent2Ramp.s300 : tokens.accent2Ramp.s700;
-
-  // ── Text sitting directly on the sky ───────────────────────────────────
-  //
-  // A vertical gradient changes luminance down the screen, so one text colour
-  // cannot serve the whole column: daytime rain runs dark at the top and light
-  // at the bottom, which leaves the design's white section labels sitting on
-  // a pale background by the time the eye reaches them. These helpers pick a
-  // colour for the depth the text actually occupies.
-
-  /// The sky's colour at [t] down the screen, 0 = top, 1 = bottom.
-  Color skyColorAt(double t) {
-    final stops = gradient.stops ?? const [0.0, 0.5, 1.0];
-    final colors = gradient.colors;
-    if (t <= stops.first) return colors.first;
-    if (t >= stops.last) return colors.last;
-
-    for (var i = 0; i < stops.length - 1; i++) {
-      if (t >= stops[i] && t <= stops[i + 1]) {
-        final span = stops[i + 1] - stops[i];
-        final local = span == 0 ? 0.0 : (t - stops[i]) / span;
-        return Color.lerp(colors[i], colors[i + 1], local)!;
-      }
-    }
-    return colors.last;
-  }
-
-  /// Keeps [preferred] — the colour the design chose — when it still reads at
-  /// depth [t], and otherwise falls back to whichever of ink or off-white has
-  /// more contrast there.
-  ///
-  /// [minimum] is the WCAG ratio to hold: 4.5 for body text, 3.0 for large
-  /// text, icons and interface chrome.
-  Color onSkyAt(Color preferred, double t, {double minimum = 4.5}) {
-    final background = skyColorAt(t);
-    // The design's muted roles are translucent white, and luminance ignores
-    // alpha — measuring them unflattened would score them as solid white and
-    // wave through text that is actually washed out.
-    final effective = Color.alphaBlend(preferred, background);
-    if (contrastRatio(effective, background) >= minimum) return preferred;
-
-    const paper = Color(0xFFF9F4ED);
-    return contrastRatio(paper, background) >=
-            contrastRatio(tokens.text, background)
-        ? paper
-        : tokens.text;
-  }
-
-  /// The muted role — "feels like", section kickers — at depth [t].
-  Color onSkyMutedAt(double t) {
-    final resolved = onSkyAt(subText, t, minimum: 3.0);
-    if (resolved == subText) return resolved;
-
-    // A flipped colour is muted back down so it still reads as secondary —
-    // but only as far as it can go while holding 3:1. On a mid-tone sky the
-    // headroom runs out, and legibility wins over hierarchy.
-    final background = skyColorAt(t);
-    const muted = 0.78;
-    final candidate = resolved.withValues(alpha: muted);
-    final flattened = Color.alphaBlend(candidate, background);
-    return contrastRatio(flattened, background) >= 3.0 ? candidate : resolved;
-  }
-
-  /// WCAG 2.x contrast ratio. Both colours are treated as opaque.
-  static double contrastRatio(Color a, Color b) {
-    final l1 = a.computeLuminance();
-    final l2 = b.computeLuminance();
-    final hi = l1 > l2 ? l1 : l2;
-    final lo = l1 > l2 ? l2 : l1;
-    return (hi + 0.05) / (lo + 0.05);
-  }
+  /// `homeTextShadow` — the design lifts the hero off a dark sky with a
+  /// single soft shadow, and leaves a light sky alone.
+  List<Shadow> get heroTextShadow => isDark
+      ? const [
+          Shadow(color: Color(0x59000000), offset: Offset(0, 1), blurRadius: 12),
+        ]
+      : const [];
 
   static LinearGradient _sky(
     Color top,
@@ -411,17 +291,4 @@ class OnboardingMood {
       darkCard: true,
     ),
   ];
-}
-
-/// Roughly how far down the screen each piece of sky-level text sits, as a
-/// fraction of the viewport. The sky gradient changes luminance with depth, so
-/// a colour is only readable relative to a position — these keep the call
-/// sites honest about which one they mean.
-abstract final class SkyDepth {
-  static const double locationBar = 0.10;
-  static const double refreshHint = 0.18;
-  static const double hero = 0.30;
-  static const double feelsLike = 0.38;
-  static const double hourlyLabel = 0.44;
-  static const double dailyLabel = 0.64;
 }

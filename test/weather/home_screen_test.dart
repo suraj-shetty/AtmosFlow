@@ -60,6 +60,11 @@ void main() {
     expect(find.text('Clear'), findsOneWidget);
     expect(find.text('Feels like 20°'), findsOneWidget);
 
+    // The design dropped the tab bar: Search and Settings are reached from
+    // the header, and nothing else on Home leads to them.
+    expect(find.byTooltip('Search locations'), findsOneWidget);
+    expect(find.byTooltip('Settings'), findsOneWidget);
+
     expect(find.text('NEXT 24 HOURS'), findsOneWidget);
     expect(find.text('7-DAY FORECAST'), findsOneWidget);
     expect(find.text('Now'), findsOneWidget);
@@ -79,16 +84,16 @@ void main() {
     await tester.pumpWidget(await homeUnderTest());
     await tester.pumpAndSettle();
 
-    expect(find.text('5%'), findsNothing);
+    expect(find.text('5% precip'), findsNothing);
 
     await tester.tap(find.text('Now'));
     await tester.pumpAndSettle();
-    expect(find.text('5%'), findsOneWidget);
+    expect(find.text('5% precip'), findsOneWidget);
 
     // Tapping again collapses it.
     await tester.tap(find.text('Now'));
     await tester.pumpAndSettle();
-    expect(find.text('5%'), findsNothing);
+    expect(find.text('5% precip'), findsNothing);
   });
 
   testWidgets('switching to fahrenheit re-renders every temperature', (

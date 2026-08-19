@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/theme/atmos_tokens.dart';
 import '../../../../../core/theme/glass.dart';
-import '../../../../../core/theme/weather_palette.dart';
 import '../../../../../core/widgets/screen_transition.dart';
 
 /// One cell of Home's 2×2 metric grid — icon, caption, value — on light
@@ -13,29 +12,25 @@ class MetricTile extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.value,
-    required this.palette,
     this.delay = Duration.zero,
   });
 
   final IconData icon;
   final String label;
   final String value;
-
-  /// The sky behind the tile — decides the glass recipe and text colours.
-  final WeatherPalette palette;
-
   final Duration delay;
 
   @override
   Widget build(BuildContext context) {
+    final tokens = context.tokens;
+
     return FadeSlideUp(
       delay: delay,
       child: GlassSurface(
-        dark: palette.cardIsDark,
-        padding: const EdgeInsets.all(AtmosTokens.space3),
+        padding: const EdgeInsets.all(14),
         child: Row(
           children: [
-            Icon(icon, size: 18, color: palette.cardAccent2),
+            Icon(icon, size: 18, color: tokens.accent2Ramp.s700),
             const SizedBox(width: 10),
             Expanded(
               child: Column(
@@ -44,11 +39,11 @@ class MetricTile extends StatelessWidget {
                 children: [
                   Text(
                     label,
-                    style: TextStyle(fontSize: 11, color: palette.cardSubText),
+                    style: TextStyle(fontSize: 11, color: tokens.neutral.s600),
                   ),
                   Text(
                     value,
-                    style: TextStyle(fontSize: 16, color: palette.cardText),
+                    style: TextStyle(fontSize: 16, color: tokens.text),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

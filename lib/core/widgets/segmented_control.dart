@@ -93,7 +93,7 @@ class _Option extends StatelessWidget {
           child: InkWell(
             onTap: onTap,
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 9),
+              padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 12),
               child: Text(
                 label,
                 textAlign: TextAlign.center,

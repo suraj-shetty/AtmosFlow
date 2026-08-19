@@ -47,7 +47,7 @@ class DayDetailScreen extends ConsumerWidget {
       decoration: BoxDecoration(gradient: palette.gradient),
       child: ScreenTransition(
         child: ListView(
-          padding: const EdgeInsets.fromLTRB(20, 72, 20, 40),
+          padding: const EdgeInsets.fromLTRB(20, 72, 20, 32),
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -59,10 +59,7 @@ class DayDetailScreen extends ConsumerWidget {
                     GlassIconButton(
                       icon: WeatherIcons.chevronLeft,
                       onPressed: () => context.go(Routes.home),
-                      color: palette.onSkyAt(
-                        palette.text,
-                        SkyDepth.locationBar,
-                      ),
+                      color: palette.text,
                       size: 36,
                       dark: palette.isDark,
                       tooltip: 'Back to forecast',
@@ -73,35 +70,34 @@ class DayDetailScreen extends ConsumerWidget {
                         style: TextStyle(
                           fontFamily: AtmosTokens.fontHeading,
                           fontSize: 18,
-                          color: palette.onSkyAt(
-                            palette.text,
-                            SkyDepth.locationBar,
-                          ),
+                          height: 1.12,
+                          letterSpacing: -0.015 * 18,
+                          color: palette.text,
                         ),
                       ),
                     ),
                   ],
                 ),
                 _Panel(
-                  dark: palette.cardIsDark,
+                  dark: palette.isDark,
                   child: TemperatureChart(
                     temperatures: day.hourlyTemperatures,
-                    subLabelColor: palette.cardSubText,
+                    subLabelColor: palette.subText,
                     animate: !reduceMotion,
                   ),
                 ),
                 _Panel(
-                  dark: palette.cardIsDark,
+                  dark: palette.isDark,
                   child: SunPath(
                     sunrise: day.sunrise,
                     sunset: day.sunset,
                     progress: day.sunProgressAt(
                       dayIndex == 0 ? forecast.localNow : day.sunset,
                     ),
-                    textColor: palette.cardText,
-                    subColor: palette.cardSubText,
-                    trackColor: palette.cardSubText.withValues(alpha: 0.28),
-                    arcColor: palette.cardAccent,
+                    textColor: palette.text,
+                    subColor: palette.subText,
+                    trackColor: tokens.accentRamp.s200,
+                    arcColor: tokens.accentRamp.s500,
                     animate: !reduceMotion,
                   ),
                 ),
@@ -157,25 +153,28 @@ class _DetailGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final iconColor = palette.cardAccent2;
+    final iconColor = context.tokens.accent2Ramp.s500;
 
     return GridView.count(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+      // A nested scroll view counts as "primary" and would otherwise inherit
+      // the screen's safe-area inset as its own padding.
+      padding: EdgeInsets.zero,
       crossAxisCount: 2,
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       childAspectRatio: 1.35,
       children: [
         _DetailCard(
-          dark: palette.cardIsDark,
+          dark: palette.isDark,
           icon: Icon(WeatherIcons.humidity, size: 20, color: iconColor),
           label: 'Humidity',
           value: humidity,
           palette: palette,
         ),
         _DetailCard(
-          dark: palette.cardIsDark,
+          dark: palette.isDark,
           // The arrow points the way the wind is going.
           icon: Transform.rotate(
             angle: (current.windDirection + 180) * math.pi / 180,
@@ -186,7 +185,7 @@ class _DetailGrid extends StatelessWidget {
           palette: palette,
         ),
         _DetailCard(
-          dark: palette.cardIsDark,
+          dark: palette.isDark,
           icon: Icon(WeatherIcons.uv, size: 20, color: iconColor),
           label: 'UV Index',
           value: '${day.uvIndexMax.round()} · ${uvBandOf(day.uvIndexMax)}',
@@ -194,7 +193,7 @@ class _DetailGrid extends StatelessWidget {
           bar: uvFractionOf(day.uvIndexMax),
         ),
         _DetailCard(
-          dark: palette.cardIsDark,
+          dark: palette.isDark,
           icon: Icon(WeatherIcons.pressure, size: 20, color: iconColor),
           label: 'Pressure',
           value: pressure,
@@ -239,11 +238,11 @@ class _DetailCard extends StatelessWidget {
           icon,
           Text(
             label,
-            style: TextStyle(fontSize: 11, color: palette.cardSubText),
+            style: TextStyle(fontSize: 11, color: palette.subText),
           ),
           Text(
             value,
-            style: TextStyle(fontSize: 18, color: palette.cardText),
+            style: TextStyle(fontSize: 18, color: palette.text),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -253,7 +252,7 @@ class _DetailCard extends StatelessWidget {
               child: SizedBox(
                 height: 6,
                 child: ColoredBox(
-                  color: palette.cardSubText.withValues(alpha: 0.22),
+                  color: palette.subText.withValues(alpha: 0.22),
                   child: FractionallySizedBox(
                     alignment: Alignment.centerLeft,
                     widthFactor: bar,

@@ -69,13 +69,28 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       ),
       child: ScreenTransition(
         child: ListView(
-          padding: const EdgeInsets.fromLTRB(20, 72, 20, 104),
+          padding: const EdgeInsets.fromLTRB(20, 72, 20, 32),
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               spacing: 16,
               children: [
-                Text('Search', style: Theme.of(context).textTheme.titleLarge),
+                Row(
+                  spacing: 10,
+                  children: [
+                    GlassIconButton(
+                      icon: WeatherIcons.chevronLeft,
+                      onPressed: () => context.go(Routes.home),
+                      color: tokens.text,
+                      size: 36,
+                      tooltip: 'Back to forecast',
+                    ),
+                    Text(
+                      'Search',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ],
+                ),
                 _SearchField(
                   controller: _controller,
                   onChanged: (value) =>
@@ -134,7 +149,7 @@ class _SearchField extends StatelessWidget {
         border: Border.all(color: Colors.white.withValues(alpha: 0.6)),
         borderRadius: BorderRadius.circular(AtmosTokens.radiusPill),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
         spacing: 8,
         children: [
@@ -150,7 +165,7 @@ class _SearchField extends StatelessWidget {
               decoration: InputDecoration(
                 border: InputBorder.none,
                 isDense: true,
-                contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                contentPadding: EdgeInsets.zero,
                 hintText: 'Search for a city',
                 hintStyle: TextStyle(fontSize: 14, color: tokens.neutral.s500),
               ),
@@ -181,6 +196,8 @@ class _SavedSection extends StatelessWidget {
       );
     }
 
+    final tokens = context.tokens;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: 8,
@@ -189,9 +206,12 @@ class _SavedSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SectionLabel('Saved Locations'),
-            TextButton(
-              onPressed: () => context.go(Routes.savedLocations),
-              child: const Text('See all'),
+            GestureDetector(
+              onTap: () => context.go(Routes.savedLocations),
+              child: Text(
+                'See all',
+                style: TextStyle(fontSize: 12, color: tokens.accentRamp.s700),
+              ),
             ),
           ],
         ),

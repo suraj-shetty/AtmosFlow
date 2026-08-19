@@ -17,7 +17,6 @@ import '../ambient/ambient_sky.dart';
 import 'widgets/daily_row.dart';
 import 'widgets/hourly_strip.dart';
 import 'widgets/metric_tile.dart';
-import 'widgets/pull_to_refresh_header.dart';
 
 /// The main screen: a full-bleed condition sky with the forecast scrolling
 /// over it.
@@ -120,15 +119,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           children: [
                             _LocationBar(
                               name: forecast.place.name,
-                              color: palette.onSkyAt(
-                                palette.accentText,
-                                SkyDepth.locationBar,
-                                minimum: 3,
-                              ),
+                              color: palette.accentText,
                               onSearch: () => context.go(Routes.search),
-                            ),
-                            PullToRefreshHeader(
-                              color: palette.onSkyMutedAt(SkyDepth.refreshHint),
+                              onSettings: () => context.go(Routes.settings),
                             ),
                             _Hero(
                               temperature: formatter.temperature(
@@ -138,7 +131,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               feelsLike: formatter.temperature(
                                 current.feelsLike,
                               ),
-                              isNight: current.isNight,
                               palette: palette,
                               conditionIcon: WeatherIcons.forCondition(
                                 current.condition,
@@ -146,19 +138,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               ),
                             ),
                             _Section(
-                              labelColor: palette.onSkyMutedAt(
-                                SkyDepth.hourlyLabel,
-                              ),
                               label: 'Next 24 hours',
                               child: HourlyStrip(
                                 hours: forecast.next24Hours,
-                                palette: palette,
                               ),
                             ),
                             _Section(
-                              labelColor: palette.onSkyMutedAt(
-                                SkyDepth.dailyLabel,
-                              ),
                               label: '7-day forecast',
                               child: Column(
                                 spacing: 8,
@@ -178,12 +163,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         forecast.daily[i].high,
                                       ),
                                       onTap: () => context.go(Routes.day(i)),
-                                      palette: palette,
                                     ),
                                 ],
                               ),
                             ),
-                            _MetricGrid(current: current, palette: palette),
+                            _MetricGrid(current: current),
                           ],
                         ),
                       ),
@@ -243,11 +227,13 @@ class _LocationBar extends StatelessWidget {
     required this.name,
     required this.color,
     required this.onSearch,
+    required this.onSettings,
   });
 
   final String name;
   final Color color;
   final VoidCallback onSearch;
+  final VoidCallback onSettings;
 
   @override
   Widget build(BuildContext context) {
@@ -274,11 +260,23 @@ class _LocationBar extends StatelessWidget {
             ],
           ),
         ),
-        GlassIconButton(
-          icon: WeatherIcons.search,
-          onPressed: onSearch,
-          color: color,
-          tooltip: 'Search locations',
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 8,
+          children: [
+            GlassIconButton(
+              icon: WeatherIcons.search,
+              onPressed: onSearch,
+              color: color,
+              tooltip: 'Search locations',
+            ),
+            GlassIconButton(
+              icon: WeatherIcons.settings,
+              onPressed: onSettings,
+              color: color,
+              tooltip: 'Settings',
+            ),
+          ],
         ),
       ],
     );
@@ -290,7 +288,6 @@ class _Hero extends StatelessWidget {
     required this.temperature,
     required this.condition,
     required this.feelsLike,
-    required this.isNight,
     required this.palette,
     required this.conditionIcon,
   });
@@ -298,7 +295,6 @@ class _Hero extends StatelessWidget {
   final String temperature;
   final String condition;
   final String feelsLike;
-  final bool isNight;
   final WeatherPalette palette;
   final IconData conditionIcon;
 
@@ -312,10 +308,14 @@ class _Hero extends StatelessWidget {
           style: TextStyle(
             fontFamily: AtmosTokens.fontBody,
             fontSize: 96,
-            fontWeight: FontWeight.w300,
+            // The design asks for `font-weight:200`, but its Google Fonts
+            // import only loads Figtree 400/600/700 and browsers never
+            // synthesise a lighter face — so the prototype renders the hero
+            // in Regular. Matching what it draws, not what it declares.
+            fontWeight: FontWeight.w400,
             height: 1,
             letterSpacing: -0.03 * 96,
-            color: palette.heroText,
+            color: palette.text,
             shadows: palette.heroTextShadow,
           ),
         ),
@@ -326,23 +326,17 @@ class _Hero extends StatelessWidget {
             Icon(
               conditionIcon,
               size: 22,
-              color: palette.onSkyAt(palette.text, SkyDepth.feelsLike),
+              color: palette.text,
             ),
             Text(
               condition,
-              style: TextStyle(
-                fontSize: 17,
-                color: palette.onSkyAt(palette.text, SkyDepth.feelsLike),
-              ),
+              style: TextStyle(fontSize: 17, color: palette.text),
             ),
           ],
         ),
         Text(
           'Feels like $feelsLike',
-          style: TextStyle(
-            fontSize: 13,
-            color: palette.onSkyMutedAt(SkyDepth.feelsLike),
-          ),
+          style: TextStyle(fontSize: 13, color: palette.subText),
         ),
       ],
     );
@@ -350,18 +344,10 @@ class _Hero extends StatelessWidget {
 }
 
 class _Section extends StatelessWidget {
-  const _Section({
-    required this.label,
-    required this.child,
-    required this.labelColor,
-  });
+  const _Section({required this.label, required this.child});
 
   final String label;
   final Widget child;
-
-  /// Section labels sit on the sky itself, not on glass, so they follow the
-  /// palette's sub-text role.
-  final Color labelColor;
 
   @override
   Widget build(BuildContext context) {
@@ -369,7 +355,7 @@ class _Section extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: 8,
       children: [
-        SectionLabel(label, color: labelColor),
+        SectionLabel(label),
         child,
       ],
     );
@@ -377,10 +363,9 @@ class _Section extends StatelessWidget {
 }
 
 class _MetricGrid extends ConsumerWidget {
-  const _MetricGrid({required this.current, required this.palette});
+  const _MetricGrid({required this.current});
 
   final CurrentWeather current;
-  final WeatherPalette palette;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -400,17 +385,21 @@ class _MetricGrid extends ConsumerWidget {
     return GridView.count(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+      // A nested scroll view counts as "primary" and would otherwise inherit
+      // the screen's safe-area inset as its own padding.
+      padding: EdgeInsets.zero,
       crossAxisCount: 2,
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
-      childAspectRatio: 2.6,
+      // Tuned to the tile's own content: 14px padding around an 11px caption
+      // over a 16px value, both on the body's 1.55 line height.
+      childAspectRatio: 2.4,
       children: [
         for (var i = 0; i < tiles.length; i++)
           MetricTile(
             icon: tiles[i].$1,
             label: tiles[i].$2,
             value: tiles[i].$3,
-            palette: palette,
             delay: Duration(milliseconds: 60 * i),
           ),
       ],

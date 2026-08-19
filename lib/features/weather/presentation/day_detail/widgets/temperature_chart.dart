@@ -106,7 +106,7 @@ class _TemperatureChartPainter extends CustomPainter {
   final Color fillTop;
   final Color fillBottom;
 
-  static const double _pad = 10;
+  static const double _pad = 12;
 
   @override
   void paint(Canvas canvas, Size size) {

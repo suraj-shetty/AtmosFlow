@@ -9,7 +9,6 @@ import '../features/settings/presentation/settings_screen.dart';
 import '../features/weather/application/weather_providers.dart';
 import '../features/weather/presentation/day_detail/day_detail_screen.dart';
 import '../features/weather/presentation/home/home_screen.dart';
-import 'app_shell.dart';
 
 abstract final class Routes {
   static const onboarding = '/onboarding';
@@ -53,51 +52,49 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: Routes.onboarding,
         builder: (context, state) => const OnboardingScreen(),
       ),
-      StatefulShellRoute.indexedStack(
-        builder: (context, state, shell) => AppShell(shell: shell),
-        branches: [
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: Routes.home,
-                builder: (context, state) => const HomeScreen(),
-                routes: [
-                  GoRoute(
-                    path: 'day/:index',
-                    builder: (context, state) => DayDetailScreen(
-                      dayIndex:
-                          int.tryParse(state.pathParameters['index'] ?? '') ??
-                          0,
-                    ),
-                  ),
-                ],
+      GoRoute(
+        path: Routes.home,
+        pageBuilder: (context, state) => _fade(state, const HomeScreen()),
+        routes: [
+          GoRoute(
+            path: 'day/:index',
+            pageBuilder: (context, state) => _fade(
+              state,
+              DayDetailScreen(
+                dayIndex: int.tryParse(state.pathParameters['index'] ?? '') ?? 0,
               ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: Routes.search,
-                builder: (context, state) => const SearchScreen(),
-                routes: [
-                  GoRoute(
-                    path: 'saved',
-                    builder: (context, state) => const SavedLocationsScreen(),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: Routes.settings,
-                builder: (context, state) => const SettingsScreen(),
-              ),
-            ],
+            ),
           ),
         ],
+      ),
+      GoRoute(
+        path: Routes.search,
+        pageBuilder: (context, state) => _fade(state, const SearchScreen()),
+        routes: [
+          GoRoute(
+            path: 'saved',
+            pageBuilder: (context, state) =>
+                _fade(state, const SavedLocationsScreen()),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: Routes.settings,
+        pageBuilder: (context, state) => _fade(state, const SettingsScreen()),
       ),
     ],
   );
 });
+
+/// The design has no page-level transition of its own: every screen body
+/// fades and lifts itself in through `ScreenTransition`, so the route swap
+/// underneath has to be instant or the two would stack.
+CustomTransitionPage<void> _fade(GoRouterState state, Widget child) {
+  return CustomTransitionPage(
+    key: state.pageKey,
+    transitionDuration: Duration.zero,
+    reverseTransitionDuration: Duration.zero,
+    child: Scaffold(body: child),
+    transitionsBuilder: (context, animation, secondary, child) => child,
+  );
+}
