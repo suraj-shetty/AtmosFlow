@@ -34,8 +34,16 @@ abstract class Forecast with _$Forecast {
   /// the same naive shape so the two compare wall-clock to wall-clock.
   DateTime get localNow => wallClockNow(utcOffset);
 
+  /// The app's source of "now".
+  ///
+  /// A seam rather than an abstraction: the sun-path dot tracks this minute
+  /// by minute, which is exactly the kind of drift that makes a golden pass
+  /// at 3:00 and fail at 3:01.
+  @visibleForTesting
+  static DateTime Function() clock = DateTime.now;
+
   static DateTime wallClockNow(Duration utcOffset) {
-    final wall = DateTime.now().toUtc().add(utcOffset);
+    final wall = clock().toUtc().add(utcOffset);
     return DateTime(
       wall.year,
       wall.month,
