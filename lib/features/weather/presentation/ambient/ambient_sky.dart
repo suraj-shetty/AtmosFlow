@@ -30,26 +30,30 @@ class AmbientSky extends StatelessWidget {
   /// Home's scroll position. Null on screens that don't scroll the sky.
   final ValueListenable<double>? scrollOffset;
 
-  /// False disables every animation — used by goldens and by users who have
-  /// asked the OS to reduce motion.
+  /// False holds the sky still — for goldens, and for users who have asked
+  /// the OS to reduce motion.
+  ///
+  /// Still, not absent: Reduce Motion asks for less movement, not for a bare
+  /// gradient, and the sun, moon, stars and clouds are as much a part of
+  /// reading the weather here as the temperature is.
   final bool enabled;
 
   @override
   Widget build(BuildContext context) {
-    if (!enabled) return const SizedBox.shrink();
-
     final offset = scrollOffset;
-    if (offset == null) {
-      return RepaintBoundary(
-        child: _Layers(condition: condition, isNight: isNight),
-      );
-    }
+    final layers = offset == null
+        ? _Layers(condition: condition, isNight: isNight)
+        : ValueListenableBuilder<double>(
+            valueListenable: offset,
+            builder: (context, value, _) =>
+                _Layers(condition: condition, isNight: isNight, scroll: value),
+          );
+
     return RepaintBoundary(
-      child: ValueListenableBuilder<double>(
-        valueListenable: offset,
-        builder: (context, value, _) =>
-            _Layers(condition: condition, isNight: isNight, scroll: value),
-      ),
+      // Every layer drives itself from its own controller, so muting the
+      // tickers freezes all of them at their opening frame without any of
+      // them needing to know why.
+      child: TickerMode(enabled: enabled, child: layers),
     );
   }
 }

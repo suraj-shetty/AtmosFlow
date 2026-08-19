@@ -164,34 +164,39 @@ class _MoodAmbient extends StatelessWidget {
   const _MoodAmbient({required this.mood, required this.enabled});
 
   final OnboardingMood mood;
+
+  /// False holds the mood's sky still, the way Home does — the carousel is
+  /// the point of this screen, so an empty gradient would be no onboarding
+  /// at all.
   final bool enabled;
 
   @override
   Widget build(BuildContext context) {
-    if (!enabled) return const SizedBox.shrink();
-
-    return ClipRect(
-      child: AnimatedSwitcher(
-        duration: Motion.moodCrossFade,
-        child: KeyedSubtree(
-          key: ValueKey('${mood.condition}-${mood.isNight}'),
-          child: Stack(
-            children: [
-              if (mood.condition == WeatherCondition.clear && !mood.isNight)
-                const SunLayer(
-                  size: 180,
-                  top: 70,
-                  glowInset: 30,
-                  spin: Duration(seconds: 90),
-                )
-              else
-                Positioned.fill(
-                  child: AmbientSky(
-                    condition: mood.condition,
-                    isNight: mood.isNight,
+    return TickerMode(
+      enabled: enabled,
+      child: ClipRect(
+        child: AnimatedSwitcher(
+          duration: Motion.moodCrossFade,
+          child: KeyedSubtree(
+            key: ValueKey('${mood.condition}-${mood.isNight}'),
+            child: Stack(
+              children: [
+                if (mood.condition == WeatherCondition.clear && !mood.isNight)
+                  const SunLayer(
+                    size: 180,
+                    top: 70,
+                    glowInset: 30,
+                    spin: Duration(seconds: 90),
+                  )
+                else
+                  Positioned.fill(
+                    child: AmbientSky(
+                      condition: mood.condition,
+                      isNight: mood.isNight,
+                    ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

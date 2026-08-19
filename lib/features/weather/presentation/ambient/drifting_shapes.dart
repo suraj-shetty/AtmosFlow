@@ -49,9 +49,17 @@ class _DriftingBlobState extends State<DriftingBlob>
     duration: widget.period,
   );
 
+  bool _started = false;
+
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // A muted ticker means Reduce Motion, or a golden. Hold the opening frame
+    // rather than starting a drift that can never advance — and, more to the
+    // point, rather than leaving a stagger timer pending that nothing will
+    // ever fire.
+    if (_started || !TickerMode.of(context)) return;
+    _started = true;
     _start();
   }
 
