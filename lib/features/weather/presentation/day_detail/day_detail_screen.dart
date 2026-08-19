@@ -95,7 +95,12 @@ class DayDetailScreen extends ConsumerWidget {
                     ),
                     textColor: palette.text,
                     subColor: palette.subText,
-                    trackColor: tokens.accentRamp.s200,
+                    // The design asks for accent-200, which is also the
+                    // exact top stop of the clear-day sky — so on that one
+                    // condition the rail is drawn in its own background and
+                    // vanishes. Two steps darker still reads as a faint rail
+                    // under the accent-500 dot, on every sky.
+                    trackColor: tokens.accentRamp.s400,
                     arcColor: tokens.accentRamp.s500,
                     animate: !reduceMotion,
                   ),
