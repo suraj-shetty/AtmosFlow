@@ -12,6 +12,7 @@ import '../../../core/widgets/section_label.dart';
 import '../../../core/widgets/segmented_control.dart';
 import '../../weather/application/weather_providers.dart';
 import '../application/settings_providers.dart';
+import '../application/unit_formatter.dart';
 import '../domain/app_settings.dart';
 
 /// Units, appearance and location management, on the design's one always-dark
@@ -136,27 +137,54 @@ class _Card extends StatelessWidget {
 
 /// The live temperature chip that flips on its Y axis whenever the unit
 /// changes — the design's `@keyframes flipY`.
-class _FlippingTemperature extends ConsumerStatefulWidget {
+class _FlippingTemperature extends StatefulWidget {
   const _FlippingTemperature({required this.unit});
 
   final TemperatureUnit unit;
 
   @override
-  ConsumerState<_FlippingTemperature> createState() =>
-      _FlippingTemperatureState();
+  State<_FlippingTemperature> createState() => _FlippingTemperatureState();
 }
 
-class _FlippingTemperatureState extends ConsumerState<_FlippingTemperature>
+class _FlippingTemperatureState extends State<_FlippingTemperature>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     vsync: this,
     duration: Motion.unitFlip,
   );
 
+  /// The keyframes turn the chip 0 → 94° → 0, so its face is edge-on — and a
+  /// swap invisible — the moment the rotation passes 90°.
+  static const double _peakDegrees = 94;
+  static const double _swapAt = (90 / _peakDegrees) / 2;
+
+  /// A fixed 22°C sample, so the chip demonstrates the unit rather than
+  /// reporting the weather.
+  static const double _sampleCelsius = 22;
+
+  /// The label the chip carries into the flip, held until the rotation hides
+  /// its face. Without it the value changes on the first frame, while the chip
+  /// is still square to the viewer, and the flip reads as a delayed reaction
+  /// to a change the user has already seen.
+  String? _outgoing;
+
+  static String _labelFor(TemperatureUnit unit) =>
+      UnitFormatter(
+        AppSettings(temperatureUnit: unit),
+      ).temperature(_sampleCelsius);
+
   @override
   void didUpdateWidget(_FlippingTemperature old) {
     super.didUpdateWidget(old);
-    if (old.unit != widget.unit) _controller.forward(from: 0);
+    if (old.unit == widget.unit) return;
+    if (MediaQuery.disableAnimationsOf(context)) {
+      // No flip to hide the swap behind, so show the new value at once.
+      _outgoing = null;
+      _controller.value = 1;
+      return;
+    }
+    _outgoing = _labelFor(old.unit);
+    _controller.forward(from: 0);
   }
 
   @override
@@ -167,39 +195,37 @@ class _FlippingTemperatureState extends ConsumerState<_FlippingTemperature>
 
   @override
   Widget build(BuildContext context) {
-    // A fixed 22°C sample, so the chip demonstrates the unit rather than
-    // reporting the weather.
-    final label = ref.watch(unitFormatterProvider).temperature(22);
+    final incoming = _labelFor(widget.unit);
 
     return AnimatedBuilder(
       animation: _controller,
-      builder: (context, child) {
-        // 0 → 94° → 0, as the keyframes specify.
+      builder: (context, _) {
         final t = _controller.value;
-        final angle = (t <= 0.5 ? t * 2 : (1 - t) * 2) * (94 * math.pi / 180);
+        final turn = t <= 0.5 ? t * 2 : (1 - t) * 2;
+        final label = t < _swapAt ? (_outgoing ?? incoming) : incoming;
+
         return Transform(
           alignment: Alignment.center,
           transform: Matrix4.identity()
             ..setEntry(3, 2, 0.0025)
-            ..rotateY(angle),
-          child: child,
+            ..rotateY(turn * _peakDegrees * math.pi / 180),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              label,
+              style: const TextStyle(
+                fontFamily: AtmosTokens.fontHeading,
+                fontSize: 20,
+                color: SettingsScreen._onDark,
+              ),
+            ),
+          ),
         );
       },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.12),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontFamily: AtmosTokens.fontHeading,
-            fontSize: 20,
-            color: SettingsScreen._onDark,
-          ),
-        ),
-      ),
     );
   }
 }
