@@ -40,15 +40,16 @@ void main() {
       expect(container.read(savedLocationsProvider).map((p) => p.id), [1, 3]);
     });
 
-    test('reorder follows ReorderableListView index semantics', () async {
+    test('reorder follows the onReorderItem index semantics', () async {
       final container = await testContainer();
       final notifier = container.read(savedLocationsProvider.notifier);
       for (final p in FakeWeatherRepository.savedFixtures.take(4)) {
         notifier.add(p);
       }
 
-      // Drag the first row down to the third slot.
-      notifier.reorder(0, 3);
+      // Drag the first row down to the third slot. The index is counted
+      // against the list with that row already lifted out of it.
+      notifier.reorder(0, 2);
       expect(container.read(savedLocationsProvider).map((p) => p.id), [
         2,
         3,

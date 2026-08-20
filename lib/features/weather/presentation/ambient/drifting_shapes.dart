@@ -58,7 +58,7 @@ class _DriftingBlobState extends State<DriftingBlob>
     // rather than starting a drift that can never advance — and, more to the
     // point, rather than leaving a stagger timer pending that nothing will
     // ever fire.
-    if (_started || !TickerMode.of(context)) return;
+    if (_started || !TickerMode.valuesOf(context).enabled) return;
     _started = true;
     _start();
   }

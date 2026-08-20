@@ -271,7 +271,7 @@ class _ManageLocationsCard extends ConsumerWidget {
             physics: const NeverScrollableScrollPhysics(),
             padding: EdgeInsets.zero,
             itemCount: places.length,
-            onReorder: notifier.reorder,
+            onReorderItem: notifier.reorder,
             proxyDecorator: (child, index, animation) =>
                 Material(color: Colors.transparent, child: child),
             itemBuilder: (context, index) {

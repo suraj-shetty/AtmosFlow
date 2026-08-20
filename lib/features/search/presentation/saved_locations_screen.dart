@@ -55,7 +55,7 @@ class SavedLocationsScreen extends ConsumerWidget {
               child: ReorderableListView.builder(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 40),
                 itemCount: places.length,
-                onReorder: notifier.reorder,
+                onReorderItem: notifier.reorder,
                 proxyDecorator: (child, index, animation) =>
                     Material(color: Colors.transparent, child: child),
                 itemBuilder: (context, index) {

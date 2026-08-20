@@ -62,13 +62,14 @@ class SavedLocationsNotifier extends Notifier<List<Place>> {
       if (p.id != id) p,
   ]);
 
-  /// Drag-to-reorder. [newIndex] is the index the row lands on *after*
-  /// removal, matching `ReorderableListView`'s contract.
+  /// Drag-to-reorder. [newIndex] is the index the row lands on *after* it
+  /// has been lifted out, which is what `onReorderItem` hands us — the older
+  /// `onReorder` counted against the un-shortened list and left the
+  /// off-by-one to the caller.
   void reorder(int oldIndex, int newIndex) {
     if (oldIndex == newIndex) return;
     final next = [...state];
-    final moved = next.removeAt(oldIndex);
-    next.insert(newIndex > oldIndex ? newIndex - 1 : newIndex, moved);
+    next.insert(newIndex, next.removeAt(oldIndex));
     _write(next);
   }
 

@@ -1,3 +1,6 @@
+// CupertinoPageTransitionsBuilder lives in the Cupertino library, not the
+// Material one, so the iOS entry below needs this import.
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'atmos_tokens.dart';
