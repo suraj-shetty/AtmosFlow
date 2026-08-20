@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 248">
+  <!-- The app mark, at the proportions tool/brand/mark.py's MASTER tier uses. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0.2079" y2="0.9781">
+      <stop offset="0" stop-color="#8fc4e8"/>
+      <stop offset=".58" stop-color="#f2d3ae"/>
+      <stop offset="1" stop-color="#e8a06a"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="36%" cy="32%" r="80%">
+      <stop offset="0" stop-color="#fff6e6"/>
+      <stop offset=".62" stop-color="#e09550"/>
+      <stop offset=".92" stop-color="#c67139"/>
+    </radialGradient>
+  </defs>
+  <rect width="248" height="248" rx="54" fill="url(#sky)"/>
+  <circle cx="124" cy="125" r="48" fill="url(#sun)"/>
+  <rect x="68" y="165" width="112" height="13" rx="6.5" fill="#ffffff" fill-opacity=".94"/>
+  <rect x="49" y="191" width="150" height="13" rx="6.5" fill="#ffffff" fill-opacity=".8"/>
+</svg>

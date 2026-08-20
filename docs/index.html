@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AtmosFlow — Your sky, beautifully forecasted</title>
+<meta name="description" content="A Flutter weather app where the whole screen becomes the sky outside — seven conditions, day and night, with the forecast floating over it on frosted glass.">
+<link rel="canonical" href="https://suraj-shetty.github.io/AtmosFlow/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AtmosFlow — Your sky, beautifully forecasted">
+<meta property="og:description" content="A Flutter weather app where the whole screen becomes the sky outside.">
+<meta property="og:url" content="https://suraj-shetty.github.io/AtmosFlow/">
+<meta property="og:image" content="https://suraj-shetty.github.io/AtmosFlow/images/banner.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;600;700&display=swap">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<style>
+/* ── Organic design-system tokens, ported verbatim from the project's
+      styles.css so this page and the app speak the same language. ───────── */
+:root {
+  --color-bg: #f5ead8;
+  --color-surface: #ebddc5;
+  --color-text: #201e1d;
+  --color-accent: #c67139;
+  --color-accent-2: #7a8a5e;
+  --color-divider: color-mix(in srgb, #201e1d 16%, transparent);
+
+  --color-neutral-100: #f9f4ed; --color-neutral-200: #eee7db;
+  --color-neutral-300: #dcd3c4; --color-neutral-400: #c0b6a5;
+  --color-neutral-500: #a19786; --color-neutral-600: #82796a;
+  --color-neutral-700: #645c50; --color-neutral-800: #474238;
+  --color-neutral-900: #2e2b25;
+
+  --color-accent-100: #fff2eb; --color-accent-200: #ffe1d0;
+  --color-accent-300: #ffc6a5; --color-accent-400: #f6a06b;
+  --color-accent-500: #d67f48; --color-accent-600: #b2622d;
+  --color-accent-700: #8c491a; --color-accent-800: #643312;
+  --color-accent-900: #402310;
+
+  --color-accent-2-100: #f0fae1; --color-accent-2-200: #e1eecc;
+  --color-accent-2-500: #8fa073; --color-accent-2-800: #3d472b;
+  --color-accent-2-900: #272e1b;
+
+  --font-heading: "Caprasimo", Georgia, serif;
+  --font-body: "Figtree", system-ui, -apple-system, sans-serif;
+
+  --space-1: 4.4px; --space-2: 8.8px; --space-3: 13.2px;
+  --space-4: 17.6px; --space-6: 26.4px; --space-8: 35.2px;
+
+  --radius-sm: 8px; --radius-md: 16px; --radius-lg: 28px;
+
+  --shadow-sm: 0 1px 2px color-mix(in srgb, #2e2b25 14%, transparent);
+  --shadow-md: 0 3px 10px color-mix(in srgb, #2e2b25 16%, transparent);
+  --shadow-lg: 0 12px 32px color-mix(in srgb, #2e2b25 22%, transparent);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--color-bg); color: var(--color-text);
+  font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 400; line-height: 1.12; letter-spacing: -0.015em; }
+a { color: var(--color-accent-700); text-decoration: none; text-underline-offset: 3px; }
+a:hover { color: var(--color-accent-800); }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  cursor: pointer; font-family: var(--font-heading); font-weight: 400;
+  font-size: 14px; line-height: 1.2; color: var(--color-text);
+  background: transparent; border: 1px solid transparent;
+  padding: var(--space-2) calc(var(--space-3) * 1.2); border-radius: 999px;
+  transition: background .18s ease, color .18s ease;
+}
+.btn-primary { background: var(--color-accent); color: var(--color-bg); }
+.btn-primary:hover { background: var(--color-accent-600); color: var(--color-bg); }
+.btn-primary:active { background: var(--color-accent-700); }
+.btn-secondary { border-color: var(--color-divider); }
+.btn-secondary:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); color: var(--color-text); }
+.btn-ghost { color: var(--color-accent); padding-inline: var(--space-3); }
+.btn-ghost:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+
+.tag {
+  display: inline-flex; align-items: center; font-size: 11px;
+  letter-spacing: .02em; padding: 3px 10px; border-radius: 999px;
+}
+.tag-outline { border: 1px solid var(--color-accent); color: var(--color-accent); }
+.tag-accent { background: var(--color-accent-100); color: var(--color-accent-800); }
+.tag-accent-2 { background: var(--color-accent-2-100); color: var(--color-accent-2-800); }
+
+/* ── the brand's own motion, from the design's keyframes ──────────────── */
+@keyframes afSunPulse { 0%,100% { transform: scale(1); opacity: .92; } 50% { transform: scale(1.06); opacity: 1; } }
+@keyframes afBar1 { 0%,100% { transform: translateX(-3px); } 50% { transform: translateX(4px); } }
+@keyframes afBar2 { 0%,100% { transform: translateX(4px); } 50% { transform: translateX(-3px); } }
+@keyframes afDrift { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes afRise { 0% { opacity: 0; transform: translateY(16px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ── header ───────────────────────────────────────────────────────────── */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; padding: 30px 0 0;
+}
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand-name { font-family: var(--font-heading); font-size: 23px; letter-spacing: -.01em; }
+.mark {
+  width: 44px; height: 44px; border-radius: 13px; flex: none;
+  background: linear-gradient(168deg,#8fc4e8 0%,#f2d3ae 62%,#e8a06a 100%);
+  position: relative; overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.mark i {
+  position: absolute; left: 50%; top: 34%; width: 17px; height: 17px;
+  margin-left: -8.5px; border-radius: 999px;
+  background: radial-gradient(circle at 36% 32%,#fff3dd,#c67139 88%);
+}
+.mark b, .mark s {
+  position: absolute; left: 50%; height: 2.5px; border-radius: 999px;
+}
+.mark b { bottom: 13px; width: 20px; margin-left: -10px; background: rgba(255,255,255,.92); }
+.mark s { bottom: 8px; width: 26px; margin-left: -13px; background: rgba(255,255,255,.78); }
+.topnav { display: flex; align-items: center; gap: 20px; font-size: 15px; color: var(--color-neutral-700); }
+.topnav a { color: var(--color-neutral-700); }
+.topnav a:hover { color: var(--color-accent); }
+
+/* ── the page card ────────────────────────────────────────────────────── */
+.sheet {
+  background: #fffaf1; border-radius: 32px; box-shadow: var(--shadow-lg);
+  overflow: hidden; margin: 56px 0 0;
+}
+.hero {
+  display: grid; grid-template-columns: minmax(0,1.08fr) minmax(0,.92fr);
+  gap: 48px; align-items: center; padding: 76px 60px 64px; position: relative;
+}
+.hero::before {
+  content: ""; position: absolute; top: -140px; right: -120px;
+  width: 420px; height: 420px; border-radius: 999px; pointer-events: none;
+  background: radial-gradient(circle, rgba(198,113,57,.14), transparent 68%);
+}
+.hero-copy { display: flex; flex-direction: column; gap: 26px; position: relative; align-items: flex-start; }
+.hero-copy h1 {
+  font-size: 66px; line-height: 1.03; letter-spacing: -.02em; max-width: 15ch;
+}
+.hero-copy p.lede {
+  font-size: 18px; line-height: 1.68; color: var(--color-neutral-700);
+  max-width: 46ch; text-wrap: pretty;
+}
+.cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.reassure { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--color-neutral-600); }
+.dots { display: flex; gap: 3px; }
+.dots span { width: 8px; height: 8px; border-radius: 999px; background: var(--color-accent-500); }
+
+/* ── the phone ────────────────────────────────────────────────────────── */
+.phone-slot { display: flex; justify-content: center; position: relative; }
+.phone {
+  width: 274px; height: 560px; border-radius: 44px; background: #201e1d;
+  padding: 9px; box-shadow: var(--shadow-lg); animation: afDrift 9s ease-in-out infinite;
+}
+.screen {
+  width: 100%; height: 100%; border-radius: 36px; position: relative; overflow: hidden;
+  background: linear-gradient(178deg,#7db4e0 0%,#bcd2e6 42%,#f2d3ae 78%,#e8a06a 100%);
+}
+.sun-glow {
+  position: absolute; top: -46px; right: -40px; width: 180px; height: 180px;
+  border-radius: 999px; animation: afSunPulse 4s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(255,238,190,.9), transparent 66%);
+}
+.cloud { position: absolute; border-radius: 999px; }
+.cloud-1 { top: 64px; left: -56px; width: 150px; height: 62px; background: rgba(255,255,255,.34); animation: afBar1 9s ease-in-out infinite; }
+.cloud-2 { top: 150px; left: -30px; width: 120px; height: 50px; background: rgba(255,255,255,.24); animation: afBar2 11s ease-in-out infinite; }
+.screen-inner { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 26px 20px 22px; }
+.status { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: rgba(32,30,29,.7); margin-bottom: 26px; }
+.now { display: flex; flex-direction: column; align-items: center; gap: 2px; margin-bottom: 26px; }
+.now .deg { font-size: 78px; font-weight: 200; line-height: 1; color: #201e1d; letter-spacing: -.03em; }
+.now .cond { font-size: 13px; color: rgba(32,30,29,.72); }
+.now .feels { font-size: 11px; color: rgba(32,30,29,.56); }
+.hours { display: flex; gap: 8px; margin-bottom: 12px; }
+.hours > div {
+  flex: 1; background: rgba(255,255,255,.42); border: 1px solid rgba(255,255,255,.6);
+  border-radius: 16px; padding: 11px 8px; display: flex; flex-direction: column;
+  align-items: center; gap: 6px;
+}
+.hours .h { font-size: 9px; color: rgba(32,30,29,.6); }
+.hours .g { width: 13px; height: 13px; border-radius: 999px; }
+.hours .t { font-size: 11px; color: #201e1d; }
+.days { margin-top: auto; display: flex; flex-direction: column; gap: 7px; }
+.days > div {
+  background: rgba(255,255,255,.4); border: 1px solid rgba(255,255,255,.58);
+  border-radius: 16px; padding: 10px 14px; display: flex;
+  justify-content: space-between; align-items: center; font-size: 11px; color: #201e1d;
+}
+.days span.hl { color: rgba(32,30,29,.6); }
+
+/* ── features ─────────────────────────────────────────────────────────── */
+.features { padding: 8px 60px 72px; }
+.features .cols { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 34px; }
+.feature { display: flex; flex-direction: column; gap: 14px; }
+.numeral {
+  width: 60px; height: 60px; border-radius: 999px; display: flex;
+  align-items: center; justify-content: center;
+  font-family: var(--font-heading); font-size: 22px;
+}
+.numeral-1 { background: var(--color-accent-200); color: var(--color-accent-900); }
+.numeral-2 { background: var(--color-accent-2-200); color: var(--color-accent-2-900); }
+.numeral-3 { background: var(--color-neutral-200); color: var(--color-text); }
+.feature h3 { font-size: 22px; }
+.feature p { font-size: 15px; line-height: 1.65; color: var(--color-neutral-700); text-wrap: pretty; }
+
+/* ── condition strip ──────────────────────────────────────────────────── */
+.strip-wrap { padding: 0 60px 76px; }
+.strip {
+  border-radius: 28px; overflow: hidden; box-shadow: var(--shadow-md);
+  display: grid; grid-template-columns: repeat(7, minmax(0,1fr));
+}
+.strip div {
+  height: 132px; display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 12px; font-size: 11px;
+}
+.on-light { color: rgba(27,31,38,.72); }
+.on-dark { color: rgba(255,255,255,.82); }
+
+/* ── CTA band + footer ────────────────────────────────────────────────── */
+.cta-band {
+  background: var(--color-accent-100); padding: 64px 60px; display: flex;
+  flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between;
+}
+.cta-band h2 { font-size: 38px; line-height: 1.1; letter-spacing: -.01em; color: var(--color-accent-900); max-width: 20ch; }
+.cta-band p { font-size: 16px; line-height: 1.65; color: var(--color-accent-800); max-width: 44ch; margin-top: 12px; text-wrap: pretty; }
+.sheet-foot {
+  padding: 28px 60px; display: flex; flex-wrap: wrap; gap: 16px;
+  justify-content: space-between; align-items: center;
+  font-size: 13px; color: var(--color-neutral-600);
+}
+
+/* ── sections outside the sheet ───────────────────────────────────────── */
+.section { padding: 96px 0 0; }
+.section-head { display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; align-items: flex-start; }
+.section-head h2 { font-size: 44px; line-height: 1.05; letter-spacing: -.02em; }
+.section-head p { font-size: 16px; line-height: 1.65; color: var(--color-neutral-700); max-width: 58ch; text-wrap: pretty; }
+.shot { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); background: #f5ead8; }
+.split { display: grid; grid-template-columns: 380px minmax(0,1fr); gap: 52px; align-items: center; }
+.split p { font-size: 15px; line-height: 1.68; color: var(--color-neutral-700); margin-bottom: var(--space-3); text-wrap: pretty; }
+.facts { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 44px; }
+.fact { flex: 1 1 200px; background: var(--color-accent-100); border-radius: var(--radius-lg); padding: 22px 24px; }
+.fact .k { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--color-accent-800); margin-bottom: 7px; }
+.fact .v { font-size: 14px; line-height: 1.6; color: var(--color-accent-900); }
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px;
+  background: color-mix(in srgb, var(--color-text) 7%, transparent);
+  padding: 2px 6px; border-radius: 6px;
+}
+pre {
+  background: var(--color-neutral-900); color: #f2e7d6; border-radius: var(--radius-md);
+  padding: 18px 22px; overflow-x: auto; font-size: 13.5px; line-height: 1.7;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+.pagefoot {
+  margin-top: 96px; padding: 32px 0 56px; border-top: 1px solid var(--color-divider);
+  display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;
+  align-items: center; font-size: 13px; color: var(--color-neutral-600);
+}
+
+@media (max-width: 900px) {
+  .wrap { padding: 0 20px; }
+  .hero { grid-template-columns: minmax(0,1fr); padding: 48px 28px 44px; gap: 40px; }
+  .hero-copy h1 { font-size: 44px; }
+  .features, .strip-wrap { padding-left: 28px; padding-right: 28px; }
+  .features .cols { grid-template-columns: minmax(0,1fr); gap: 34px; }
+  .cta-band, .sheet-foot { padding-left: 28px; padding-right: 28px; }
+  .cta-band { padding-top: 44px; padding-bottom: 44px; }
+  .cta-band h2 { font-size: 30px; }
+  .split { grid-template-columns: minmax(0,1fr); gap: 28px; }
+  .split .shot { max-width: 380px; }
+  .section { padding-top: 64px; }
+  .section-head h2 { font-size: 32px; }
+  .strip { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .strip div { height: 96px; }
+  .topnav .hide-sm { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"><i></i><b></b><s></s></div>
+      <span class="brand-name">AtmosFlow</span>
+    </div>
+    <nav class="topnav">
+      <a href="#features" class="hide-sm">Features</a>
+      <a href="#skies">Skies</a>
+      <a href="#widgets" class="hide-sm">Widgets</a>
+      <a href="https://github.com/suraj-shetty/AtmosFlow">GitHub</a>
+    </nav>
+  </header>
+</div>
+
+<div class="wrap">
+  <main class="sheet">
+
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="tag tag-outline">Now on iOS and Android</span>
+        <h1>Your sky, beautifully forecasted.</h1>
+        <p class="lede">AtmosFlow reads the weather before you read a number. The whole
+          screen becomes the sky outside — dawn gold, storm charcoal, the drift of real
+          rain — with the forecast floating over it on frosted glass.</p>
+        <div class="cta-row">
+          <a href="https://github.com/suraj-shetty/AtmosFlow" class="btn btn-primary">Get AtmosFlow</a>
+          <a href="#skies" class="btn btn-ghost">Watch the sky change →</a>
+        </div>
+        <div class="reassure">
+          <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <span>Free, no account, no ads.</span>
+        </div>
+      </div>
+
+      <div class="phone-slot">
+        <div class="phone" aria-hidden="true">
+          <div class="screen">
+            <div class="sun-glow"></div>
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="screen-inner">
+              <div class="status"><span>San Francisco</span><span>9:41</span></div>
+              <div class="now">
+                <div class="deg">18°</div>
+                <div class="cond">Mostly clear</div>
+                <div class="feels">Feels like 16°</div>
+              </div>
+              <div class="hours">
+                <div><span class="h">10</span><div class="g" style="background:#e09550"></div><span class="t">19°</span></div>
+                <div><span class="h">11</span><div class="g" style="background:#e09550"></div><span class="t">21°</span></div>
+                <div><span class="h">12</span><div class="g" style="background:#b9c2d4"></div><span class="t">22°</span></div>
+                <div><span class="h">13</span><div class="g" style="background:#b9c2d4"></div><span class="t">22°</span></div>
+              </div>
+              <div class="days">
+                <div><span>Today</span><span class="hl">22° / 13°</span></div>
+                <div><span>Friday</span><span class="hl">20° / 12°</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="cols">
+        <div class="feature">
+          <div class="numeral numeral-1">1</div>
+          <h3>A sky, not a dashboard</h3>
+          <p>Seven conditions, each with its own daylight and after-dark treatment, and
+            every one of them moving — drifting cloud blobs, a sun on a 120-second ray
+            spin, a star field that twinkles. Open it at night and it is night.</p>
+        </div>
+        <div class="feature">
+          <div class="numeral numeral-2">2</div>
+          <h3>Weather you can feel</h3>
+          <p>Snowflakes drift twelve pixels sideways as they fall. Four bands of fog
+            cross at their own speeds. The storm's bolt and full-screen flash run a
+            3.2-second cycle. The animation is the condition, not decoration.</p>
+        </div>
+        <div class="feature">
+          <div class="numeral numeral-3">3</div>
+          <h3>On your home screen too</h3>
+          <p>Widgets in three sizes on both platforms carry the same living sky, with the
+            time of day resolved from the place's own sunrise and sunset rather than
+            from the clock.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="strip-wrap">
+      <div class="strip" aria-label="The seven conditions">
+        <div style="background:linear-gradient(168deg,#8fc4e8,#dceaf5)" class="on-light">Clear</div>
+        <div style="background:linear-gradient(168deg,#aab0c0,#c8ccd6)" class="on-light">Cloudy</div>
+        <div style="background:linear-gradient(168deg,#c0c2ca,#d6d8de)" class="on-light">Fog</div>
+        <div style="background:linear-gradient(168deg,#7a8296,#5c6478)" class="on-dark">Drizzle</div>
+        <div style="background:linear-gradient(168deg,#5a6078,#3a3e52)" class="on-dark">Rain</div>
+        <div style="background:linear-gradient(168deg,#dfe6f2,#c6d0e2)" class="on-light">Snow</div>
+        <div style="background:linear-gradient(168deg,#2c2a44,#161428)" class="on-dark">Storm</div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div>
+        <h2>Look up, from wherever you are.</h2>
+        <p>Free on iOS and Android. Open-Meteo data, no key, no account. The source is
+          on GitHub — clone it and <code>flutter run</code>.</p>
+      </div>
+      <div class="cta-row">
+        <a href="https://github.com/suraj-shetty/AtmosFlow" class="btn btn-primary">View the source</a>
+        <a href="https://github.com/suraj-shetty/AtmosFlow/archive/refs/heads/main.zip" class="btn btn-secondary">Download</a>
+      </div>
+    </section>
+
+    <div class="sheet-foot">
+      <span>AtmosFlow — built in Flutter</span>
+      <span>Weather data by <a href="https://open-meteo.com">Open-Meteo</a></span>
+    </div>
+  </main>
+</div>
+
+<div class="wrap">
+
+  <section class="section" id="skies">
+    <div class="section-head">
+      <span class="tag tag-accent">The fourteen skies</span>
+      <h2>Every condition, day and night</h2>
+      <p>These are the app's own golden files — the same images the test suite compares
+        each build against, so this page cannot show the app looking like anything the
+        tests disagree with.</p>
+    </div>
+    <div class="shot"><img src="images/skies.png" alt="Home screen rendered in all seven conditions, in daylight and at night" width="1190" height="664" loading="lazy"></div>
+  </section>
+
+  <section class="section" id="screens">
+    <div class="section-head">
+      <span class="tag tag-accent-2">Six screens</span>
+      <h2>The forecast, floating over it</h2>
+      <p>A 96px hero temperature over the live sky, an hourly strip whose chips expand to
+        their precipitation line, a seven-day list, a day detail with a chart that draws
+        itself on, search, saved places, and settings.</p>
+    </div>
+    <div class="shot"><img src="images/screens.png" alt="Home, day detail, search, saved locations and settings screens" width="1600" height="622" loading="lazy"></div>
+  </section>
+
+  <section class="section" id="widgets">
+    <div class="section-head">
+      <span class="tag tag-accent">Home-screen widgets</span>
+      <h2>105 tiles, generated not drawn</h2>
+    </div>
+    <div class="split">
+      <div class="shot"><img src="images/widgets.png" alt="Widget tiles across seven conditions and five times of day" width="866" height="1196" loading="lazy"></div>
+      <div>
+        <p>Seven conditions down, five times of day across — dawn, morning, afternoon,
+          evening, night — in three layouts, on WidgetKit and <code>RemoteViews</code> alike.</p>
+        <p>The design writes those tiles as inline CSS. Hand-transcribing thirty-five
+          layer sets into Swift <em>and</em> Kotlin would be seventy chances to mistype
+          an alpha, so the CSS is parsed once into a typed model and both catalogues are
+          generated from it.</p>
+        <p>Neither platform can animate a widget, so every keyframe is sampled at one
+          shared instant — 2.944s, chosen because it is 92% of the storm's flash cycle,
+          and a widget that holds one picture for minutes should have its lightning in
+          it.</p>
+        <p><a href="https://github.com/suraj-shetty/AtmosFlow/blob/main/docs/home-screen-widgets.md">Read the write-up →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="build">
+    <div class="section-head">
+      <span class="tag tag-accent-2">Built from the design</span>
+      <h2>One project, three surfaces</h2>
+      <p>The app, the widgets and the brand all come from a single Claude Design project,
+        and each is generated from the design's own CSS rather than transcribed by hand.
+        The brand generator is checked by rendering it and the design at 248px and
+        diffing — the output is pixel-identical.</p>
+    </div>
+    <pre><code>git clone https://github.com/suraj-shetty/AtmosFlow.git
+cd AtmosFlow
+flutter run</code></pre>
+    <div class="facts">
+      <div class="fact">
+        <div class="k">No key, no signup</div>
+        <div class="v">Open-Meteo needs neither. Generated code is committed, so a fresh
+          clone compiles without a codegen step.</div>
+      </div>
+      <div class="fact">
+        <div class="k">115 tests</div>
+        <div class="v">Including 21 goldens: every screen once, Home across all seven
+          conditions in daylight and at night, and the splash in both appearances.</div>
+      </div>
+      <div class="fact">
+        <div class="k">Reduce Motion</div>
+        <div class="v">Holds every layer at its opening frame. It does not strip the sky
+          out; less movement is not less weather.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>AtmosFlow — built in Flutter, from a Claude Design project</span>
+    <span><a href="https://github.com/suraj-shetty/AtmosFlow">Source on GitHub</a> · Weather data by <a href="https://open-meteo.com">Open-Meteo</a></span>
+  </footer>
+
+</div>
+
+</body>
+</html>

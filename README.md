@@ -10,6 +10,8 @@
 [![Data](https://img.shields.io/badge/Open--Meteo-no%20API%20key-C67139)](https://open-meteo.com)
 [![Tests](https://img.shields.io/badge/tests-115%20passing-7A8A5E)](#testing)
 
+**[See it as a page →](https://suraj-shetty.github.io/AtmosFlow/)**
+
 </div>
 
 ---
