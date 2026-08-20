@@ -12,7 +12,8 @@ into two languages would be 70 chances to mistype an alpha, so it is read
 once and generated twice:
 
 ```
-tool/widget_spec/parse_ambient.py    the design's CSS → a typed model
+tool/widget_spec/ambient.json        the design's own inline CSS, extracted
+tool/widget_spec/parse_ambient.py    that CSS → a typed model
 tool/widget_spec/ambient_model.json  the model — 7 conditions × 5 skies
 tool/widget_spec/emit_swift.py       → ios/AtmosFlowWidget/AmbientCatalog.swift
 tool/widget_spec/emit_kotlin.py      → android/…/widget/AmbientCatalog.kt

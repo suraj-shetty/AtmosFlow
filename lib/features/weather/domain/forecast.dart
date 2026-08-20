@@ -86,16 +86,6 @@ abstract class CurrentWeather with _$CurrentWeather {
 
   const CurrentWeather._();
 
-  /// The design shows visibility in whole kilometres.
-  double get visibilityKm => visibilityMetres / 1000;
-
-  /// The UV bar fills against a 0–11+ scale.
-  double get uvFraction => uvFractionOf(uvIndex);
-
-  /// "Moderate" etc., following the WHO bands the design's "5 · Moderate"
-  /// label implies.
-  String get uvBand => uvBandOf(uvIndex);
-
   /// Compass point for the "Wind · NW" label.
   String get windCompass {
     const points = [

@@ -17,14 +17,11 @@ abstract final class Motion {
   static const Curve modalPresentCurve = Cubic(0.22, 1, 0.36, 1);
   static const Curve modalDismissCurve = Curves.easeInCubic;
 
-  /// The design fades the outgoing screen for 160ms before swapping.
-  static const Duration screenSwapDelay = Duration(milliseconds: 160);
-
-  /// Tab icon pops to 1.22× on tap, then settles.
-  static const Duration tabBounce = Duration(milliseconds: 300);
-  static const Duration tabBounceHold = Duration(milliseconds: 400);
+  /// The design's overshoot spring, `cubic-bezier(.34,1.56,.64,1)`. Named for
+  /// the prototype's tab icon; this app presents Search and Settings modally
+  /// instead, so what still springs on it is the refresh puck and the hourly
+  /// chip.
   static const Curve tabBounceCurve = Cubic(0.34, 1.56, 0.64, 1);
-  static const double tabBounceScale = 1.22;
 
   // ── Home ──────────────────────────────────────────────────────────────
   /// `@keyframes fadeSlideUp` — 18px rise, used by the metric grid.
@@ -51,13 +48,11 @@ abstract final class Motion {
   /// The temperature line draws itself on.
   static const Duration graphDraw = Duration(milliseconds: 1100);
   static const Curve graphDrawCurve = Cubic(0.22, 1, 0.36, 1);
-  static const Duration graphAreaFade = Duration(milliseconds: 1000);
-  static const Duration graphAreaDelay = Duration(milliseconds: 300);
 
-  /// The sun travels to 58% of its arc on `1-(1-t)³`.
+  /// The sun sweeps out to wherever the day has actually got to, on `1-(1-t)³`
+  /// — the design's fixture happened to sit at 58%.
   static const Duration arcSweep = Duration(milliseconds: 1100);
   static const Curve arcSweepCurve = Curves.easeOutCubic;
-  static const double arcTarget = 0.58;
 
   /// Both detail charts wait for the screen transition before starting.
   static const Duration detailChartDelay = Duration(milliseconds: 250);
@@ -71,14 +66,8 @@ abstract final class Motion {
   static const Duration moodDwell = Duration(milliseconds: 3500);
   static const Duration moodCrossFade = Duration(milliseconds: 1200);
 
-  /// "Enable Location" shows "Locating…" for this long before Home.
-  static const Duration locating = Duration(milliseconds: 900);
-
   // ── Ambient sky ───────────────────────────────────────────────────────
-  /// One full left→right traverse; individual clouds pick their own period.
-  static const Duration cloudDriftSlowest = Duration(seconds: 42);
   static const Duration sunRaySpin = Duration(seconds: 120);
   static const Duration sunGlowPulse = Duration(milliseconds: 4500);
   static const Duration lightningCycle = Duration(milliseconds: 3200);
-  static const Duration twinkleBase = Duration(milliseconds: 3500);
 }

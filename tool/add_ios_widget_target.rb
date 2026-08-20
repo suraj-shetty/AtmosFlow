@@ -4,6 +4,7 @@
 # Flutter's `create` does not know about app extensions, and a hand-edited
 # project.pbxproj is a merge conflict waiting to happen — so the target is
 # built here instead, idempotently: running it twice leaves one target.
+require 'set'
 require 'xcodeproj'
 
 ROOT = File.expand_path('..', __dir__)
@@ -43,6 +44,9 @@ end
 
 # ── The extension target ──────────────────────────────────────────────────
 project.targets.select { |t| t.name == TARGET_NAME }.each do |existing|
+  # The product reference lives in Products, not in the target, so dropping the
+  # target alone leaves a stray .appex behind on every run.
+  existing.product_reference&.remove_from_project
   existing.remove_from_project
 end
 project.main_group.children
@@ -124,7 +128,7 @@ runner.build_phases.insert(thin || runner.build_phases.count, embed)
 # above replaces the file references these point at.
 tests = project.targets.find { |t| t.name == 'RunnerTests' }
 if tests
-  own = ['RunnerTests.swift', 'WidgetRenderTests.swift']
+  own = ['WidgetRenderTests.swift']
   tests.source_build_phase.files
        .reject { |f| own.include?(f.display_name) }
        .each(&:remove_from_project)
@@ -144,6 +148,30 @@ if tests
     config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '17.0'
   end
 end
+
+# ── Sweep up after ourselves ──────────────────────────────────────────────
+# Rebuilding the target above detaches its old groups and file references
+# without deleting them, so a project edited a few times over accumulates
+# objects nothing points at any more. Walk down from the main group and the
+# build phases, and drop every file, reference and group the walk never
+# reaches.
+def reachable(group, seen)
+  group.children.each do |child|
+    next unless seen.add?(child)
+    reachable(child, seen) if child.respond_to?(:children)
+  end
+  seen
+end
+
+live = reachable(project.main_group, Set.new([project.main_group]))
+project.objects.select { |o| o.isa.end_with?('BuildPhase') }.each do |phase|
+  phase.files.each { |f| live << f }
+end
+
+project.objects
+       .select { |o| %w[PBXBuildFile PBXFileReference PBXGroup].include?(o.isa) }
+       .reject { |o| live.include?(o) }
+       .each(&:remove_from_project)
 
 project.save
 puts "Added #{TARGET_NAME} (#{sources.size} sources) to #{PROJECT}"

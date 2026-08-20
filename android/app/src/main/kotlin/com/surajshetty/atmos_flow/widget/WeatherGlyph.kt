@@ -109,9 +109,6 @@ object WeatherGlyph {
     private fun dot(x: Float, y: Float) =
         "M$x ${y - 0.9f}a0.9 0.9 0 1 0 0 1.8a0.9 0.9 0 1 0 0-1.8z"
 
-    /** The humidity droplet beside the reading. */
-    const val DROPLET = "M12 3.6c0 0 5.2 5.6 5.2 9.1a5.2 5.2 0 1 1-10.4 0C6.8 9.2 12 3.6 12 3.6z"
-
     fun drawPath(canvas: Canvas, data: String, left: Float, top: Float,
                  size: Float, color: Int) {
         val unit = size / 28f

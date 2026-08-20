@@ -122,9 +122,6 @@ class AtmosTokens extends ThemeExtension<AtmosTokens> {
     ),
   ];
 
-  /// `.text-muted` — `color-mix(in srgb, var(--color-text) 55%, transparent)`.
-  Color get textMuted => text.withValues(alpha: 0.55);
-
   @override
   AtmosTokens copyWith({
     Color? bg,

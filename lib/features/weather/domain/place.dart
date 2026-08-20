@@ -26,8 +26,6 @@ abstract class Place with _$Place {
   /// The id given to whatever the device's GPS resolved to.
   static const int currentLocationId = -1;
 
-  bool get isCurrentLocation => id == currentLocationId;
-
   /// "Tokyo, Japan" — what the search results show under the name.
   String get subtitle => [admin1, country].nonNulls.join(', ');
 }
