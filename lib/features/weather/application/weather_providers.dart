@@ -167,6 +167,13 @@ final placeSearchProvider = FutureProvider.autoDispose
 /// Throws `AppFailure.locationDenied` rather than the plugin's own exceptions,
 /// so the UI has one thing to switch on.
 final deviceLocationProvider = FutureProvider.autoDispose<Place>((ref) async {
+  // Read before the first await, not after the last one. Everything below
+  // suspends — the permission dialog for as long as the user stares at it —
+  // and a Ref touched after the element has gone throws rather than returning
+  // a stale value. See [DeviceLocation.resolveDeviceLocation] for what keeps
+  // the element alive that long.
+  final repository = ref.watch(weatherRepositoryProvider);
+
   if (!await Geolocator.isLocationServiceEnabled()) {
     throw const AppFailure.locationDenied();
   }
@@ -185,7 +192,39 @@ final deviceLocationProvider = FutureProvider.autoDispose<Place>((ref) async {
   final position = await Geolocator.getCurrentPosition(
     locationSettings: const LocationSettings(accuracy: LocationAccuracy.low),
   );
-  return ref
-      .watch(weatherRepositoryProvider)
-      .placeAt(latitude: position.latitude, longitude: position.longitude);
-});
+  return repository.placeAt(
+    latitude: position.latitude,
+    longitude: position.longitude,
+  );
+  // No retry: a refused permission or a switched-off location service is a
+  // decision, not a blip, and retrying behind the user's back would leave the
+  // caller waiting on a future that never reports the refusal.
+}, retry: (_, _) => null);
+
+/// Resolving the device's location without letting the provider fall out from
+/// under the request.
+extension DeviceLocation on WidgetRef {
+  /// Awaits [deviceLocationProvider], holding it open until it answers.
+  ///
+  /// The provider is `autoDispose` and this is the only way it is used: awaited
+  /// once from a button handler, with nothing watching it. A bare
+  /// `read(….future)` therefore leaves the element with no listeners the
+  /// instant the read returns, and it is disposed while the body is still
+  /// waiting on the system permission dialog. The subscription is the listener
+  /// that keeps it alive, and closing it afterwards is what makes the next tap
+  /// take a fresh fix instead of replaying the last one.
+  Future<Place> resolveDeviceLocation() async {
+    final subscription = listenManual(
+      deviceLocationProvider,
+      (_, _) {},
+      // The caller awaits the future and handles the failure; without this the
+      // same error is also reported through the listener.
+      onError: (_, _) {},
+    );
+    try {
+      return await read(deviceLocationProvider.future);
+    } finally {
+      subscription.close();
+    }
+  }
+}

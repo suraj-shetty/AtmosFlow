@@ -50,7 +50,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     final messenger = ScaffoldMessenger.of(context);
 
     try {
-      final place = await ref.read(deviceLocationProvider.future);
+      final place = await ref.resolveDeviceLocation();
       ref.read(savedLocationsProvider.notifier).add(place);
       ref.read(selectedPlaceProvider.notifier).select(place);
       if (!mounted) return;

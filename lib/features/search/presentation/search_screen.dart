@@ -61,7 +61,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   Future<void> _useMyLocation() async {
     final messenger = ScaffoldMessenger.of(context);
     try {
-      final place = await ref.read(deviceLocationProvider.future);
+      final place = await ref.resolveDeviceLocation();
       if (!mounted) return;
       _select(place);
     } on AppFailure catch (failure) {
