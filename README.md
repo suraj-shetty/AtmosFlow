@@ -10,8 +10,6 @@
 [![Data](https://img.shields.io/badge/Open--Meteo-no%20API%20key-C67139)](https://open-meteo.com)
 [![Tests](https://img.shields.io/badge/tests-115%20passing-7A8A5E)](#testing)
 
-**[See it as a page →](https://suraj-shetty.github.io/AtmosFlow/)**
-
 </div>
 
 ---
@@ -60,6 +58,15 @@ Full write-up, including the two places the platforms will not follow the
 design: **[docs/home-screen-widgets.md](docs/home-screen-widgets.md)**
 
 <br clear="right">
+
+## The landing page
+
+[`docs/index.html`](docs/index.html) is the design project's own landing page,
+built the same way everything else here is — the Organic tokens ported into the
+stylesheet, the hero phone drawn from the design's markup and keyframes. It is
+a single self-contained file: open it in a browser, or point GitHub Pages at
+`main` → `/docs` to publish it at `https://suraj-shetty.github.io/AtmosFlow/`.
+Pages is not enabled on this repository yet.
 
 ## Quick start
 
