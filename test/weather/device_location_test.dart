@@ -1,5 +1,6 @@
 import 'package:atmos_flow/core/failure/app_failure.dart';
 import 'package:atmos_flow/features/weather/application/weather_providers.dart';
+import 'package:atmos_flow/features/search/presentation/search_screen.dart';
 import 'package:atmos_flow/features/weather/domain/place.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -80,6 +81,26 @@ void main() {
     final outcome = await tapResolve(tester);
 
     expect(outcome, const AppFailure.locationDenied());
+  });
+
+  testWidgets('Search tells the user when the location is refused', (
+    tester,
+  ) async {
+    geolocator.permission = LocationPermission.deniedForever;
+
+    await tester.pumpWidget(await testHarness(const SearchScreen()));
+    await tester.pump();
+    await tester.tap(find.text('Use My Location'));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(
+      find.text(
+        'Location access is off. Enable it in Settings to use your location.',
+      ),
+      findsOneWidget,
+      reason: 'the refusal never reached the user',
+    );
   });
 }
 
