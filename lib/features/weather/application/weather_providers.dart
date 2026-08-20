@@ -137,34 +137,27 @@ final currentForecastProvider = Provider<AsyncValue<Forecast>?>((ref) {
 
 // ── Search ─────────────────────────────────────────────────────────────────
 
-/// What the user has typed into the Search field.
-class SearchQueryNotifier extends Notifier<String> {
-  @override
-  String build() => '';
+/// Geocoding results for one query, debounced so a fast typist doesn't spray
+/// requests.
+///
+/// The query is the family key rather than a provider of its own: what the
+/// user has typed is state belonging to the Search screen, and a provider
+/// holding it would outlive the screen — the field would come back still
+/// carrying the last search, over stale results, and re-fetch them.
+final placeSearchProvider = FutureProvider.autoDispose
+    .family<List<Place>, String>((ref, rawQuery) async {
+      final query = rawQuery.trim();
+      if (query.isEmpty) return const [];
 
-  void set(String query) => state = query;
-}
+      // Debounce: a keystroke asks for a different family member, disposing
+      // the previous one. Bailing out when it is no longer mounted is what
+      // stops a fast typist from spraying requests.
+      final repository = ref.watch(weatherRepositoryProvider);
+      await Future<void>.delayed(const Duration(milliseconds: 300));
+      if (!ref.mounted) return const [];
 
-final searchQueryProvider = NotifierProvider<SearchQueryNotifier, String>(
-  SearchQueryNotifier.new,
-);
-
-/// Geocoding results, debounced so a fast typist doesn't spray requests.
-final placeSearchProvider = FutureProvider.autoDispose<List<Place>>((
-  ref,
-) async {
-  final query = ref.watch(searchQueryProvider).trim();
-  if (query.isEmpty) return const [];
-
-  // Debounce: a keystroke rebuilds this provider, disposing the previous
-  // build. Bailing out when it is no longer mounted is what stops a fast
-  // typist from spraying requests.
-  final repository = ref.watch(weatherRepositoryProvider);
-  await Future<void>.delayed(const Duration(milliseconds: 300));
-  if (!ref.mounted) return const [];
-
-  return repository.searchPlaces(query);
-}, retry: (_, _) => null);
+      return repository.searchPlaces(query);
+    }, retry: (_, _) => null);
 
 // ── Device location ────────────────────────────────────────────────────────
 

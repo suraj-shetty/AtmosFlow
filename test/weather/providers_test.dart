@@ -3,6 +3,8 @@ import 'package:atmos_flow/features/settings/application/settings_providers.dart
 import 'package:atmos_flow/features/settings/domain/app_settings.dart';
 import 'package:atmos_flow/features/weather/application/weather_providers.dart';
 import 'package:atmos_flow/features/weather/data/fake_weather_repository.dart';
+import 'package:atmos_flow/features/weather/domain/place.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -110,27 +112,24 @@ void main() {
   });
 
   group('placeSearchProvider', () {
+    /// The provider auto-disposes, and its debounce outlives a bare `read`,
+    /// so hold a subscription the way the Search screen does.
+    Future<List<Place>> search(ProviderContainer container, String query) {
+      final sub = container.listen(placeSearchProvider(query), (_, _) {});
+      addTearDown(sub.close);
+      return container.read(placeSearchProvider(query).future);
+    }
+
     test('is empty for a blank query and filters for a real one', () async {
       final container = await testContainer();
-      // The provider auto-disposes, and its debounce outlives a bare `read`,
-      // so hold a subscription the way the Search screen does.
-      final sub = container.listen(placeSearchProvider, (_, _) {});
-      addTearDown(sub.close);
 
-      expect(await container.read(placeSearchProvider.future), isEmpty);
-
-      container.read(searchQueryProvider.notifier).set('tok');
-      final results = await container.read(placeSearchProvider.future);
-      expect(results.map((p) => p.name), ['Tokyo']);
+      expect(await search(container, ''), isEmpty);
+      expect((await search(container, 'tok')).map((p) => p.name), ['Tokyo']);
     });
 
     test('returns nothing for a query that matches no city', () async {
       final container = await testContainer();
-      final sub = container.listen(placeSearchProvider, (_, _) {});
-      addTearDown(sub.close);
-
-      container.read(searchQueryProvider.notifier).set('zzzz');
-      expect(await container.read(placeSearchProvider.future), isEmpty);
+      expect(await search(container, 'zzzz'), isEmpty);
     });
   });
 

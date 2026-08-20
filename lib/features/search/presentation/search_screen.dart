@@ -25,13 +25,30 @@ class SearchScreen extends ConsumerStatefulWidget {
 }
 
 class _SearchScreenState extends ConsumerState<SearchScreen> {
-  late final TextEditingController _controller = TextEditingController(
-    text: ref.read(searchQueryProvider),
-  );
+  final TextEditingController _controller = TextEditingController();
+
+  /// What has been typed, held here rather than in a provider so it goes when
+  /// the screen goes. A notifier rather than `setState` so the field's
+  /// `onChanged` has something small to close over — see [_SearchField].
+  final ValueNotifier<String> _query = ValueNotifier<String>('');
+
+  @override
+  void initState() {
+    super.initState();
+    // Deliberately wired here, and closing over locals rather than `this`:
+    // Flutter keeps the last text field's widget alive in a static, so a
+    // callback handed to `TextField.onChanged` that reached back into this
+    // State would hold the whole dismissed screen on the heap. Nothing the
+    // field carries points anywhere near here.
+    final controller = _controller;
+    final query = _query;
+    controller.addListener(() => query.value = controller.text);
+  }
 
   @override
   void dispose() {
     _controller.dispose();
+    _query.dispose();
     super.dispose();
   }
 
@@ -55,7 +72,6 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
-    final query = ref.watch(searchQueryProvider);
     final saved = ref.watch(savedLocationsProvider);
 
     return DecoratedBox(
@@ -91,11 +107,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     ),
                   ],
                 ),
-                _SearchField(
-                  controller: _controller,
-                  onChanged: (value) =>
-                      ref.read(searchQueryProvider.notifier).set(value),
-                ),
+                _SearchField(controller: _controller),
                 GlassSurface(
                   onTap: _useMyLocation,
                   padding: const EdgeInsets.symmetric(
@@ -120,10 +132,12 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     ],
                   ),
                 ),
-                if (query.trim().isEmpty)
-                  _SavedSection(saved: saved, onSelect: _select)
-                else
-                  _ResultsSection(onSelect: _select),
+                ValueListenableBuilder<String>(
+                  valueListenable: _query,
+                  builder: (context, query, _) => query.trim().isEmpty
+                      ? _SavedSection(saved: saved, onSelect: _select)
+                      : _ResultsSection(query: query, onSelect: _select),
+                ),
               ],
             ),
           ],
@@ -133,11 +147,12 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   }
 }
 
+/// The pill field. It carries no callbacks at all — the screen listens to the
+/// controller instead, which is what keeps the dismissed screen collectable.
 class _SearchField extends StatelessWidget {
-  const _SearchField({required this.controller, required this.onChanged});
+  const _SearchField({required this.controller});
 
   final TextEditingController controller;
-  final ValueChanged<String> onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +172,6 @@ class _SearchField extends StatelessWidget {
           Expanded(
             child: TextField(
               controller: controller,
-              onChanged: onChanged,
               textInputAction: TextInputAction.search,
               autocorrect: false,
               style: TextStyle(fontSize: 14, color: tokens.text),
@@ -223,15 +237,15 @@ class _SavedSection extends StatelessWidget {
 }
 
 class _ResultsSection extends ConsumerWidget {
-  const _ResultsSection({required this.onSelect});
+  const _ResultsSection({required this.query, required this.onSelect});
 
+  final String query;
   final ValueChanged<Place> onSelect;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tokens = context.tokens;
-    final query = ref.watch(searchQueryProvider);
-    final results = ref.watch(placeSearchProvider);
+    final results = ref.watch(placeSearchProvider(query));
 
     return results.when(
       loading: () => const Padding(

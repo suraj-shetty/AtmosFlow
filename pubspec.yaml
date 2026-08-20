@@ -24,6 +24,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  # Pulled in transitively by flutter_test; named here because
+  # test/routing/lifecycle_test.dart uses forceGC directly to prove a
+  # dismissed screen is actually collected, not merely unmounted.
+  leak_tracker: ^10.0.8
   build_runner: ^2.7.1
   freezed: ^3.2.3
   json_serializable: ^6.11.2
