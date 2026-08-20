@@ -61,6 +61,30 @@ abstract final class Motion {
   /// `@keyframes flipY` on the demo temperature chip when the unit changes.
   static const Duration unitFlip = Duration(milliseconds: 500);
 
+  // ── Launch ────────────────────────────────────────────────────────────
+  /// The brand design's launch timeline, as absolute marks from Flutter's
+  /// first frame: 0ms the static OS image, 180ms the sky starts moving, 260ms
+  /// the wordmark rises, 600ms it is in place and held, 800ms the crossfade
+  /// into the live condition begins, and under 1.2s the whole thing is over.
+  ///
+  /// The design's own demo page plays the rise over .7s, which would still be
+  /// running when the crossfade starts; the timeline it ships beside it is the
+  /// one that adds up, so the rise takes the 340ms between its two marks.
+  static const Duration splashSkyIn = Duration(milliseconds: 180);
+  static const Duration splashRiseStart = Duration(milliseconds: 260);
+  static const Duration splashRiseEnd = Duration(milliseconds: 600);
+  static const Duration splashDwell = Duration(milliseconds: 800);
+  static const Duration splashHandoff = Duration(milliseconds: 400);
+
+  /// One turn of the splash sky's idle motion — the sun breathing, the band
+  /// sliding. The design gives each element its own period; they share one
+  /// here because nothing on this screen lives long enough to drift apart.
+  static const Duration splashIdle = Duration(milliseconds: 3400);
+
+  /// "The hairline progress bar appears at 1.5s. Never a spinner — the sky is
+  /// the loading state."
+  static const Duration splashPatience = Duration(milliseconds: 1500);
+
   // ── Onboarding ────────────────────────────────────────────────────────
   /// The mood carousel advances every 3.5s, cross-fading over 1.2s.
   static const Duration moodDwell = Duration(milliseconds: 3500);

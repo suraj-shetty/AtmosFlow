@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The dawn gradient's middle stop. Android 12 and up draw their own
+         splash and will only take a flat colour there, so the sky arrives as
+         its dominant tone and becomes a gradient on Flutter's first frame. -->
+    <color name="splash_background">#f2d3ae</color>
+</resources>

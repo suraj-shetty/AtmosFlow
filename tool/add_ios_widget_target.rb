@@ -152,25 +152,41 @@ end
 # ── Sweep up after ourselves ──────────────────────────────────────────────
 # Rebuilding the target above detaches its old groups and file references
 # without deleting them, so a project edited a few times over accumulates
-# objects nothing points at any more. Walk down from the main group and the
-# build phases, and drop every file, reference and group the walk never
-# reaches.
-def reachable(group, seen)
-  group.children.each do |child|
-    next unless seen.add?(child)
-    reachable(child, seen) if child.respond_to?(:children)
+# objects nothing points at any more.
+#
+# Orphanhood is judged by walking *up* from each object rather than down from
+# the main group. Walking down has to know every kind of container there is,
+# and missing one — a localised storyboard's variant group, say — silently
+# deletes files the project still needs.
+def rooted?(object, root)
+  seen = Set.new
+  node = object
+  while node && seen.add?(node)
+    return true if node == root
+    # An object with no parent at all is exactly what we are looking for, and
+    # xcodeproj reports that by raising rather than returning nil.
+    node = begin
+      node.parent
+    rescue StandardError
+      nil
+    end
   end
-  seen
+  false
 end
 
-live = reachable(project.main_group, Set.new([project.main_group]))
-project.objects.select { |o| o.isa.end_with?('BuildPhase') }.each do |phase|
-  phase.files.each { |f| live << f }
-end
+root = project.main_group
+in_a_phase = project.objects.select { |o| o.isa.end_with?('BuildPhase') }
+                     .flat_map(&:files).uniq
 
+project.objects.select { |o| o.isa == 'PBXBuildFile' }
+       .reject { |o| in_a_phase.include?(o) }
+       .each(&:remove_from_project)
+
+still_built = project.objects.select { |o| o.isa == 'PBXBuildFile' }
+                     .map(&:file_ref).compact
 project.objects
-       .select { |o| %w[PBXBuildFile PBXFileReference PBXGroup].include?(o.isa) }
-       .reject { |o| live.include?(o) }
+       .select { |o| %w[PBXFileReference PBXGroup].include?(o.isa) }
+       .reject { |o| still_built.include?(o) || rooted?(o, root) }
        .each(&:remove_from_project)
 
 project.save

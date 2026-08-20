@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Modify this file to customize your launch splash screen -->
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="?android:colorBackground" />
+<!-- "The splash is not a holding pattern — it is the sky already arriving."
+     A flat dawn gradient with the mark at rest, and nothing else: no text and
+     no motion until Flutter's own splash takes over.
 
-    <!-- You can insert your own image assets here -->
-    <!-- <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@mipmap/launch_image" />
-    </item> -->
+     The mark is lifted 35dp — half the wordmark block that appears under it a
+     frame later — so that handing over to Flutter does not jog it upward. The
+     inset is doubled because insetting one edge moves a centred child by half
+     of it. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <bitmap android:gravity="fill" android:src="@drawable/launch_gradient" />
+    </item>
+    <item android:bottom="70dp">
+        <bitmap android:gravity="center" android:src="@drawable/launch_mark" />
+    </item>
 </layer-list>

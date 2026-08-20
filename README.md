@@ -25,6 +25,13 @@ dart run build_runner build --delete-conflicting-outputs
 flutter analyze && flutter test
 ```
 
+## Design
+
+The app, the home-screen widgets and the brand all come from the same Claude
+Design project, and each is generated from the design's own CSS rather than
+transcribed by hand — see [docs/home-screen-widgets.md](docs/home-screen-widgets.md)
+and [docs/brand.md](docs/brand.md).
+
 ## Data
 
 [Open-Meteo](https://open-meteo.com) — free, no API key, no signup. Forecasts

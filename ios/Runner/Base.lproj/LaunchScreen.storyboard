@@ -1,28 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<!-- Stage one of the brand design's launch: a flat dawn sky with the mark at
+     rest, no text and no motion. Everything that moves belongs to the Flutter
+     splash that replaces this on the first frame — which is why the gradient
+     and the mark here are rendered from the same description Flutter draws
+     from, and land in the same place. Both images carry a dark variant, which
+     is the only reading of the design's "between sunset and sunrise" a launch
+     image can make before any code has run. -->
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ydg-fD-yQy"/>
-                        <viewControllerLayoutGuide type="bottom" id="xbc-2k-c8Z"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="LaunchBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Sky-00-Bgd">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="LaunchMark" translatesAutoresizingMaskIntoConstraints="NO" id="Mrk-00-Tle">
+                                <rect key="frame" x="118.5" y="313" width="156" height="156"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="156" id="Mrk-wd-000"/>
+                                    <constraint firstAttribute="height" constant="156" id="Mrk-ht-000"/>
+                                </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.82745098039215681" blue="0.68235294117647061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1a2-6s-vTC"/>
-                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4X2-HB-R7a"/>
+                            <constraint firstItem="Sky-00-Bgd" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Sky-tp-000"/>
+                            <constraint firstItem="Sky-00-Bgd" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Sky-ld-000"/>
+                            <constraint firstAttribute="trailing" secondItem="Sky-00-Bgd" secondAttribute="trailing" id="Sky-tr-000"/>
+                            <constraint firstAttribute="bottom" secondItem="Sky-00-Bgd" secondAttribute="bottom" id="Sky-bt-000"/>
+                            <constraint firstItem="Mrk-00-Tle" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Mrk-cx-000"/>
+                            <!-- Lifted by half the wordmark block the Flutter splash puts under the
+                                 mark (29pt name + 7pt gap + 12pt tagline = 48pt, so 35pt of
+                                 lift once the 22pt gap is counted). The design centres the
+                                 mark alone on this screen and centres mark-plus-wordmark on
+                                 the next, which would jog it upward the instant Flutter drew
+                                 — and "no seam" is the point of the whole sequence. -->
+                            <constraint firstItem="Mrk-00-Tle" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-35" id="Mrk-cy-000"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -32,6 +57,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchImage" width="168" height="185"/>
+        <image name="LaunchBackground" width="440" height="956"/>
+        <image name="LaunchMark" width="156" height="156"/>
     </resources>
 </document>

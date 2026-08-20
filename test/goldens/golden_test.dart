@@ -1,7 +1,11 @@
+import 'package:atmos_flow/core/persistence/preferences.dart';
+import 'package:atmos_flow/features/splash/presentation/splash_gate.dart';
 import 'package:atmos_flow/features/weather/domain/weather_condition.dart';
 import 'package:atmos_flow/features/weather/presentation/home/widgets/daily_row.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'golden_harness.dart';
 
@@ -116,4 +120,51 @@ void main() {
       matchesGoldenFile('onboarding.png'),
     );
   });
+
+  for (final night in [false, true]) {
+    testWidgets('Splash — ${night ? 'night' : 'day'}', (tester) async {
+      useDesignSurface(tester);
+      freezeClock();
+      // Nothing saved: the splash has no forecast to wait on, which is the
+      // state a first launch shows.
+      SharedPreferences.setMockInitialValues({});
+      final prefs = await SharedPreferences.getInstance();
+      await tester.pumpWidget(
+        MediaQuery(
+          data: MediaQueryData(
+            platformBrightness: night ? Brightness.dark : Brightness.light,
+            // The same flag the screens are captured under: it draws the
+            // composed frame rather than a moment inside the rise.
+            disableAnimations: true,
+          ),
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: ProviderScope(
+              overrides: [
+                sharedPreferencesProvider.overrideWithValue(prefs),
+              ],
+              child: SplashGate(
+                child: ColoredBox(
+                  color: const Color(0xFF000000),
+                  child: const SizedBox.expand(),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      // Short of the 800ms dwell, so the splash is still at full strength and
+      // has not begun handing over.
+      await tester.pump(const Duration(milliseconds: 400));
+
+      await expectLater(
+        find.byType(SplashGate),
+        matchesGoldenFile('splash-${night ? 'night' : 'day'}.png'),
+      );
+
+      // Tearing the tree down cancels the gate's own timers; left pending,
+      // the 1.5s patience timer would fail the test after the golden passed.
+      await tester.pumpWidget(const SizedBox.shrink());
+    });
+  }
 }

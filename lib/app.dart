@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/theme/app_theme.dart';
 import 'features/home_widget/application/widget_publisher.dart';
 import 'features/settings/application/settings_providers.dart';
+import 'features/splash/presentation/splash_gate.dart';
 import 'routing/app_router.dart';
 
 class AtmosFlowApp extends ConsumerWidget {
@@ -25,6 +26,10 @@ class AtmosFlowApp extends ConsumerWidget {
       darkTheme: AppTheme.dark(),
       themeMode: appearance.themeMode,
       routerConfig: ref.watch(appRouterProvider),
+      // The splash sits over the router, not inside it: the design asks for
+      // one unbroken picture, and a route of its own would swap the sky out
+      // rather than let it become today's.
+      builder: (context, child) => SplashGate(child: child ?? const SizedBox()),
     );
   }
 }

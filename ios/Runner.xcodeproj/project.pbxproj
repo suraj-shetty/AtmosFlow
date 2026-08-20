@@ -7,38 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		000D6B1CEBF90C5E34DDCA05 /* WidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643DF85698953067FD0ABD29 /* WidgetEntry.swift */; };
-		06F53C4BE665BA6A6D7B31A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA8436E17B8D306CF43F054 /* Foundation.framework */; };
-		0BD3978DEC54C2930A939DED /* SVGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8E195C67220C2FBA3739F /* SVGPath.swift */; };
+		0691BE692FA9FC1DC5F13ACD /* AmbientCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B00F7B37A59D6DC508C45 /* AmbientCatalog.swift */; };
+		0FDB8E0236EAF007FA9B9294 /* WidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D091641BA9C7FD0AD46DF6 /* WidgetViews.swift */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
-		19F433FBC559936170A82B44 /* WidgetSky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B85D20C3DC829CA5AD1CAEF /* WidgetSky.swift */; };
-		1E2F4F728455443169AAEDC7 /* WidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643DF85698953067FD0ABD29 /* WidgetEntry.swift */; };
-		2373BC35E1096D5C10FCB510 /* WidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F961108635779D4124212A10 /* WidgetViews.swift */; };
-		2DC13B214A081DA5C7CC7B06 /* Ambient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE44A878F4E4103BE35F149 /* Ambient.swift */; };
-		2EAFE8216EAB3255C239332C /* WidgetSky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B85D20C3DC829CA5AD1CAEF /* WidgetSky.swift */; };
-		2F026D1EC7F6C8CE48DA9F19 /* AmbientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B06BD95D930BE7C7D33C2 /* AmbientView.swift */; };
-		3796BE3CF4044D8FF9A1D95A /* WeatherGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB4A597378013B945E4380 /* WeatherGlyph.swift */; };
+		19956E398B1C1A65AE040EBD /* SVGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C00F8428E3F0BDC0B6709D /* SVGPath.swift */; };
+		221148642F43F93FFADD9231 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA8436E17B8D306CF43F054 /* Foundation.framework */; };
+		29EEEAB9E4B43887B3C86A7F /* WidgetSky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB32BD0E2EA542E6C688CFD /* WidgetSky.swift */; };
+		345903CCB8FEDB11B0B864D5 /* SVGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C00F8428E3F0BDC0B6709D /* SVGPath.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
-		3E12EECCBAC7A8D8F9CD5393 /* WeatherGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB4A597378013B945E4380 /* WeatherGlyph.swift */; };
-		3E416CBB14EE55995BE3194B /* AmbientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B06BD95D930BE7C7D33C2 /* AmbientView.swift */; };
-		43F0C5173437C8DA31041FA2 /* SVGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8E195C67220C2FBA3739F /* SVGPath.swift */; };
-		4FE217268A0E9F017AE1F61E /* Figtree-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12CA8DBDC6BDE92634B89CA5 /* Figtree-Regular.ttf */; };
-		668542FBFB43DD9E10838114 /* Figtree-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58BD2DBA9F546E5131F1F1E2 /* Figtree-SemiBold.ttf */; };
-		7126AE31C42BD81D099A570B /* WidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F961108635779D4124212A10 /* WidgetViews.swift */; };
+		3D15EFFDD8AEC4D51E576A05 /* WidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D091641BA9C7FD0AD46DF6 /* WidgetViews.swift */; };
+		4197C33C7F23538727CE5B74 /* AtmosFlowWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FCBDE0F69F5F64DAC373E48F /* AtmosFlowWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		48EDD54F246AD76C92246A11 /* AmbientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B5121AA7149AD7B1A7F4CE /* AmbientView.swift */; };
+		4BF2A46DE8079BD2F3CFF070 /* WidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8638A71197B77D1FBF51091C /* WidgetEntry.swift */; };
+		4CB690AB7330A12B42888745 /* WeatherGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3385F00943CD89E6748080 /* WeatherGlyph.swift */; };
+		5765AD186443B22AD32BEFEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA8436E17B8D306CF43F054 /* Foundation.framework */; };
+		5EBF5551D39B8BAA31EECE01 /* AmbientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633AEF168B1D1F4DBB92D1D0 /* AmbientLayer.swift */; };
+		62409F53C8F6831E8D0A6DC5 /* AmbientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B5121AA7149AD7B1A7F4CE /* AmbientView.swift */; };
+		6ACD19CE8F06FBCA6A6BD5F4 /* WidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8638A71197B77D1FBF51091C /* WidgetEntry.swift */; };
+		6BB29CBD17711AE5B919579B /* Ambient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF75EF2A4C4E40D142B09E7 /* Ambient.swift */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		7552EA6BAE622689AA3B30D7 /* WidgetRenderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351BE8C25D4B8CCE723F838 /* WidgetRenderTests.swift */; };
 		779BF551070F643FE0772149 /* WidgetBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2905888EA156B107A2F630A6 /* WidgetBridge.swift */; };
 		78A318202AECB46A00862997 /* FlutterGeneratedPluginSwiftPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 78A3181F2AECB46A00862997 /* FlutterGeneratedPluginSwiftPackage */; };
-		7D0C11012E1E5A38B14660FE /* AmbientCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B89AFCD509757CF40C86B1 /* AmbientCatalog.swift */; };
-		7F8ADB07D0801DC9CE2FA397 /* AmbientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385EF3B6EB50AF1C0FB82B2E /* AmbientLayer.swift */; };
-		94EA6F6CDE7A124E46F5FF8A /* AtmosFlowWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE00C40FA98D56D2D7D533F /* AtmosFlowWidget.swift */; };
+		7D3E7BADA6B5DF5793788158 /* AmbientCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B00F7B37A59D6DC508C45 /* AmbientCatalog.swift */; };
+		8033032AC78D94D8F0DCD0A6 /* Figtree-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5ED0FC280ADD8EF843014FC9 /* Figtree-Regular.ttf */; };
+		93BFA4909DF1B4FFA79E189F /* AmbientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633AEF168B1D1F4DBB92D1D0 /* AmbientLayer.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
-		B7EA85DEC14DE02F5B205CE2 /* AmbientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385EF3B6EB50AF1C0FB82B2E /* AmbientLayer.swift */; };
-		D3C25060254054D45CA35DDB /* Ambient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE44A878F4E4103BE35F149 /* Ambient.swift */; };
-		DF2BCB08AB81C7715B131556 /* AtmosFlowWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BC9A16931CBB3AE151A89CF4 /* AtmosFlowWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		EA8A34FA5B008A92B47294CC /* AmbientCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B89AFCD509757CF40C86B1 /* AmbientCatalog.swift */; };
+		A99F447E80D8620CF4716679 /* Ambient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF75EF2A4C4E40D142B09E7 /* Ambient.swift */; };
+		B273F6DD3AFDB17B556DA950 /* Figtree-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B734EF8D2C4526F1D53BFD06 /* Figtree-SemiBold.ttf */; };
+		BDF1C6B52746C069830115F4 /* WeatherGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3385F00943CD89E6748080 /* WeatherGlyph.swift */; };
+		F05B27DB8258C8BF20EC723D /* WidgetSky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB32BD0E2EA542E6C688CFD /* WidgetSky.swift */; };
+		F0DFBA6F2988F171A2D7AEF2 /* AtmosFlowWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337190952DE08074490BA924 /* AtmosFlowWidget.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,11 +50,11 @@
 			remoteGlobalIDString = 97C146ED1CF9000F007C117D;
 			remoteInfo = Runner;
 		};
-		9B9E7EA7B176203102FE7B0B /* PBXContainerItemProxy */ = {
+		EFEE88C77D3B7AB540965FF5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = E84D8B59463CE0CDF75E65BA;
+			remoteGlobalIDString = 52B49F87B34F8D124FFBD35A;
 			remoteInfo = AtmosFlowWidgetExtension;
 		};
 /* End PBXContainerItemProxy section */
@@ -75,7 +76,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				DF2BCB08AB81C7715B131556 /* AtmosFlowWidgetExtension.appex in Embed App Extensions */,
+				4197C33C7F23538727CE5B74 /* AtmosFlowWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,53 +84,57 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0DE5FB1BB3CC63995A719A63 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		12CA8DBDC6BDE92634B89CA5 /* Figtree-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; path = "Figtree-Regular.ttf"; sourceTree = "<group>"; };
+		076B71B246B1FB823D68D6BF /* Figtree-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; path = "Figtree-Regular.ttf"; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		2905888EA156B107A2F630A6 /* WidgetBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WidgetBridge.swift; path = WidgetBridge.swift; sourceTree = "<group>"; };
-		2CFB4A597378013B945E4380 /* WeatherGlyph.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WeatherGlyph.swift; sourceTree = "<group>"; };
-		2FE44A878F4E4103BE35F149 /* Ambient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Ambient.swift; sourceTree = "<group>"; };
+		2A3385F00943CD89E6748080 /* WeatherGlyph.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WeatherGlyph.swift; sourceTree = "<group>"; };
+		2F7B00F7B37A59D6DC508C45 /* AmbientCatalog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AmbientCatalog.swift; sourceTree = "<group>"; };
+		31AAEE505CB820B6099A409E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		331C8081294A63A400263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		385EF3B6EB50AF1C0FB82B2E /* AmbientLayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AmbientLayer.swift; sourceTree = "<group>"; };
+		337190952DE08074490BA924 /* AtmosFlowWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AtmosFlowWidget.swift; sourceTree = "<group>"; };
+		3A0B8486D90E9A560DCA9D89 /* AtmosFlowWidget.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = AtmosFlowWidget.entitlements; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
-		3C86109F39948DC67BEFA2C4 /* AtmosFlowWidget.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = AtmosFlowWidget.entitlements; sourceTree = "<group>"; };
-		58BD2DBA9F546E5131F1F1E2 /* Figtree-SemiBold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; path = "Figtree-SemiBold.ttf"; sourceTree = "<group>"; };
-		643DF85698953067FD0ABD29 /* WidgetEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetEntry.swift; sourceTree = "<group>"; };
+		5B1C4C287E128E99F7C73DC9 /* Figtree-SemiBold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; path = "Figtree-SemiBold.ttf"; sourceTree = "<group>"; };
+		5ED0FC280ADD8EF843014FC9 /* Figtree-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; path = "Figtree-Regular.ttf"; sourceTree = "<group>"; };
+		633AEF168B1D1F4DBB92D1D0 /* AmbientLayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AmbientLayer.swift; sourceTree = "<group>"; };
+		6AB32BD0E2EA542E6C688CFD /* WidgetSky.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetSky.swift; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
-		7C1B06BD95D930BE7C7D33C2 /* AmbientView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AmbientView.swift; sourceTree = "<group>"; };
+		8638A71197B77D1FBF51091C /* WidgetEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetEntry.swift; sourceTree = "<group>"; };
+		95C00F8428E3F0BDC0B6709D /* SVGPath.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SVGPath.swift; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
 		97C146EE1CF9000F007C117D /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		97C146FB1CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9B85D20C3DC829CA5AD1CAEF /* WidgetSky.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetSky.swift; sourceTree = "<group>"; };
-		BC9A16931CBB3AE151A89CF4 /* AtmosFlowWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AtmosFlowWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B734EF8D2C4526F1D53BFD06 /* Figtree-SemiBold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; path = "Figtree-SemiBold.ttf"; sourceTree = "<group>"; };
+		C1B5121AA7149AD7B1A7F4CE /* AmbientView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AmbientView.swift; sourceTree = "<group>"; };
+		C9D091641BA9C7FD0AD46DF6 /* WidgetViews.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetViews.swift; sourceTree = "<group>"; };
 		CCA8436E17B8D306CF43F054 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		DEF75EF2A4C4E40D142B09E7 /* Ambient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Ambient.swift; sourceTree = "<group>"; };
 		E351BE8C25D4B8CCE723F838 /* WidgetRenderTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetRenderTests.swift; sourceTree = "<group>"; };
-		E6B89AFCD509757CF40C86B1 /* AmbientCatalog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AmbientCatalog.swift; sourceTree = "<group>"; };
-		E9A8E195C67220C2FBA3739F /* SVGPath.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SVGPath.swift; sourceTree = "<group>"; };
 		F4727A2E76791805F194A70F /* Runner.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; name = Runner.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
-		F961108635779D4124212A10 /* WidgetViews.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetViews.swift; sourceTree = "<group>"; };
-		FEE00C40FA98D56D2D7D533F /* AtmosFlowWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AtmosFlowWidget.swift; sourceTree = "<group>"; };
+		FCBDE0F69F5F64DAC373E48F /* AtmosFlowWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AtmosFlowWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		72CF2C6E573A4DC6113A8530 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				06F53C4BE665BA6A6D7B31A8 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		97C146EB1CF9000F007C117D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				78A318202AECB46A00862997 /* FlutterGeneratedPluginSwiftPackage in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5763CCD78C77889505DF733 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				221148642F43F93FFADD9231 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +176,7 @@
 				97C146EF1CF9000F007C117D /* Products */,
 				331C8082294A63A400263BE5 /* RunnerTests */,
 				283FB9E5C502D073259625D3 /* Frameworks */,
-				FCD9CA3E16FA6B3D368B5758 /* AtmosFlowWidget */,
+				AC71D262770731F7341521BA /* AtmosFlowWidget */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,7 +185,7 @@
 			children = (
 				97C146EE1CF9000F007C117D /* Runner.app */,
 				331C8081294A63A400263BE5 /* RunnerTests.xctest */,
-				BC9A16931CBB3AE151A89CF4 /* AtmosFlowWidgetExtension.appex */,
+				FCBDE0F69F5F64DAC373E48F /* AtmosFlowWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -202,14 +207,25 @@
 			path = Runner;
 			sourceTree = "<group>";
 		};
-		CB39390CD678FC629F58D217 /* Fonts */ = {
+		AC71D262770731F7341521BA /* AtmosFlowWidget */ = {
 			isa = PBXGroup;
 			children = (
-				12CA8DBDC6BDE92634B89CA5 /* Figtree-Regular.ttf */,
-				58BD2DBA9F546E5131F1F1E2 /* Figtree-SemiBold.ttf */,
+				DEF75EF2A4C4E40D142B09E7 /* Ambient.swift */,
+				2F7B00F7B37A59D6DC508C45 /* AmbientCatalog.swift */,
+				633AEF168B1D1F4DBB92D1D0 /* AmbientLayer.swift */,
+				C1B5121AA7149AD7B1A7F4CE /* AmbientView.swift */,
+				337190952DE08074490BA924 /* AtmosFlowWidget.swift */,
+				95C00F8428E3F0BDC0B6709D /* SVGPath.swift */,
+				2A3385F00943CD89E6748080 /* WeatherGlyph.swift */,
+				8638A71197B77D1FBF51091C /* WidgetEntry.swift */,
+				6AB32BD0E2EA542E6C688CFD /* WidgetSky.swift */,
+				C9D091641BA9C7FD0AD46DF6 /* WidgetViews.swift */,
+				31AAEE505CB820B6099A409E /* Info.plist */,
+				3A0B8486D90E9A560DCA9D89 /* AtmosFlowWidget.entitlements */,
+				EC1322BEF614C3EAF34D20F8 /* Fonts */,
 			);
-			name = Fonts;
-			path = ../../assets/fonts;
+			name = AtmosFlowWidget;
+			path = AtmosFlowWidget;
 			sourceTree = "<group>";
 		};
 		DC9659DF3CD8E32680A97E32 /* iOS */ = {
@@ -220,25 +236,14 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		FCD9CA3E16FA6B3D368B5758 /* AtmosFlowWidget */ = {
+		EC1322BEF614C3EAF34D20F8 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				2FE44A878F4E4103BE35F149 /* Ambient.swift */,
-				E6B89AFCD509757CF40C86B1 /* AmbientCatalog.swift */,
-				385EF3B6EB50AF1C0FB82B2E /* AmbientLayer.swift */,
-				7C1B06BD95D930BE7C7D33C2 /* AmbientView.swift */,
-				FEE00C40FA98D56D2D7D533F /* AtmosFlowWidget.swift */,
-				E9A8E195C67220C2FBA3739F /* SVGPath.swift */,
-				2CFB4A597378013B945E4380 /* WeatherGlyph.swift */,
-				643DF85698953067FD0ABD29 /* WidgetEntry.swift */,
-				9B85D20C3DC829CA5AD1CAEF /* WidgetSky.swift */,
-				F961108635779D4124212A10 /* WidgetViews.swift */,
-				0DE5FB1BB3CC63995A719A63 /* Info.plist */,
-				3C86109F39948DC67BEFA2C4 /* AtmosFlowWidget.entitlements */,
-				CB39390CD678FC629F58D217 /* Fonts */,
+				5ED0FC280ADD8EF843014FC9 /* Figtree-Regular.ttf */,
+				B734EF8D2C4526F1D53BFD06 /* Figtree-SemiBold.ttf */,
 			);
-			name = AtmosFlowWidget;
-			path = AtmosFlowWidget;
+			name = Fonts;
+			path = ../../assets/fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +266,23 @@
 			productReference = 331C8081294A63A400263BE5 /* RunnerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		52B49F87B34F8D124FFBD35A /* AtmosFlowWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0AF041A94B805DE1379C6B1 /* Build configuration list for PBXNativeTarget "AtmosFlowWidgetExtension" */;
+			buildPhases = (
+				83AFD1D253058E8096F661C3 /* Sources */,
+				D5763CCD78C77889505DF733 /* Frameworks */,
+				51E99EF93C51A1A99D65FF69 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AtmosFlowWidgetExtension;
+			productName = AtmosFlowWidgetExtension;
+			productReference = FCBDE0F69F5F64DAC373E48F /* AtmosFlowWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		97C146ED1CF9000F007C117D /* Runner */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
@@ -276,7 +298,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				D9A31EBB90264375A695B6F6 /* PBXTargetDependency */,
+				77AD3456EB40C483A952C6B1 /* PBXTargetDependency */,
 			);
 			name = Runner;
 			packageProductDependencies = (
@@ -285,23 +307,6 @@
 			productName = Runner;
 			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
 			productType = "com.apple.product-type.application";
-		};
-		E84D8B59463CE0CDF75E65BA /* AtmosFlowWidgetExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4E07F97D2F58FD7C4F6D7EFB /* Build configuration list for PBXNativeTarget "AtmosFlowWidgetExtension" */;
-			buildPhases = (
-				F53A15B434E7997AE31083E4 /* Sources */,
-				72CF2C6E573A4DC6113A8530 /* Frameworks */,
-				CB80B8AD4C4A62A963C200D0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = AtmosFlowWidgetExtension;
-			productName = AtmosFlowWidgetExtension;
-			productReference = BC9A16931CBB3AE151A89CF4 /* AtmosFlowWidgetExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -341,7 +346,7 @@
 			targets = (
 				97C146ED1CF9000F007C117D /* Runner */,
 				331C8080294A63A400263BE5 /* RunnerTests */,
-				E84D8B59463CE0CDF75E65BA /* AtmosFlowWidgetExtension */,
+				52B49F87B34F8D124FFBD35A /* AtmosFlowWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -354,6 +359,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		51E99EF93C51A1A99D65FF69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8033032AC78D94D8F0DCD0A6 /* Figtree-Regular.ttf in Resources */,
+				B273F6DD3AFDB17B556DA950 /* Figtree-SemiBold.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		97C146EC1CF9000F007C117D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -362,15 +376,6 @@
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CB80B8AD4C4A62A963C200D0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4FE217268A0E9F017AE1F61E /* Figtree-Regular.ttf in Resources */,
-				668542FBFB43DD9E10838114 /* Figtree-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,15 +421,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				7552EA6BAE622689AA3B30D7 /* WidgetRenderTests.swift in Sources */,
-				2DC13B214A081DA5C7CC7B06 /* Ambient.swift in Sources */,
-				EA8A34FA5B008A92B47294CC /* AmbientCatalog.swift in Sources */,
-				7F8ADB07D0801DC9CE2FA397 /* AmbientLayer.swift in Sources */,
-				2F026D1EC7F6C8CE48DA9F19 /* AmbientView.swift in Sources */,
-				0BD3978DEC54C2930A939DED /* SVGPath.swift in Sources */,
-				3796BE3CF4044D8FF9A1D95A /* WeatherGlyph.swift in Sources */,
-				000D6B1CEBF90C5E34DDCA05 /* WidgetEntry.swift in Sources */,
-				2EAFE8216EAB3255C239332C /* WidgetSky.swift in Sources */,
-				7126AE31C42BD81D099A570B /* WidgetViews.swift in Sources */,
+				6BB29CBD17711AE5B919579B /* Ambient.swift in Sources */,
+				0691BE692FA9FC1DC5F13ACD /* AmbientCatalog.swift in Sources */,
+				5EBF5551D39B8BAA31EECE01 /* AmbientLayer.swift in Sources */,
+				62409F53C8F6831E8D0A6DC5 /* AmbientView.swift in Sources */,
+				19956E398B1C1A65AE040EBD /* SVGPath.swift in Sources */,
+				4CB690AB7330A12B42888745 /* WeatherGlyph.swift in Sources */,
+				4BF2A46DE8079BD2F3CFF070 /* WidgetEntry.swift in Sources */,
+				F05B27DB8258C8BF20EC723D /* WidgetSky.swift in Sources */,
+				0FDB8E0236EAF007FA9B9294 /* WidgetViews.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83AFD1D253058E8096F661C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A99F447E80D8620CF4716679 /* Ambient.swift in Sources */,
+				7D3E7BADA6B5DF5793788158 /* AmbientCatalog.swift in Sources */,
+				93BFA4909DF1B4FFA79E189F /* AmbientLayer.swift in Sources */,
+				48EDD54F246AD76C92246A11 /* AmbientView.swift in Sources */,
+				F0DFBA6F2988F171A2D7AEF2 /* AtmosFlowWidget.swift in Sources */,
+				345903CCB8FEDB11B0B864D5 /* SVGPath.swift in Sources */,
+				BDF1C6B52746C069830115F4 /* WeatherGlyph.swift in Sources */,
+				6ACD19CE8F06FBCA6A6BD5F4 /* WidgetEntry.swift in Sources */,
+				29EEEAB9E4B43887B3C86A7F /* WidgetSky.swift in Sources */,
+				3D15EFFDD8AEC4D51E576A05 /* WidgetViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,23 +460,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F53A15B434E7997AE31083E4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D3C25060254054D45CA35DDB /* Ambient.swift in Sources */,
-				7D0C11012E1E5A38B14660FE /* AmbientCatalog.swift in Sources */,
-				B7EA85DEC14DE02F5B205CE2 /* AmbientLayer.swift in Sources */,
-				3E416CBB14EE55995BE3194B /* AmbientView.swift in Sources */,
-				94EA6F6CDE7A124E46F5FF8A /* AtmosFlowWidget.swift in Sources */,
-				43F0C5173437C8DA31041FA2 /* SVGPath.swift in Sources */,
-				3E12EECCBAC7A8D8F9CD5393 /* WeatherGlyph.swift in Sources */,
-				1E2F4F728455443169AAEDC7 /* WidgetEntry.swift in Sources */,
-				19F433FBC559936170A82B44 /* WidgetSky.swift in Sources */,
-				2373BC35E1096D5C10FCB510 /* WidgetViews.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -463,11 +468,11 @@
 			target = 97C146ED1CF9000F007C117D /* Runner */;
 			targetProxy = 331C8085294A63A400263BE5 /* PBXContainerItemProxy */;
 		};
-		D9A31EBB90264375A695B6F6 /* PBXTargetDependency */ = {
+		77AD3456EB40C483A952C6B1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AtmosFlowWidgetExtension;
-			target = E84D8B59463CE0CDF75E65BA /* AtmosFlowWidgetExtension */;
-			targetProxy = 9B9E7EA7B176203102FE7B0B /* PBXContainerItemProxy */;
+			target = 52B49F87B34F8D124FFBD35A /* AtmosFlowWidgetExtension */;
+			targetProxy = EFEE88C77D3B7AB540965FF5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -475,6 +480,7 @@
 		97C146FA1CF9000F007C117D /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
+				97C146FB1CF9000F007C117D /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -482,6 +488,7 @@
 		97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
+				97C147001CF9000F007C117D /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -489,7 +496,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0785F9E7D464FF0D30FA6F56 /* Profile */ = {
+		0B9436EDEE0C39EB5327B7C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = AtmosFlowWidget/AtmosFlowWidget.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9MV9L388X7;
+				FLUTTER_BUILD_NAME = "$(FLUTTER_BUILD_NAME:default=0.1.0)";
+				FLUTTER_BUILD_NUMBER = "$(FLUTTER_BUILD_NUMBER:default=1)";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AtmosFlowWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.surajshetty.atmosFlow.AtmosFlowWidget;
+				PRODUCT_NAME = AtmosFlowWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0C8CF036FF7AAA79305B953C /* Profile */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
@@ -512,6 +542,30 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Profile;
+		};
+		23E595E0BC10C8144B969C5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = AtmosFlowWidget/AtmosFlowWidget.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9MV9L388X7;
+				FLUTTER_BUILD_NAME = "$(FLUTTER_BUILD_NAME:default=0.1.0)";
+				FLUTTER_BUILD_NUMBER = "$(FLUTTER_BUILD_NUMBER:default=1)";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AtmosFlowWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.surajshetty.atmosFlow.AtmosFlowWidget;
+				PRODUCT_NAME = AtmosFlowWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
 		};
 		249021D3217E4FDB00AE95B9 /* Profile */ = {
 			isa = XCBuildConfiguration;
@@ -638,54 +692,7 @@
 			};
 			name = Profile;
 		};
-		6DF3E5D0174B6A6712527522 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_ENTITLEMENTS = AtmosFlowWidget/AtmosFlowWidget.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9MV9L388X7;
-				FLUTTER_BUILD_NAME = "$(FLUTTER_BUILD_NAME:default=0.1.0)";
-				FLUTTER_BUILD_NUMBER = "$(FLUTTER_BUILD_NUMBER:default=1)";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = AtmosFlowWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.surajshetty.atmosFlow.AtmosFlowWidget;
-				PRODUCT_NAME = AtmosFlowWidget;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		80596CF8551FD47AD6B18F0F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_ENTITLEMENTS = AtmosFlowWidget/AtmosFlowWidget.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9MV9L388X7;
-				FLUTTER_BUILD_NAME = "$(FLUTTER_BUILD_NAME:default=0.1.0)";
-				FLUTTER_BUILD_NUMBER = "$(FLUTTER_BUILD_NUMBER:default=1)";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = AtmosFlowWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.surajshetty.atmosFlow.AtmosFlowWidget;
-				PRODUCT_NAME = AtmosFlowWidget;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		87D9C9C1FBAB3109E15AB2A3 /* Profile */ = {
+		455BB7228D05F2EF5EF626BC /* Profile */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
@@ -709,7 +716,7 @@
 			};
 			name = Profile;
 		};
-		93E1B5E581664B5F773AEB78 /* Debug */ = {
+		4F56854FFEA85010490C04DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
@@ -729,8 +736,9 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
-			name = Debug;
+			name = Release;
 		};
 		97C147031CF9000F007C117D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -890,7 +898,7 @@
 			};
 			name = Release;
 		};
-		D66B79E5C72E96A8C9749673 /* Release */ = {
+		B0D5A210994019A0002DBA68 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
@@ -910,9 +918,8 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
@@ -923,16 +930,6 @@
 				331C8088294A63A400263BE5 /* Debug */,
 				331C8089294A63A400263BE5 /* Release */,
 				331C808A294A63A400263BE5 /* Profile */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4E07F97D2F58FD7C4F6D7EFB /* Build configuration list for PBXNativeTarget "AtmosFlowWidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D66B79E5C72E96A8C9749673 /* Release */,
-				6DF3E5D0174B6A6712527522 /* Debug */,
-				87D9C9C1FBAB3109E15AB2A3 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -953,6 +950,16 @@
 				97C147061CF9000F007C117D /* Debug */,
 				97C147071CF9000F007C117D /* Release */,
 				249021D4217E4FDB00AE95B9 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0AF041A94B805DE1379C6B1 /* Build configuration list for PBXNativeTarget "AtmosFlowWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23E595E0BC10C8144B969C5E /* Release */,
+				0B9436EDEE0C39EB5327B7C0 /* Debug */,
+				455BB7228D05F2EF5EF626BC /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
