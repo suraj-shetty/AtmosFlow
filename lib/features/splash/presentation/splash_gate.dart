@@ -285,7 +285,8 @@ class _Wordmark extends StatelessWidget {
     final rise = CurvedAnimation(
       parent: intro,
       curve: Interval(
-        Motion.splashRiseStart.inMilliseconds / Motion.splashDwell.inMilliseconds,
+        Motion.splashRiseStart.inMilliseconds /
+            Motion.splashDwell.inMilliseconds,
         Motion.splashRiseEnd.inMilliseconds / Motion.splashDwell.inMilliseconds,
         curve: Curves.easeOut,
       ),

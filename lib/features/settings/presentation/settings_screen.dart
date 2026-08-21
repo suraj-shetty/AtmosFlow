@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/theme/atmos_tokens.dart';
@@ -16,8 +17,12 @@ import '../application/settings_providers.dart';
 import '../application/unit_formatter.dart';
 import '../domain/app_settings.dart';
 
-/// Units, appearance and location management, on the design's one always-dark
-/// screen (`accent-800 → neutral-900`).
+/// Units and location management, on the design's one always-dark screen
+/// (`accent-800 → neutral-900`).
+///
+/// There is no appearance control: the app has one warm palette, and what a
+/// light/dark switch actually moved was the status bar — which now follows
+/// the sky each screen paints instead.
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
@@ -30,15 +35,21 @@ class SettingsScreen extends ConsumerWidget {
     final notifier = ref.read(settingsProvider.notifier);
     final borderColor = Colors.white.withValues(alpha: 0.25);
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [tokens.accentRamp.s800, tokens.neutral.s900],
-        ),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      // This screen is dark top to bottom, whatever the sky is doing.
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.light,
       ),
       child: ScreenTransition(
+        background: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [tokens.accentRamp.s800, tokens.neutral.s900],
+          ),
+        ),
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 72, 20, 32),
           children: [
@@ -97,19 +108,6 @@ class SettingsScreen extends ConsumerWidget {
                       foregroundColor: _onDark,
                       borderColor: borderColor,
                       labelOf: (u) => u.label,
-                    ),
-                  ],
-                ),
-                _Card(
-                  label: 'Appearance',
-                  children: [
-                    SegmentedControl<AppearanceMode>(
-                      options: AppearanceMode.values,
-                      selected: settings.appearance,
-                      onChanged: notifier.setAppearance,
-                      foregroundColor: _onDark,
-                      borderColor: borderColor,
-                      labelOf: (m) => m.label,
                     ),
                   ],
                 ),
@@ -182,10 +180,9 @@ class _FlippingTemperatureState extends State<_FlippingTemperature>
   /// to a change the user has already seen.
   String? _outgoing;
 
-  static String _labelFor(TemperatureUnit unit) =>
-      UnitFormatter(
-        AppSettings(temperatureUnit: unit),
-      ).temperature(_sampleCelsius);
+  static String _labelFor(TemperatureUnit unit) => UnitFormatter(
+    AppSettings(temperatureUnit: unit),
+  ).temperature(_sampleCelsius);
 
   @override
   void didUpdateWidget(_FlippingTemperature old) {

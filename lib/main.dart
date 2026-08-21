@@ -9,7 +9,9 @@ import 'core/persistence/preferences.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // The sky gradients run edge to edge behind the status bar.
+  // The sky gradients run edge to edge behind the status bar. Dark glyphs are
+  // only the starting point — every screen sets its own from the ground it
+  // paints, through an `AnnotatedRegion`.
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
 

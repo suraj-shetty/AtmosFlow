@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:atmos_flow/core/persistence/preferences.dart';
 import 'package:atmos_flow/core/theme/app_theme.dart';
-import 'package:atmos_flow/features/settings/application/settings_providers.dart';
 import 'package:atmos_flow/features/weather/application/weather_providers.dart';
 import 'package:atmos_flow/features/weather/data/fake_weather_repository.dart';
 import 'package:atmos_flow/features/weather/domain/forecast.dart';
@@ -111,10 +110,6 @@ Future<Widget> goldenApp({Forecast? forecast, bool savePlace = true}) async {
       builder: (context, ref, _) => MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light(),
-        darkTheme: AppTheme.dark(),
-        themeMode: ref
-            .watch(settingsProvider.select((s) => s.appearance))
-            .themeMode,
         routerConfig: ref.watch(appRouterProvider),
         // Every ambient sky loops forever, so there is no settled frame to
         // capture. The app draws a still sky under this flag — which is also

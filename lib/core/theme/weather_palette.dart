@@ -93,7 +93,11 @@ class WeatherPalette {
   /// single soft shadow, and leaves a light sky alone.
   List<Shadow> get heroTextShadow => isDark
       ? const [
-          Shadow(color: Color(0x59000000), offset: Offset(0, 1), blurRadius: 12),
+          Shadow(
+            color: Color(0x59000000),
+            offset: Offset(0, 1),
+            blurRadius: 12,
+          ),
         ]
       : const [];
 

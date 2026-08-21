@@ -9,7 +9,11 @@ import 'package:flutter/material.dart';
 /// one the launch image already put on screen — that is what lets the handoff
 /// have no seam.
 abstract final class Brand {
-  static const dawnSky = [Color(0xFF8FC4E8), Color(0xFFF2D3AE), Color(0xFFE8A06A)];
+  static const dawnSky = [
+    Color(0xFF8FC4E8),
+    Color(0xFFF2D3AE),
+    Color(0xFFE8A06A),
+  ];
   static const dawnSkyStops = [0.0, 0.58, 1.0];
 
   /// The splash sky: the icon's gradient with one more stop and a shallower
@@ -28,7 +32,11 @@ abstract final class Brand {
 
   /// The tile is the icon one step lighter, so it reads as an object on the
   /// sky rather than a hole cut in it.
-  static const tileSky = [Color(0xFFA8D0EC), Color(0xFFF6DCBC), Color(0xFFE29257)];
+  static const tileSky = [
+    Color(0xFFA8D0EC),
+    Color(0xFFF6DCBC),
+    Color(0xFFE29257),
+  ];
   static const tileAngle = 168.0;
 
   static const sunCore = Color(0xFFFFF6E6);
@@ -272,7 +280,10 @@ class _Crescent extends StatelessWidget {
           width: disc,
           height: disc,
           child: const DecoratedBox(
-            decoration: BoxDecoration(shape: BoxShape.circle, color: Brand.moon),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Brand.moon,
+            ),
           ),
         ),
         Positioned(

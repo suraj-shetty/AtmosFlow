@@ -62,7 +62,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             pageBuilder: (context, state) => _modal(
               state,
               DayDetailScreen(
-                dayIndex: int.tryParse(state.pathParameters['index'] ?? '') ?? 0,
+                dayIndex:
+                    int.tryParse(state.pathParameters['index'] ?? '') ?? 0,
               ),
             ),
           ),
@@ -81,8 +82,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: Routes.settings,
-        pageBuilder: (context, state) =>
-            _modal(state, const SettingsScreen()),
+        pageBuilder: (context, state) => _modal(state, const SettingsScreen()),
       ),
     ],
   );

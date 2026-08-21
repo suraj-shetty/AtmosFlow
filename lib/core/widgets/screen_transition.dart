@@ -7,10 +7,21 @@ import '../theme/motion.dart';
 ///
 /// Wraps a screen's content rather than the route, so it also plays when a
 /// tab is re-selected.
+///
+/// Pass the screen's own [background] rather than painting it outside: a
+/// partial opacity forces the subtree into its own compositing layer, and a
+/// `BackdropFilter` inside that layer — every glass card in this app — has
+/// nothing to sample and blurs empty pixels, which reads as a dark wash over
+/// each card until the fade finishes. Handing the background in puts it
+/// inside that layer, where the blur can find it. The same decoration is also
+/// painted underneath at full opacity, so what fades in is only the content.
 class ScreenTransition extends StatefulWidget {
-  const ScreenTransition({super.key, required this.child});
+  const ScreenTransition({super.key, required this.child, this.background});
 
   final Widget child;
+
+  /// The screen's ground — the gradient it would otherwise sit on.
+  final Decoration? background;
 
   @override
   State<ScreenTransition> createState() => _ScreenTransitionState();
@@ -23,28 +34,55 @@ class _ScreenTransitionState extends State<ScreenTransition>
     duration: Motion.screenTransition,
   )..forward();
 
+  late final CurvedAnimation _curved = CurvedAnimation(
+    parent: _controller,
+    curve: Motion.screenTransitionCurve,
+  );
+
   @override
   void dispose() {
+    _curved.dispose();
     _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final curved = CurvedAnimation(
-      parent: _controller,
-      curve: Motion.screenTransitionCurve,
-    );
-    return AnimatedBuilder(
-      animation: curved,
+    final background = widget.background;
+
+    // Inside the fading layer, under the content, so every glass surface has
+    // a backdrop to blur for the whole of the fade.
+    Widget body = widget.child;
+    if (background != null) {
+      body = DecoratedBox(decoration: background, child: body);
+    }
+
+    // One shared backdrop for every glass surface on the screen — see
+    // [GlassSurface].
+    body = BackdropGroup(child: body);
+
+    final Widget content = AnimatedBuilder(
+      animation: _curved,
       builder: (context, child) => Opacity(
         opacity: _controller.value,
         child: Transform.translate(
-          offset: Offset(0, 10 * (1 - curved.value)),
+          offset: Offset(0, 10 * (1 - _curved.value)),
           child: child,
         ),
       ),
-      child: widget.child,
+      child: body,
+    );
+
+    if (background == null) return content;
+
+    // …and again behind it at full strength, so the ground itself never fades
+    // and the 10px lift never uncovers the bottom edge.
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        DecoratedBox(decoration: background),
+        content,
+      ],
     );
   }
 }

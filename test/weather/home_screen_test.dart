@@ -1,5 +1,6 @@
 import 'package:atmos_flow/core/failure/app_failure.dart';
 import 'package:atmos_flow/core/theme/app_theme.dart';
+import 'package:atmos_flow/core/theme/motion.dart';
 import 'package:atmos_flow/core/persistence/preferences.dart';
 import 'package:atmos_flow/features/settings/application/settings_providers.dart';
 import 'package:atmos_flow/features/settings/domain/app_settings.dart';
@@ -195,7 +196,10 @@ void main() {
     // at full size on the frame it starts.
     final start = tester.widget<Transform>(
       find
-          .descendant(of: find.byType(RefreshPuck), matching: find.byType(Transform))
+          .descendant(
+            of: find.byType(RefreshPuck),
+            matching: find.byType(Transform),
+          )
           .first,
     );
     expect(start.transform.getTranslation().y, lessThan(0));
@@ -203,7 +207,10 @@ void main() {
     await tester.pump(const Duration(milliseconds: 600));
     final settled = tester.widget<Transform>(
       find
-          .descendant(of: find.byType(RefreshPuck), matching: find.byType(Transform))
+          .descendant(
+            of: find.byType(RefreshPuck),
+            matching: find.byType(Transform),
+          )
           .first,
     );
     expect(settled.transform.getTranslation().y, closeTo(0, 0.01));
@@ -212,5 +219,62 @@ void main() {
     await tester.pump(const Duration(milliseconds: 1200));
     expect(puck().refreshing, isFalse);
     await tester.pumpAndSettle();
+  });
+
+  testWidgets('pulling the list down draws the bubble out and refreshes', (
+    tester,
+  ) async {
+    await tester.pumpWidget(await homeUnderTest());
+    await tester.pumpAndSettle();
+
+    RefreshPuck puck() => tester.widget<RefreshPuck>(find.byType(RefreshPuck));
+    expect(puck().refreshing, isFalse);
+    expect(puck().pull.value, 0);
+
+    // Short of the trigger: the bubble is out, but letting go does nothing.
+    final gesture = await tester.startGesture(const Offset(200, 300));
+    await gesture.moveBy(const Offset(0, Motion.pullTrigger / 2));
+    await tester.pump();
+    expect(puck().pull.value, greaterThan(0));
+    expect(puck().pull.value, lessThan(1));
+
+    // Past it, and the release starts the same refresh a tap would.
+    await gesture.moveBy(const Offset(0, Motion.pullTrigger * 2));
+    await tester.pump();
+    expect(puck().pull.value, greaterThanOrEqualTo(1));
+
+    await gesture.up();
+    // The scrollable says nothing at the moment a drag ends; the release
+    // shows up as the first ballistic frame after it.
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 16));
+    await tester.pump();
+    expect(puck().refreshing, isTrue);
+
+    await tester.pump(const Duration(milliseconds: 1400));
+    expect(puck().refreshing, isFalse);
+    await tester.pumpAndSettle();
+    expect(puck().pull.value, 0);
+  });
+
+  testWidgets('a pull that stops short of the trigger refreshes nothing', (
+    tester,
+  ) async {
+    await tester.pumpWidget(await homeUnderTest());
+    await tester.pumpAndSettle();
+
+    RefreshPuck puck() => tester.widget<RefreshPuck>(find.byType(RefreshPuck));
+
+    final gesture = await tester.startGesture(const Offset(200, 300));
+    await gesture.moveBy(const Offset(0, Motion.pullTrigger / 2));
+    await tester.pump();
+    await gesture.up();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 16));
+    await tester.pump();
+
+    expect(puck().refreshing, isFalse);
+    await tester.pumpAndSettle();
+    expect(puck().pull.value, 0);
   });
 }

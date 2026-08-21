@@ -140,7 +140,6 @@ void main() {
       final settings = container.read(settingsProvider);
       expect(settings.temperatureUnit, TemperatureUnit.celsius);
       expect(settings.windUnit, WindUnit.kmh);
-      expect(settings.appearance, AppearanceMode.auto);
     });
 
     test('changing a unit reaches the formatter', () async {

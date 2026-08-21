@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,6 +20,7 @@ import '../ambient/ambient_sky.dart';
 import 'widgets/daily_row.dart';
 import 'widgets/hourly_strip.dart';
 import 'widgets/metric_tile.dart';
+import 'widgets/pull_to_refresh.dart';
 import 'widgets/refresh_puck.dart';
 
 /// The main screen: a full-bleed condition sky with the forecast scrolling
@@ -34,6 +36,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   /// Feeds the parallax without rebuilding the content on every frame.
   final _scrollOffset = ValueNotifier<double>(0);
 
+  /// How far the list has been dragged past its top, 0–1 against the trigger.
+  /// Only the puck listens, so a pull never rebuilds the forecast.
+  final _pull = ValueNotifier<double>(0);
+
   /// Drives the refresh puck. The pull gesture and the design's tap targets
   /// both set it, so there is only ever one indicator on screen.
   bool _refreshing = false;
@@ -41,6 +47,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void dispose() {
     _scrollOffset.dispose();
+    _pull.dispose();
     super.dispose();
   }
 
@@ -99,116 +106,151 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
     final formatter = ref.watch(unitFormatterProvider);
     final reduceMotion = MediaQuery.disableAnimationsOf(context);
+    // Search, Settings and Day Detail cover Home completely, and nothing in
+    // the framework stops a covered route's tickers: left alone the sky would
+    // keep rebuilding and re-scheduling frames behind a screen no one can
+    // see. `ModalRoute.of` rebuilds this when the route stops being current.
+    final visible = ModalRoute.of(context)?.isCurrent ?? true;
 
-    return DecoratedBox(
-      decoration: BoxDecoration(gradient: palette.gradient),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      // The status bar sits directly on the sky, so it reads the sky rather
+      // than a setting: light glyphs over a night or storm gradient, dark
+      // ones over a clear morning. `statusBarBrightness` is what iOS reads
+      // and `statusBarIconBrightness` what Android does; they are opposites
+      // of each other, which is why both are spelled out here.
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: palette.brightness,
+        statusBarIconBrightness: palette.isDark
+            ? Brightness.light
+            : Brightness.dark,
+      ),
       child: Stack(
         children: [
           Positioned.fill(
-            child: AmbientSky(
-              condition: current.condition,
-              isNight: current.isNight,
-              scrollOffset: _scrollOffset,
-              enabled: !reduceMotion,
-            ),
-          ),
-          Positioned.fill(
             child: ScreenTransition(
-              child: NotificationListener<ScrollNotification>(
-                onNotification: _onScroll,
-                // The gesture is the platform's; the indicator is the
-                // design's, so the stock spinner is drawn in nothing at all.
-                child: RefreshIndicator(
-                  onRefresh: () => _refresh(forecast),
-                  edgeOffset: 72,
-                  elevation: 0,
-                  color: Colors.transparent,
-                  backgroundColor: Colors.transparent,
-                  child: ListView(
-                    padding: const EdgeInsets.only(top: 72, bottom: 104),
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          spacing: 18,
+              // The sky is the backdrop every glass card on this screen
+              // blurs, so it belongs inside the entrance — see
+              // [ScreenTransition.background].
+              background: BoxDecoration(gradient: palette.gradient),
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: AmbientSky(
+                      condition: current.condition,
+                      isNight: current.isNight,
+                      scrollOffset: _scrollOffset,
+                      enabled: visible && !reduceMotion,
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: NotificationListener<ScrollNotification>(
+                      onNotification: _onScroll,
+
+                      // The gesture and the indicator are both the app's: the pull
+                      // draws the puck out of the top edge and, past the trigger,
+                      // starts the same refresh a tap on the hero would.
+                      child: PullToRefresh(
+                        pull: _pull,
+                        refreshing: _refreshing,
+                        onRefresh: () => _refresh(forecast),
+                        child: ListView(
+                          physics: PullToRefresh.physics,
+                          padding: const EdgeInsets.only(top: 72, bottom: 104),
                           children: [
-                            // The design refreshes on a tap of the header
-                            // strip or the hero, either side of the controls
-                            // that sit inside them.
-                            GestureDetector(
-                              onTap: () => _refresh(forecast),
-                              child: _LocationBar(
-                                name: forecast.place.name,
-                                color: palette.accentText,
-                                onSearch: () => context.push(Routes.search),
-                                onSettings: () =>
-                                    context.push(Routes.settings),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
                               ),
-                            ),
-                            GestureDetector(
-                              onTap: () => _refresh(forecast),
-                              child: _Hero(
-                                temperature: formatter.temperature(
-                                  current.temperature,
-                                ),
-                                condition: current.condition.label,
-                                feelsLike: formatter.temperature(
-                                  current.feelsLike,
-                                ),
-                                palette: palette,
-                                conditionIcon: WeatherIcons.forCondition(
-                                  current.condition,
-                                  isNight: current.isNight,
-                                ),
-                              ),
-                            ),
-                            _Section(
-                              label: 'Next 24 hours',
-                              color: palette.kickerText,
-                              child: HourlyStrip(
-                                hours: forecast.next24Hours,
-                                palette: palette,
-                              ),
-                            ),
-                            _Section(
-                              label: '7-day forecast',
-                              color: palette.kickerText,
                               child: Column(
-                                spacing: 8,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                spacing: 18,
                                 children: [
-                                  for (
-                                    var i = 0;
-                                    i < forecast.daily.length;
-                                    i++
-                                  )
-                                    DailyRow(
-                                      day: forecast.daily[i],
-                                      isToday: i == 0,
-                                      lowLabel: formatter.temperature(
-                                        forecast.daily[i].low,
+                                  // The design refreshes on a tap of the header
+                                  // strip or the hero, either side of the controls
+                                  // that sit inside them.
+                                  GestureDetector(
+                                    onTap: () => _refresh(forecast),
+                                    child: _LocationBar(
+                                      name: forecast.place.name,
+                                      color: palette.accentText,
+                                      onSearch: () =>
+                                          context.push(Routes.search),
+                                      onSettings: () =>
+                                          context.push(Routes.settings),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () => _refresh(forecast),
+                                    child: _Hero(
+                                      temperature: formatter.temperature(
+                                        current.temperature,
                                       ),
-                                      highLabel: formatter.temperature(
-                                        forecast.daily[i].high,
+                                      condition: current.condition.label,
+                                      feelsLike: formatter.temperature(
+                                        current.feelsLike,
                                       ),
-                                      onTap: () => context.push(Routes.day(i)),
+                                      palette: palette,
+                                      conditionIcon: WeatherIcons.forCondition(
+                                        current.condition,
+                                        isNight: current.isNight,
+                                      ),
+                                    ),
+                                  ),
+                                  _Section(
+                                    label: 'Next 24 hours',
+                                    color: palette.kickerText,
+                                    child: HourlyStrip(
+                                      hours: forecast.next24Hours,
                                       palette: palette,
                                     ),
+                                  ),
+                                  _Section(
+                                    label: '7-day forecast',
+                                    color: palette.kickerText,
+                                    child: Column(
+                                      spacing: 8,
+                                      children: [
+                                        for (
+                                          var i = 0;
+                                          i < forecast.daily.length;
+                                          i++
+                                        )
+                                          DailyRow(
+                                            day: forecast.daily[i],
+                                            isToday: i == 0,
+                                            lowLabel: formatter.temperature(
+                                              forecast.daily[i].low,
+                                            ),
+                                            highLabel: formatter.temperature(
+                                              forecast.daily[i].high,
+                                            ),
+                                            onTap: () =>
+                                                context.push(Routes.day(i)),
+                                            palette: palette,
+                                          ),
+                                      ],
+                                    ),
+                                  ),
+                                  _MetricGrid(
+                                    current: current,
+                                    palette: palette,
+                                  ),
                                 ],
                               ),
                             ),
-                            _MetricGrid(current: current, palette: palette),
                           ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
           ),
           RefreshPuck(
             refreshing: _refreshing,
+            pull: _pull,
             // The design shows the sky's own body for a clear sky and a
             // cloud for every other condition.
             icon: current.condition == WeatherCondition.clear
@@ -382,11 +424,7 @@ class _Hero extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 6,
           children: [
-            Icon(
-              conditionIcon,
-              size: 22,
-              color: palette.text,
-            ),
+            Icon(conditionIcon, size: 22, color: palette.text),
             Text(
               condition,
               style: TextStyle(fontSize: 17, color: palette.text),

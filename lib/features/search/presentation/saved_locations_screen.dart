@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,16 +21,22 @@ class SavedLocationsScreen extends ConsumerWidget {
     final places = ref.watch(savedLocationsProvider);
     final notifier = ref.read(savedLocationsProvider.notifier);
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [tokens.accentRamp.s100, tokens.bg, tokens.bg],
-          stops: const [0, 0.6, 1],
-        ),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      // A warm, light ground top to bottom — dark glyphs over it.
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
       ),
       child: ScreenTransition(
+        background: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [tokens.accentRamp.s100, tokens.bg, tokens.bg],
+            stops: const [0, 0.6, 1],
+          ),
+        ),
         child: Column(
           children: [
             Padding(

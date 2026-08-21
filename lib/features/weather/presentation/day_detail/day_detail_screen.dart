@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -42,9 +43,17 @@ class DayDetailScreen extends ConsumerWidget {
     final f = ref.watch(unitFormatterProvider);
     final reduceMotion = MediaQuery.disableAnimationsOf(context);
 
-    return DecoratedBox(
-      decoration: BoxDecoration(gradient: palette.gradient),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      // This screen keeps Home's sky, so it keeps Home's status bar too.
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: palette.brightness,
+        statusBarIconBrightness: palette.isDark
+            ? Brightness.light
+            : Brightness.dark,
+      ),
       child: ScreenTransition(
+        background: BoxDecoration(gradient: palette.gradient),
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 72, 20, 32),
           children: [
@@ -240,10 +249,7 @@ class _DetailCard extends StatelessWidget {
         spacing: 4,
         children: [
           icon,
-          Text(
-            label,
-            style: TextStyle(fontSize: 11, color: palette.subText),
-          ),
+          Text(label, style: TextStyle(fontSize: 11, color: palette.subText)),
           Text(
             value,
             style: TextStyle(fontSize: 18, color: palette.text),

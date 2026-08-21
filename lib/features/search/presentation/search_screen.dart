@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,8 +16,9 @@ import 'widgets/location_row.dart';
 
 /// Search for a city, or reach for the device's own location.
 ///
-/// With an empty query this shows the first three saved locations; with a
-/// query it shows geocoding results, or an empty state.
+/// With an empty query this shows the first three saved locations — the same
+/// list, in the same order, that Settings manages, with "See all" for the
+/// rest — with a query it shows geocoding results, or an empty state.
 class SearchScreen extends ConsumerStatefulWidget {
   const SearchScreen({super.key});
 
@@ -74,16 +76,22 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     final tokens = context.tokens;
     final saved = ref.watch(savedLocationsProvider);
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [tokens.accentRamp.s100, tokens.bg, tokens.bg],
-          stops: const [0, 0.6, 1],
-        ),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      // A warm, light ground top to bottom — dark glyphs over it.
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
       ),
       child: ScreenTransition(
+        background: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [tokens.accentRamp.s100, tokens.bg, tokens.bg],
+            stops: const [0, 0.6, 1],
+          ),
+        ),
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 72, 20, 32),
           children: [
@@ -229,6 +237,8 @@ class _SavedSection extends StatelessWidget {
             ),
           ],
         ),
+        // Three at a glance; "See all" above leads to the full, reorderable
+        // list.
         for (final place in saved.take(3))
           LocationRow(place: place, onTap: () => onSelect(place)),
       ],

@@ -55,6 +55,13 @@ abstract final class Motion {
   static const Duration refreshPuckSlide = Duration(milliseconds: 500);
   static const Duration refreshPuckFade = Duration(milliseconds: 350);
 
+  /// How far the list has to be dragged past its top before releasing it
+  /// starts a refresh, and the travel the bubble reads as a full pull.
+  static const double pullTrigger = 96;
+
+  /// The bubble settling back after a pull that never reached the trigger.
+  static const Duration pullRelease = Duration(milliseconds: 320);
+
   /// Where the puck waits when it is not showing: 46px up, at 60% scale.
   static const double refreshPuckHiddenLift = 46;
   static const double refreshPuckHiddenScale = 0.6;

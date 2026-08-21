@@ -6,7 +6,7 @@ import '../../../core/persistence/preferences.dart';
 import '../domain/app_settings.dart';
 import 'unit_formatter.dart';
 
-/// Unit and appearance preferences, written through to disk on every change.
+/// Unit preferences, written through to disk on every change.
 class SettingsNotifier extends Notifier<AppSettings> {
   @override
   AppSettings build() {
@@ -26,9 +26,6 @@ class SettingsNotifier extends Notifier<AppSettings> {
       _write(state.copyWith(temperatureUnit: unit));
 
   void setWindUnit(WindUnit unit) => _write(state.copyWith(windUnit: unit));
-
-  void setAppearance(AppearanceMode mode) =>
-      _write(state.copyWith(appearance: mode));
 
   void _write(AppSettings next) {
     state = next;

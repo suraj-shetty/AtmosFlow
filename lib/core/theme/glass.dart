@@ -102,7 +102,11 @@ class GlassSurface extends StatelessWidget {
     Widget result = ClipRRect(
       borderRadius: radius,
       clipBehavior: clipBehavior,
-      child: BackdropFilter(
+      // Grouped: a screen can carry a couple of dozen glass surfaces, and a
+      // sky animating underneath re-runs every one of their blurs each frame.
+      // Sharing one backdrop across the screen's [BackdropGroup] turns that
+      // into a single blur pass.
+      child: BackdropFilter.grouped(
         filter: glassFilter(dark: dark),
         child: surface,
       ),
@@ -173,7 +177,7 @@ class GlassIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final button = ClipOval(
-      child: BackdropFilter(
+      child: BackdropFilter.grouped(
         filter: GlassSurface.glassFilter(dark: dark),
         child: Material(
           color: Colors.white.withValues(alpha: dark ? 0.14 : 0.5),
