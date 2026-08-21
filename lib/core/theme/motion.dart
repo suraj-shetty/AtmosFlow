@@ -23,6 +23,25 @@ abstract final class Motion {
   /// chip.
   static const Curve tabBounceCurve = Cubic(0.34, 1.56, 0.64, 1);
 
+  // ── Hourly strip ──────────────────────────────────────────────────────
+  /// Tapping an hour chip opens it. The design's `.35s` is quick enough that
+  /// the growth reads as a jump rather than a move, so the expand runs long
+  /// enough to be followed — every property on the chip (height, corner
+  /// radius, scale, fill, shadow) is driven from this one duration so they
+  /// arrive together.
+  static const Duration hourExpand = Duration(milliseconds: 520);
+  static const Duration hourCollapse = Duration(milliseconds: 440);
+
+  /// Opening springs past its resting size; closing just eases back, because
+  /// an overshoot on the way out reads as a bounce off the neighbouring chip.
+  static const Curve hourExpandCurve = tabBounceCurve;
+  static const Curve hourCollapseCurve = Cubic(0.4, 0, 0.2, 1);
+
+  /// The chip's corners open out with it — `--radius-lg` closed,
+  /// `--radius-card` at full stretch.
+  static const double hourRadiusClosed = 28; // AtmosTokens.radiusLg
+  static const double hourRadiusOpen = 28 * 1.15; // AtmosTokens.radiusCard
+
   // ── Home ──────────────────────────────────────────────────────────────
   /// `@keyframes fadeSlideUp` — 18px rise, used by the metric grid.
   static const Duration fadeSlideUp = Duration(milliseconds: 500);
