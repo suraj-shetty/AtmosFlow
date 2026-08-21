@@ -1,7 +1,10 @@
 name: atmos_flow
 description: "AtmosFlow — a beautifully forecasted weather app."
 publish_to: 'none'
-version: 0.1.0
+# The build number after the + is CFBundleVersion / versionCode. Without it
+# Flutter uses the whole version string as the build number too, which gives
+# iOS a CFBundleVersion of "0.1.0" — legal, but nothing you can increment.
+version: 0.1.0+1
 
 environment:
   sdk: ^3.8.1
