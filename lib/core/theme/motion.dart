@@ -64,13 +64,15 @@ abstract final class Motion {
   static const double parallaxSlow = -0.12; // clouds and other slow layers
 
   // ── Day detail ────────────────────────────────────────────────────────
-  /// The temperature line draws itself on.
-  static const Duration graphDraw = Duration(milliseconds: 1100);
+  /// The temperature line draws itself on. The design's 1.1s is over before
+  /// the eye has found the start of the curve, so the draw takes its time.
+  static const Duration graphDraw = Duration(milliseconds: 1900);
   static const Curve graphDrawCurve = Cubic(0.22, 1, 0.36, 1);
 
   /// The sun sweeps out to wherever the day has actually got to, on `1-(1-t)³`
-  /// — the design's fixture happened to sit at 58%.
-  static const Duration arcSweep = Duration(milliseconds: 1100);
+  /// — the design's fixture happened to sit at 58%. Paced with [graphDraw], a
+  /// touch shorter so the two do not finish on the same frame.
+  static const Duration arcSweep = Duration(milliseconds: 1700);
   static const Curve arcSweepCurve = Curves.easeOutCubic;
 
   /// Both detail charts wait for the screen transition before starting.
