@@ -54,14 +54,8 @@ class TileRenderTest {
             WidgetSky.NIGHT -> "11°"
         },
         humidity = "58%",
-        clock = when (sky) {
-            WidgetSky.DAWN -> "5:42"
-            WidgetSky.MORNING -> "9:15"
-            WidgetSky.AFTERNOON -> "14:30"
-            WidgetSky.EVENING -> "19:48"
-            WidgetSky.NIGHT -> "23:20"
-        },
         place = "SF",
-        caption = "${sky.label} · ${condition.label}",
+        conditionLabel = condition.label,
+        stamp = "2:14 PM",
     )
 }

@@ -41,20 +41,15 @@ final class WidgetRenderTests: XCTestCase {
         let temperature: [WidgetSky: Int] = [
             .dawn: 12, .morning: 16, .afternoon: 22, .evening: 18, .night: 11,
         ]
-        let clock: [WidgetSky: String] = [
-            .dawn: "5:42", .morning: "9:15", .afternoon: "14:30",
-            .evening: "19:48", .night: "23:20",
-        ]
         return WidgetEntry(
             date: Date(),
             condition: condition,
             sky: sky,
             temperature: "\(temperature[sky] ?? 20)°",
             humidity: "58%",
-            clock: clock[sky] ?? "12:00",
             place: "SF",
-            caption: "\(sky.label) · \(condition.label)",
-            conditionLabel: condition.label
+            conditionLabel: condition.label,
+            stamp: "2:14 PM"
         )
     }
 

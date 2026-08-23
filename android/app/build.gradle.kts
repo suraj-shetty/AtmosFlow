@@ -55,4 +55,9 @@ dependencies {
     // is the only place a Canvas actually rasterises.
     androidTestImplementation("androidx.test:runner:1.6.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
+
+    // `WidgetReading` decides which sky the tile paints and how old its
+    // reading is, and touches nothing from the platform to do it — so it is
+    // tested on the JVM rather than made to wait for a device.
+    testImplementation("junit:junit:4.13.2")
 }

@@ -128,7 +128,7 @@ struct WideWidgetView: View {
                         Text(entry.temperature)
                             .font(Face.body(24))
                             .foregroundStyle(entry.sky.ink)
-                        Text(entry.clock)
+                        Text(entry.stamp)
                             .font(Face.body(11))
                             .foregroundStyle(entry.sky.caption)
                             .padding(.top, 2)
@@ -151,7 +151,9 @@ struct WideWidgetView: View {
     }
 }
 
-/// The humidity and the clock along the bottom of the two square tiles.
+/// The humidity and the reading's hour along the bottom of the two square
+/// tiles — the clock the design drew here, though see [WidgetEntry.stamp] for
+/// what it gives way to once the reading is old.
 private struct Footnote: View {
     var entry: WidgetEntry
     var fontSize: CGFloat
@@ -167,7 +169,7 @@ private struct Footnote: View {
                 Text(entry.humidity)
             }
             Spacer(minLength: 0)
-            Text(entry.clock)
+            Text(entry.stamp)
         }
         .font(Face.body(fontSize))
         .foregroundStyle(color)

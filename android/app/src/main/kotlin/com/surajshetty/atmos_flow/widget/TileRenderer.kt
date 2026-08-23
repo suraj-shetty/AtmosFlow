@@ -103,7 +103,7 @@ object TileRenderer {
             canvas, context, sky,
             RectF(padding, cardsTop, padding + cardWidth, cardsTop + cardHeight),
             big = snapshot.temperature, bigSize = pt(24f), bigOnTop = true,
-            small = snapshot.clock, smallSize = pt(11f), unit = unit,
+            small = snapshot.stamp, smallSize = pt(11f), unit = unit,
         )
         drawCard(
             canvas, context, sky,
