@@ -34,11 +34,24 @@ class WidgetPublisher {
   static const _androidProvider =
       'com.surajshetty.atmos_flow.widget.AtmosFlowWidgetProvider';
 
+  /// Keys an older version of the app used to publish, and nothing reads any
+  /// more. A store is not rewritten, only written over — so on a phone that
+  /// upgraded, a `clock` reading "15:04" and the sky it was taken under would
+  /// otherwise sit there for good. Nothing draws them today, but the next
+  /// person to open the store deserves to find only what the widget uses.
+  static const _retired = ['caption', 'clock', 'sky'];
+
   Future<void> publish(WidgetSnapshot snapshot) async {
     try {
       await HomeWidget.setAppGroupId(appGroup);
       for (final entry in snapshot.toStore().entries) {
         await HomeWidget.saveWidgetData<String>(entry.key, entry.value);
+      }
+      for (final key in _retired) {
+        // A null value is how both platforms are asked to drop a key.
+        // `deleteFile` skips a read-back that only matters for keys holding a
+        // path to a file the plugin wrote; these never did.
+        await HomeWidget.saveWidgetData<String>(key, null, deleteFile: false);
       }
       // Written first, then asked to redraw — the reload picks up whatever is
       // in the store at the moment it lands.

@@ -44,7 +44,11 @@ void main() {
           final arguments = call.arguments as Map<Object?, Object?>?;
           switch (call.method) {
             case 'saveWidgetData':
-              store[arguments!['id']! as String] = arguments['data'];
+              final id = arguments!['id']! as String;
+              // Both platforms drop the key when the value is null, which is
+              // the only way the plugin offers to delete one.
+              final data = arguments['data'];
+              data == null ? store.remove(id) : store[id] = data;
             case 'getWidgetData':
               return store[arguments!['id']! as String];
           }
@@ -133,6 +137,21 @@ void main() {
 
     expect(await refreshWidget(container: container), isFalse);
     expect(published(), isFalse);
+  });
+
+  test('keys the app has stopped publishing are cleared out', () async {
+    // Left behind by a version that formatted the clock and resolved the sky
+    // before publishing. Nothing reads them now, and a store is only ever
+    // written over, so without this they outlive the code that wrote them.
+    store.addAll({'clock': '15:04', 'sky': 'afternoon', 'caption': 'stale'});
+
+    expect(await refreshWidget(container: await containerWith()), isTrue);
+
+    expect(store.keys, isNot(contains('clock')));
+    expect(store.keys, isNot(contains('sky')));
+    expect(store.keys, isNot(contains('caption')));
+    // And the reading itself is still there, which is the point of the run.
+    expect(store['temperature'], '22°');
   });
 
   test('an unreadable stamp is treated as no reading at all', () async {
