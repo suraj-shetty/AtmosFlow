@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -113,6 +115,18 @@ final selectedPlaceProvider = NotifierProvider<SelectedPlaceNotifier, Place?>(
 
 // ── Forecast ───────────────────────────────────────────────────────────────
 
+/// How long a reading is worth showing before it is worth fetching again.
+///
+/// Not a claim about accuracy — the numbers move slowly and Open-Meteo
+/// publishes on the hour. It is the line past which a forecast stops being
+/// what it is like out and becomes what it was like.
+///
+/// A seam rather than a constant for one reason: proving the cache lets go
+/// would otherwise take a quarter of an hour. Nothing in the app assigns to
+/// it.
+@visibleForTesting
+Duration forecastFreshFor = const Duration(minutes: 15);
+
 /// Forecast for one place. `ref.invalidate` on this is what pull-to-refresh
 /// does.
 final forecastProvider = FutureProvider.family<Forecast, Place>(
@@ -120,7 +134,21 @@ final forecastProvider = FutureProvider.family<Forecast, Place>(
     // Riverpod 3 auto-disposes by default; hold the response so switching tabs
     // or scrolling a list of saved places doesn't re-fetch. Pull-to-refresh
     // invalidates it explicitly.
+    //
+    // The hold has an end. Once the last screen stops watching a place it is
+    // kept for [forecastFreshFor] in case something comes straight back to
+    // it, and then let go: one search for "London" leaves nine forecasts
+    // behind, and by then none of them are worth answering with anyway.
+    //
+    // Letting go while nothing is watching costs no request — the provider is
+    // simply cleared, and the next screen to ask is what fetches again. The
+    // timer is only ever set when nobody is listening, which is what keeps
+    // this from becoming a poll.
     ref.keepAlive();
+    Timer? expiry;
+    ref.onCancel(() => expiry = Timer(forecastFreshFor, ref.invalidateSelf));
+    ref.onResume(() => expiry?.cancel());
+    ref.onDispose(() => expiry?.cancel());
     return ref.watch(weatherRepositoryProvider).fetchForecast(place);
   },
   // Riverpod 3 retries failed providers on a backoff by default. The design
@@ -135,6 +163,37 @@ final currentForecastProvider = Provider<AsyncValue<Forecast>?>((ref) {
   if (place == null) return null;
   return ref.watch(forecastProvider(place));
 });
+
+/// Fetches again when the app comes back to a reading that has gone stale.
+///
+/// The cache's own expiry only bites once nothing is watching, and the usual
+/// way to leave a weather app is to leave it sitting on Home. That reading is
+/// still listened to, so it is still held, and nothing ever asks for it again
+/// — the app could be reopened the next morning and show yesterday's
+/// afternoon. This is the one case the expiry cannot reach.
+///
+/// The refresh is silent: the screen keeps its numbers while the new ones
+/// arrive, and a resume with no network is left to the screen's own error
+/// state rather than announced.
+final forecastFreshnessProvider = Provider<void>((ref) {
+  final listener = AppLifecycleListener(onResume: () => _refetchIfStale(ref));
+  ref.onDispose(listener.dispose);
+});
+
+void _refetchIfStale(Ref ref) {
+  final place = ref.read(selectedPlaceProvider);
+  if (place == null) return;
+
+  final showing = ref.read(forecastProvider(place)).value;
+  if (showing == null) return;
+  if (showing.age < forecastFreshFor) return;
+
+  // The whole family, not just this place. Saved Locations is a screenful of
+  // forecasts and each row watches its own, so they are held for exactly the
+  // same reason and go stale in exactly the same way. The ones nobody is
+  // watching are simply dropped, and fetched again when something asks.
+  ref.invalidate(forecastProvider);
+}
 
 // ── Search ─────────────────────────────────────────────────────────────────
 

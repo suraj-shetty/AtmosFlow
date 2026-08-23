@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/theme/app_theme.dart';
 import 'features/home_widget/application/widget_publisher.dart';
 import 'features/splash/presentation/splash_gate.dart';
+import 'features/weather/application/weather_providers.dart';
 import 'routing/app_router.dart';
 
 class AtmosFlowApp extends ConsumerWidget {
@@ -15,6 +16,11 @@ class AtmosFlowApp extends ConsumerWidget {
     // Watched here rather than from Home so a refresh started anywhere still
     // reaches them.
     ref.watch(widgetMirrorProvider);
+
+    // Watches for the app coming back to a forecast that has gone stale while
+    // it was away. Here for the same reason: it belongs to the app being open
+    // at all, not to whichever screen happens to be on top.
+    ref.watch(forecastFreshnessProvider);
 
     return MaterialApp.router(
       title: 'AtmosFlow',

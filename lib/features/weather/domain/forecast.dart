@@ -54,6 +54,13 @@ abstract class Forecast with _$Forecast {
     );
   }
 
+  /// How long ago this reading was taken.
+  ///
+  /// Lives here rather than at the call site because [clock] is the app's
+  /// test seam and belongs to the domain — and because "how old is this" is
+  /// a question about a forecast, not about whoever is asking.
+  Duration get age => clock().difference(fetchedAt);
+
   /// The next 24 entries from now — what the Home strip scrolls through.
   List<HourlyPoint> get next24Hours => hourly.take(24).toList(growable: false);
 
