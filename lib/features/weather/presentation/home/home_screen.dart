@@ -60,6 +60,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Future<void> _refresh(Forecast forecast) async {
     if (_refreshing) return;
+    final messenger = ScaffoldMessenger.of(context);
     setState(() => _refreshing = true);
     ref.invalidate(forecastProvider(forecast.place));
     try {
@@ -69,6 +70,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         // reads even when the network is instant.
         Future<void>.delayed(Motion.refreshMinimum),
       ]);
+    } catch (error) {
+      // Nobody awaits this — the puck fires it and the gesture is over — so
+      // an escaping failure would go nowhere but the console. The reading on
+      // screen is still the last good one, so the failure is said out loud
+      // rather than drawn over the top of it.
+      if (!mounted) return;
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            (error is AppFailure ? error : const AppFailure.unknown()).message,
+          ),
+        ),
+      );
     } finally {
       if (mounted) setState(() => _refreshing = false);
     }
@@ -80,6 +94,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     if (async == null) return const SizedBox.shrink();
 
     return async.when(
+      // A failed refresh does not take the forecast away. Riverpod holds the
+      // last good value alongside the error, and a reading from ten minutes
+      // ago is worth vastly more to someone in a tunnel than a screen saying
+      // it could not reach the network — which is the same judgement the
+      // widget already makes when it keeps drawing and marks its own age.
+      // With no value to fall back on there is nothing to show but the
+      // failure, and this falls through to `error` as before.
+      skipError: true,
       loading: () => const _HomeScaffold(
         child: Center(child: CircularProgressIndicator()),
       ),
