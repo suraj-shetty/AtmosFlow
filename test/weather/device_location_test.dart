@@ -123,17 +123,18 @@ class _FakeGeolocator extends GeolocatorPlatform {
   Future<LocationPermission> requestPermission() async => permission;
 
   @override
-  Future<Position> getCurrentPosition({LocationSettings? locationSettings}) async =>
-      Position(
-        latitude: 37.7749,
-        longitude: -122.4194,
-        timestamp: DateTime.utc(2026),
-        accuracy: 10,
-        altitude: 0,
-        altitudeAccuracy: 0,
-        heading: 0,
-        headingAccuracy: 0,
-        speed: 0,
-        speedAccuracy: 0,
-      );
+  Future<Position> getCurrentPosition({
+    LocationSettings? locationSettings,
+  }) async => Position(
+    latitude: 37.7749,
+    longitude: -122.4194,
+    timestamp: DateTime.utc(2026),
+    accuracy: 10,
+    altitude: 0,
+    altitudeAccuracy: 0,
+    heading: 0,
+    headingAccuracy: 0,
+    speed: 0,
+    speedAccuracy: 0,
+  );
 }

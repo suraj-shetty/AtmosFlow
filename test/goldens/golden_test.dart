@@ -140,9 +140,7 @@ void main() {
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: ProviderScope(
-              overrides: [
-                sharedPreferencesProvider.overrideWithValue(prefs),
-              ],
+              overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
               child: SplashGate(
                 child: ColoredBox(
                   color: const Color(0xFF000000),
