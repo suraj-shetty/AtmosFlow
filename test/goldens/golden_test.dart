@@ -1,3 +1,10 @@
+// Tagged so CI can leave these out: text rasterisation differs between hosts,
+// so files that are correct on the machine that rendered them fail on a
+// runner. `flutter test` locally still runs them, which is where a diff is
+// useful — see the note on `main` below.
+@Tags(['golden'])
+library;
+
 import 'package:atmos_flow/core/persistence/preferences.dart';
 import 'package:atmos_flow/features/splash/presentation/splash_gate.dart';
 import 'package:atmos_flow/features/weather/domain/weather_condition.dart';

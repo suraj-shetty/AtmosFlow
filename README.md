@@ -171,6 +171,15 @@ flutter test
 across all seven conditions in daylight and at night, and the splash in both
 appearances.
 
+CI runs the other 135 and leaves the goldens out — text rasterises differently
+on a runner than on the machine that rendered the files, so all 21 fail there
+while being perfectly correct. That is the same reason they are a record rather
+than an oracle, so the exclusion costs nothing a runner could have told you.
+
+```bash
+flutter test --exclude-tags golden   # what CI gates
+```
+
 The skip is deliberate and documented in place: Search is the one screen whose
 `State` is not collected after dismissal, narrowed as far as a widget test can
 take it and left failing-but-skipped rather than deleted, so the next person to

@@ -1,0 +1,6 @@
+# Declared so the test runner does not treat 'golden' as a typo.
+tags:
+  golden:
+    description: >-
+      Pixel records of the rendered app. Host-dependent, so CI excludes them
+      with --exclude-tags golden; run them locally, where a diff means look.
