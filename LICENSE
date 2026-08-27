@@ -42,7 +42,9 @@ closely without granting you the right to take it.
    owned by others that is included or relied upon here, which remains under
    its own terms:
 
-   - Caprasimo and Figtree (assets/fonts/) — SIL Open Font License 1.1.
+   - Caprasimo and Figtree (assets/fonts/) — SIL Open Font License 1.1. The
+     licence text ships with them, in assets/fonts/OFL-Caprasimo.txt and
+     assets/fonts/OFL-Figtree.txt; see assets/fonts/README.md.
    - Flutter, Dart, and the packages listed in pubspec.yaml — their own
      licences.
    - Weather data from Open-Meteo — https://open-meteo.com, CC BY 4.0.
