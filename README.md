@@ -4,11 +4,12 @@
 
 **A weather app that shows you the sky before it shows you a number.**
 
-[![Flutter](https://img.shields.io/badge/Flutter-3.32-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart-3.8-0175C2?logo=dart&logoColor=white)](https://dart.dev)
+[![Flutter](https://img.shields.io/badge/Flutter-3.47-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.13-0175C2?logo=dart&logoColor=white)](https://dart.dev)
 [![Platforms](https://img.shields.io/badge/iOS%20%7C%20Android-native%20widgets-201E1D)](#home-screen-widgets)
 [![Data](https://img.shields.io/badge/Open--Meteo-no%20API%20key-C67139)](https://open-meteo.com)
-[![Tests](https://img.shields.io/badge/tests-115%20passing-7A8A5E)](#testing)
+[![Tests](https://img.shields.io/badge/tests-156%20passing-7A8A5E)](#testing)
+[![License](https://img.shields.io/badge/license-MIT-201E1D)](LICENSE)
 
 </div>
 
@@ -16,7 +17,7 @@
 
 Built in Flutter from the
 [AtmosFlow Claude Design project](https://claude.ai/design/p/ac9e9aee-0640-47ce-8a80-5866410dc37a):
-six screens over a live animated sky, home-screen widgets on both platforms,
+seven screens over a live animated sky, home-screen widgets on both platforms,
 and a launch sequence that treats the splash as weather rather than as a wait.
 
 ![Screens](docs/images/screens.png)
@@ -142,8 +143,8 @@ lib/
 ```
 
 **State.** Riverpod 3, hand-written providers rather than codegen — the
-`riverpod_generator` package requires Dart 3.9+ and this project targets the
-installed 3.8.1 SDK. `forecastProvider` and `placeSearchProvider` opt out of
+`riverpod_generator` package requires Dart 3.9+ and this project's declared SDK
+floor is 3.8.1. `forecastProvider` and `placeSearchProvider` opt out of
 Riverpod 3's default retry-on-error: the design puts the user in charge with an
 explicit "Try again" and pull-to-refresh.
 
@@ -166,8 +167,14 @@ draws from, and lands in the same place, so there is no seam between them.
 flutter test
 ```
 
-115 tests. Among them, 21 golden files: every screen once, Home across all
-seven conditions in daylight and at night, and the splash in both appearances.
+156 passing, one skipped. Among them, 21 golden files: every screen once, Home
+across all seven conditions in daylight and at night, and the splash in both
+appearances.
+
+The skip is deliberate and documented in place: Search is the one screen whose
+`State` is not collected after dismissal, narrowed as far as a widget test can
+take it and left failing-but-skipped rather than deleted, so the next person to
+look does not start from scratch.
 
 `FakeWeatherRepository` carries the design prototype's own fixtures — San
 Francisco at 22°, the eight-entry hourly strip, the 24-point temperature curve

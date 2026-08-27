@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: analyze & test
+    # macOS, not Linux: the golden files were rendered on macOS and text
+    # rasterisation differs enough between the two that a Linux runner fails
+    # goldens that are correct.
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.1
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Generated code (freezed + json_serializable) is committed, so there is
+      # no codegen step here — if the checked-in output has drifted from the
+      # models, analyze is what catches it.
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Test
+        run: flutter test
+
+      # Goldens are a record of what the app looks like, not a pass/fail
+      # oracle. When one differs, the diff is the useful artifact.
+      - name: Upload golden failures
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: golden-failures
+          path: test/goldens/failures/
+          if-no-files-found: ignore
