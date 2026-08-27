@@ -10,16 +10,17 @@
 [![Data](https://img.shields.io/badge/Open--Meteo-no%20API%20key-C67139)](https://open-meteo.com)
 [![CI](https://github.com/suraj-shetty/AtmosFlow/actions/workflows/ci.yml/badge.svg)](https://github.com/suraj-shetty/AtmosFlow/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/badge/tests-156%20passing-7A8A5E)](#testing)
-[![License](https://img.shields.io/badge/license-MIT-201E1D)](LICENSE)
+[![License](https://img.shields.io/badge/license-source%20available-201E1D)](LICENSE)
 
 </div>
 
 ---
 
-Built in Flutter from the
-[AtmosFlow Claude Design project](https://claude.ai/design/p/ac9e9aee-0640-47ce-8a80-5866410dc37a):
-seven screens over a live animated sky, home-screen widgets on both platforms,
-and a launch sequence that treats the splash as weather rather than as a wait.
+Designed and built by **Suraj Shetty**. The visual design is mine, made in
+[Claude Designs](https://claude.ai/design/p/ac9e9aee-0640-47ce-8a80-5866410dc37a),
+and the app is my Flutter implementation of it: seven screens over a live animated
+sky, home-screen widgets on both platforms, and a launch sequence that treats the
+splash as weather rather than as a wait.
 
 ![Screens](docs/images/screens.png)
 
@@ -63,7 +64,7 @@ design: **[docs/home-screen-widgets.md](docs/home-screen-widgets.md)**
 
 ## The landing page
 
-[`docs/index.html`](docs/index.html) is the design project's own landing page,
+[`docs/index.html`](docs/index.html) is the design's own landing page,
 built the same way everything else here is — the Organic tokens ported into the
 stylesheet, the hero phone drawn from the design's markup and keyframes. It is
 a single self-contained file — no build step, no scripts — and it is live at
@@ -95,9 +96,8 @@ dart run build_runner build --delete-conflicting-outputs
 
 ## Design → code
 
-The app, the widgets and the brand all come from one Claude Design project,
-and each is **generated from the design's own CSS** rather than transcribed by
-hand:
+The app, the widgets and the brand all come from one design of mine, and each is
+**generated from that design's own CSS** rather than transcribed by hand:
 
 | | |
 | --- | --- |
@@ -202,3 +202,17 @@ on one is the prompt to go and look.
 ```bash
 flutter test --update-goldens test/goldens
 ```
+
+## License
+
+**Source-available, not open source.** Read it, clone it, build it, learn from
+it. Please do not republish it or present it — or the design, the brand, or the
+writing in `docs/` — as your own work. The full terms are in [LICENSE](LICENSE);
+they are short and in plain English.
+
+Third-party material keeps its own licence: the Caprasimo and Figtree fonts
+under the SIL Open Font License, the Flutter packages under theirs, and
+Open-Meteo's data under CC BY 4.0.
+
+If you want to do something the licence does not cover, ask — the answer is
+often yes.

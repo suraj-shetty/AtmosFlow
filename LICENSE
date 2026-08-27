@@ -1,21 +1,61 @@
-MIT License
+AtmosFlow — Source-Available License
+Copyright (c) 2026 Suraj Shetty. All rights reserved.
 
-Copyright (c) 2026 Suraj Shetty
+This project is published so that it can be read. It is NOT open source, and it
+is not licensed for reuse. If you are evaluating my work — as a client, an
+employer, or a curious engineer — everything below is meant to let you look
+closely without granting you the right to take it.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. WHAT YOU MAY DO
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+   a. View, read, and study this repository and everything in it.
+   b. Clone or fork it, and build and run it locally, for the sole purpose of
+      evaluating the work or learning from how it is put together.
+   c. Quote short excerpts of the source in reviews, discussion, or teaching,
+      with attribution to Suraj Shetty and a link to this repository.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+2. WHAT YOU MAY NOT DO
+
+   a. Publish, republish, redistribute, mirror, or host this work or any
+      substantial part of it, whether modified or not.
+   b. Present this work, or anything derived from it, as your own — including
+      in a portfolio, a case study, a course, a template, or an application
+      submitted to an app store.
+   c. Use it, in whole or in part, in any product or service, commercial or
+      otherwise.
+   d. Use the AtmosFlow name, the app icon, the brand mark, the colour system,
+      the screen designs, the widget tile designs, or the written documentation
+      as your own or in any derived work.
+   e. Sublicense, sell, or relicense any part of it.
+   f. Remove or obscure this notice or the copyright above.
+
+3. DESIGN AND WRITING
+
+   The visual design — the brand mark, the Organic colour system, the screen
+   layouts, the seven condition skies, and the widget tiles — is my own work,
+   authored in Claude Designs. The documentation in docs/ is my own writing.
+   Both are covered by this licence exactly as the source code is.
+
+4. THIRD-PARTY MATERIAL
+
+   This licence covers only my own work. It grants no rights over material
+   owned by others that is included or relied upon here, which remains under
+   its own terms:
+
+   - Caprasimo and Figtree (assets/fonts/) — SIL Open Font License 1.1.
+   - Flutter, Dart, and the packages listed in pubspec.yaml — their own
+     licences.
+   - Weather data from Open-Meteo — https://open-meteo.com, CC BY 4.0.
+
+5. NO WARRANTY
+
+   THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL
+   THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING
+   FROM, OUT OF, OR IN CONNECTION WITH THE WORK OR ITS USE.
+
+6. ASKING
+
+   If you want to do something this licence does not permit, ask me. The answer
+   is often yes.
