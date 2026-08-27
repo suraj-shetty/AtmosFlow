@@ -66,16 +66,32 @@ exactly the set of families WidgetKit offers:
 There is also a real `accessoryRectangular` Lock Screen widget. It shows the
 reading in the order the design puts it in; the sky cannot come along.
 
-**Rain and storm print white at every hour.** The design carries two sets of
-copy colours and picks between them by sky — white on dawn, evening and night,
-ink on morning and afternoon. That reads as a rule about the sky, but it is
-really a rule about the tile, and for five of the seven conditions the two are
-the same thing. Rain's veil is rgba(52, 58, 80, .58) and the storm's is
-rgba(24, 26, 44, .64), heavy enough that a bright morning arrives at the copy
-as dark as an evening: ink on `Rain|Morning` measured 4.1:1 for the
-temperature and 2.3:1 for the caption, and the storm was worse. Those four
-tiles now take the white set, which is what `WidgetPalette` on each side is
-for.
+**Four of the veils choose the copy colour, not the sky.** The design carries
+two sets of copy colours and picks between them by sky — white on dawn,
+evening and night, ink on morning and afternoon. That reads as a rule about
+the sky. It is really a rule about the tile, and the copy is not drawn on the
+sky: it is drawn on the sky with the condition's veil over it.
+
+Three of the seven veils are pale or thin enough that the distinction never
+comes up. The other four move the tile past the point where the sky's own
+answer still holds, and they move it in both directions:
+
+| Veil | | Over | Was | Becomes |
+| --- | --- | --- | --- | --- |
+| rain | rgba(52, 58, 80, .58) | morning, afternoon | ink at 4.2:1 | white at 5.7:1 |
+| storm | rgba(24, 26, 44, .64) | morning, afternoon | ink at 4.2:1 | white at 5.7:1 |
+| fog | rgba(196, 198, 206, .56) | dawn, evening | white at 2.4:1 | ink at 6.8:1 |
+| snow | rgba(214, 222, 238, .5) | dawn, evening | white at 2.4:1 | ink at 6.8:1 |
+
+Night is the sky that never moves — it starts at #141A30, and no veil in the
+set lifts it far enough for ink to win.
+
+`WidgetPalette`, on both sides, is where that lives: the sky's depth proposes,
+and a condition that darkens or lightens it can override. The colours
+themselves are the design's, unchanged.
+
+Those ratios are measured rather than estimated, off the pixels each string
+actually covers — see the two render passes below.
 
 On Android the whole tile is painted into one bitmap rather than assembled
 from `RemoteViews`. A `RemoteViews` tree cannot draw gradients, glows or an
@@ -126,6 +142,27 @@ That step is worth doing with the script rather than by hand. Every tile comes
 out of `ImageRenderer` clipped to a rounded rectangle, so its corners are
 transparent; flattening them onto anything but the page's own cream leaves
 four wedges on all thirty-five.
+
+## Checking that the copy can be read
+
+The iOS run writes a second directory: the same 35 tiles with no copy on them.
+Contrast needs both, because the pixels a string covers *are* the string — the
+colour underneath has to come from the bare render, and diffing the two says
+which pixels the copy reached.
+
+```bash
+python3 tool/brand/contrast.py <tiles> <backgrounds>
+```
+
+It prints every string's ratio in both sets of copy colours and stars the ones
+where the set not in use scores higher. That is what found the eight tiles
+above. Two stars are expected and left alone: the clear night glyph, a crescent
+drawn over the ambient moon on purpose, and `fog|night`, where ink would gain
+0.6 on the temperature and lose more than that on the caption and footer.
+
+A star is worth chasing; a low number in *both* columns is not the same thing.
+Several tiles sit under 4.5:1 whichever set they take, and closing those means
+moving the design's own colours rather than choosing between them.
 
 ## Regenerating the Xcode target
 

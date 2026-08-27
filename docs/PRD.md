@@ -12,7 +12,7 @@ visual design can be built against it without losing a feature.
 | **Stack** | Flutter 3.47.1 · Dart 3.13.1 · Riverpod 3.3.2 |
 | **Data** | Open-Meteo (free, keyless, no signup) |
 | **Surfaces** | 7 screens + 5 widget layouts |
-| **Tests** | 156 Dart · 17 Swift · 14 Kotlin |
+| **Tests** | 156 Dart · 18 Swift · 14 Kotlin |
 
 ---
 
@@ -751,7 +751,7 @@ gathered in one place.
 | | |
 |---|---|
 | ✅ | **156 Dart tests** — unit, widget, and a 21-image golden suite covering every condition in both day and night |
-| ✅ | **17 Swift + 14 Kotlin tests** — sky lookup, staleness, clock formatting on both platforms. The tile-render test on each side is one function over all 105 tiles; the Kotlin one is instrumented, so it wants a device and CI does not run it |
+| ✅ | **18 Swift + 14 Kotlin tests** — sky lookup, staleness, clock formatting on both platforms. The render tests are not assertions: two functions on the iOS side draw all 105 tiles and then the 35 backgrounds under them, for the contact sheet and the contrast check. The Kotlin one is instrumented, so it wants a device and CI does not run it |
 | ✅ | **Background refresh proven on a physical iPhone** — fires unprompted with the app closed |
 | ✅ | **Android background worker proven** on emulator, end to end |
 | ⚠️ | **No CI** — nothing runs any of the above automatically |

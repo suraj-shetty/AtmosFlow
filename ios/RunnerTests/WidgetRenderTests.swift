@@ -36,6 +36,35 @@ final class WidgetRenderTests: XCTestCase {
         print("WIDGET TILES: \(directory.path)")
     }
 
+    /// The same 35 tiles with the copy left off — the ground each string is
+    /// drawn on.
+    ///
+    /// Contrast cannot be read off a finished tile: the pixels a string covers
+    /// are the string. Rendering the sky and the veil on their own gives the
+    /// colour underneath, and diffing the two says which pixels the copy
+    /// reached. `tool/brand/contrast.py` does that arithmetic — it is what
+    /// found the eight tiles `WidgetPalette` now overrides.
+    @MainActor
+    func testRenderEveryBackground() throws {
+        let directory = URL(fileURLWithPath: NSTemporaryDirectory())
+            .appendingPathComponent("atmosflow-backgrounds", isDirectory: true)
+        try? FileManager.default.removeItem(at: directory)
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+
+        for condition in WidgetCondition.allCases {
+            for sky in WidgetSky.allCases {
+                let view = ZStack {
+                    sky.gradient
+                    AmbientView(layers: AmbientLayer.catalog(condition, sky), scale: 200)
+                }
+                try write(view, size: CGSize(width: 200, height: 200),
+                          radius: 24, to: directory, named: "square-\(condition)-\(sky)")
+            }
+        }
+
+        print("WIDGET BACKGROUNDS: \(directory.path)")
+    }
+
     /// The design's own sample readings, so the render is comparable to it.
     private func entry(_ condition: WidgetCondition, _ sky: WidgetSky) -> WidgetEntry {
         let temperature: [WidgetSky: Int] = [

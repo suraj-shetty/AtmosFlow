@@ -13,15 +13,22 @@ enum class WidgetCondition(val key: String, val label: String) {
     STORM("storm", "Storm");
 
     /**
-     * Whether this condition's veil is heavy enough to darken a bright sky
-     * past the point where ink still reads against it.
+     * Whether this condition's veil drags a bright sky down toward mid-grey.
      *
-     * Every condition but clear lays a veil over the sky, and most are pale
-     * or thin enough to leave a morning a morning. Rain's is
-     * rgba(52, 58, 80, .58) and the storm's rgba(24, 26, 44, .64) — those two
-     * take a bright sky down to around #7A7F8B. See [WidgetPalette].
+     * Rain's is rgba(52, 58, 80, .58) and the storm's rgba(24, 26, 44, .64):
+     * either takes a morning down to about #7A7F8B before the copy lands on
+     * it. See [WidgetPalette].
      */
     val darkensSky: Boolean get() = this == RAIN || this == STORM
+
+    /**
+     * Whether this condition's veil lifts a dim sky up toward mid-grey — the
+     * same problem from the other side.
+     *
+     * Fog's is rgba(196, 198, 206, .56) and snow's rgba(214, 222, 238, .5),
+     * pale enough to wash a dawn or an evening out from under white copy.
+     */
+    val lightensSky: Boolean get() = this == FOG || this == SNOW
 
     companion object {
         fun from(key: String?) = entries.firstOrNull { it.key == key } ?: CLEAR
@@ -37,12 +44,23 @@ enum class WidgetSky(val key: String, val label: String) {
     NIGHT("night", "Night");
 
     /**
-     * Whether the sky itself is dark: the design paints dawn, evening and
-     * night dark, and morning and afternoon bright. Whether the *tile* ends up
-     * dark is [WidgetPalette]'s question, because the condition paints over
-     * this.
+     * How dark the sky is on its own, in three steps rather than two.
+     *
+     * The design's copy rule only needs two — dawn, evening and night take
+     * white, morning and afternoon take ink — but a veil painted over the sky
+     * moves it, and the three behave differently when it does. Dawn and
+     * evening start mid-toned and a pale veil is enough to wash them out from
+     * under white; night starts at #141A30 and no veil in the set gets it far
+     * enough to matter. See [WidgetPalette].
      */
-    val isDark: Boolean get() = this != MORNING && this != AFTERNOON
+    enum class Depth { BRIGHT, DUSK, DARK }
+
+    val depth: Depth
+        get() = when (this) {
+            MORNING, AFTERNOON -> Depth.BRIGHT
+            DAWN, EVENING -> Depth.DUSK
+            NIGHT -> Depth.DARK
+        }
 
     /**
      * The tile's background, as the design's CSS writes it: an angle in the
@@ -81,15 +99,21 @@ enum class WidgetSky(val key: String, val label: String) {
  * takes.
  *
  * The design picks by sky: white on dawn, evening and night, ink on morning
- * and afternoon. That holds wherever the sky is the last thing painted, and
- * for five of the seven conditions it is close enough. It is not the whole
- * story. The condition veil sits over the sky and under the copy, and rain's
- * and the storm's are heavy enough that a bright morning arrives at the copy
- * as dark as an evening. Ink on those measured 4.1:1 for the temperature and
- * 2.3:1 for the caption — the four tiles where the reading disappeared.
+ * and afternoon. Read as a rule about the sky that is what it says, but the
+ * copy is not drawn on the sky. It is drawn on the sky *and* the condition's
+ * veil, and four of the seven veils move the tile far enough to change the
+ * answer — in both directions.
  *
- * So the sky proposes and the condition can override: anything
- * [WidgetCondition.darkensSky] takes the white set at every hour.
+ * Measured off the rendered tiles, on the pixels each string actually covers
+ * (`tool/brand/contrast.py`), the sky-only rule leaves eight tiles where the
+ * other set is the better one, four at each end:
+ *
+ *     rain, storm   over morning, afternoon   temperature 4.2 -> white 5.7
+ *     fog, snow     over dawn, evening        temperature 2.4 -> ink   6.8
+ *
+ * So depth proposes and the condition can override. Night is the one that
+ * never moves: it starts dark enough that even the palest veil leaves white
+ * ahead.
  */
 class WidgetPalette private constructor(private val isDark: Boolean) {
 
@@ -102,8 +126,13 @@ class WidgetPalette private constructor(private val isDark: Boolean) {
         get() = alpha(Color.WHITE, if (isDark) 0.14f else 0.42f)
 
     companion object {
-        fun on(condition: WidgetCondition, sky: WidgetSky) =
-            WidgetPalette(sky.isDark || condition.darkensSky)
+        fun on(condition: WidgetCondition, sky: WidgetSky) = WidgetPalette(
+            when (sky.depth) {
+                WidgetSky.Depth.BRIGHT -> condition.darkensSky
+                WidgetSky.Depth.DUSK -> !condition.lightensSky
+                WidgetSky.Depth.DARK -> true
+            },
+        )
 
         private fun alpha(color: Int, opacity: Float): Int =
             Color.argb(
