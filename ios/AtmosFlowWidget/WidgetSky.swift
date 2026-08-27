@@ -140,22 +140,42 @@ struct WidgetPalette {
         isDark ? .rgba(255, 255, 255, 0.82) : .rgba(40, 46, 56, 0.78)
     }
 
+    // ── The footnote, and the one place these are not the design's numbers ──
+    //
+    // The design lets the footnote recede a long way: 62% ink under the square
+    // tile's humidity and clock, 58% behind its droplet. Measured against the
+    // ground it lands on, that put eleven tiles under 3:1 and twenty-three
+    // under 4.5:1 — the reading was there, but on a mid-toned tile you had to
+    // go looking for it. The alphas below are raised until every one of the
+    // thirty-five clears 3:1, which is as far as they can usefully go: the
+    // footnote is the smallest copy on the tile and turning it fully opaque
+    // would flatten it into the temperature.
+    //
+    // Alpha is also not the whole answer, and it is worth knowing where it
+    // stops. Six tiles cannot reach 4.5:1 on any alpha at all, snow at night
+    // topping out at 3.7 with white at full strength, because what limits them
+    // is the ground rather than the ink. Closing those means putting something
+    // behind the footnote — a scrim, the way dawn and evening already carry
+    // one — which is a change to the design rather than to a colour.
+
     /// The humidity and clock along the bottom.
     var footnote: Color {
-        isDark ? .rgba(255, 255, 255, 0.86) : .rgba(40, 46, 56, 0.72)
+        isDark ? .rgba(255, 255, 255, 0.90) : .rgba(40, 46, 56, 0.82)
     }
 
     var footnoteLarge: Color {
-        isDark ? .rgba(255, 255, 255, 0.86) : .rgba(40, 46, 56, 0.62)
+        isDark ? .rgba(255, 255, 255, 0.90) : .rgba(40, 46, 56, 0.80)
     }
 
-    /// The small droplet beside the humidity.
+    /// The small droplet beside the humidity. Kept just under the copy it sits
+    /// with, as the design has it — a 2.2pt stroke reads lighter than type at
+    /// the same alpha, so the gap is smaller than the numbers suggest.
     var footnoteGlyph: Color {
-        isDark ? .rgba(255, 255, 255, 0.62) : .rgba(40, 46, 56, 0.58)
+        isDark ? .rgba(255, 255, 255, 0.84) : .rgba(40, 46, 56, 0.76)
     }
 
     var footnoteGlyphLarge: Color {
-        isDark ? .rgba(255, 255, 255, 0.68) : .rgba(40, 46, 56, 0.68)
+        isDark ? .rgba(255, 255, 255, 0.84) : .rgba(40, 46, 56, 0.74)
     }
 
     /// The two glass cards on the wide tile.

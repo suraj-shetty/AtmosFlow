@@ -51,8 +51,8 @@ ELEMENTS = [
     ('temp',    (43, 111),  lambda x: x < 220,  (WHITE, 1.00), (INK, 1.00)),
     ('glyph',   (43, 111),  lambda x: x >= 240, (WHITE, 1.00), (INK, 1.00)),
     ('caption', (140, 175), lambda x: True,     (WHITE, 0.82), (INK_SOFT, 0.78)),
-    ('droplet', (340, 368), lambda x: x < 64,   (WHITE, 0.68), (INK_SOFT, 0.68)),
-    ('footer',  (340, 368), lambda x: x >= 64,  (WHITE, 0.86), (INK_SOFT, 0.62)),
+    ('droplet', (340, 368), lambda x: x < 64,   (WHITE, 0.84), (INK_SOFT, 0.74)),
+    ('footer',  (340, 368), lambda x: x >= 64,  (WHITE, 0.90), (INK_SOFT, 0.80)),
 ]
 
 # The rule WidgetPalette applies, restated here so the table can disagree

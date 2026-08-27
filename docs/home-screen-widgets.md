@@ -86,6 +86,20 @@ answer still holds, and they move it in both directions:
 Night is the sky that never moves — it starts at #141A30, and no veil in the
 set lifts it far enough for ink to win.
 
+**The footnote is drawn heavier than the design draws it.** The design lets it
+recede a long way — 62% ink under the square tile's humidity and clock, 58%
+behind the droplet. Measured, that left eleven of the thirty-five tiles with a
+footnote under 3:1: the reading was there, but on a mid-toned tile you had to
+go looking for it. The alphas are raised to 80% and 74% (90% and 84% on the
+white set), which brings every tile over 3:1 and twenty-two of them over 4.5:1,
+while keeping the footnote plainly quieter than the temperature above it.
+
+That is as far as alpha goes. Six tiles cannot reach 4.5:1 at *any* alpha —
+snow at night tops out at 3.7 with white at full strength — because what limits
+them is the ground, not the ink. Closing those means putting something behind
+the footnote, a scrim of the kind dawn and evening already carry, which would
+be a change to the design rather than to a colour.
+
 `WidgetPalette`, on both sides, is where that lives: the sky's depth proposes,
 and a condition that darkens or lightens it can override. The colours
 themselves are the design's, unchanged.
@@ -161,8 +175,8 @@ drawn over the ambient moon on purpose, and `fog|night`, where ink would gain
 0.6 on the temperature and lose more than that on the caption and footer.
 
 A star is worth chasing; a low number in *both* columns is not the same thing.
-Several tiles sit under 4.5:1 whichever set they take, and closing those means
-moving the design's own colours rather than choosing between them.
+That is a colour that is too faint for the ground it lands on, whichever set it
+comes from, and the footnote was the case in point — see below.
 
 ## Regenerating the Xcode target
 
