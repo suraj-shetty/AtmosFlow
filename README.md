@@ -66,9 +66,13 @@ design: **[docs/home-screen-widgets.md](docs/home-screen-widgets.md)**
 [`docs/index.html`](docs/index.html) is the design project's own landing page,
 built the same way everything else here is — the Organic tokens ported into the
 stylesheet, the hero phone drawn from the design's markup and keyframes. It is
-a single self-contained file: open it in a browser, or point GitHub Pages at
-`main` → `/docs` to publish it at `https://suraj-shetty.github.io/AtmosFlow/`.
-Pages is not enabled on this repository yet.
+a single self-contained file — no build step, no scripts — and it is live at
+**<https://suraj-shetty.github.io/AtmosFlow/>**, served from `main` → `/docs`.
+
+It opens with a 25-second recording of three runs side by side: a clear night in
+San Francisco, cloud over Tokyo, and a thunderstorm over Guangzhou, each captured
+against live Open-Meteo data and lined up on the moment it launches. The conditions
+are whatever the sky was doing that afternoon — nothing is seeded or staged.
 
 ## Quick start
 

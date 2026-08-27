@@ -67,7 +67,7 @@ body {
 h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 400; line-height: 1.12; letter-spacing: -0.015em; }
 a { color: var(--color-accent-700); text-decoration: none; text-underline-offset: 3px; }
 a:hover { color: var(--color-accent-800); }
-img { display: block; max-width: 100%; height: auto; }
+img, video { display: block; max-width: 100%; height: auto; }
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 ::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
 
@@ -417,6 +417,25 @@ pre code { background: none; padding: 0; font-size: inherit; }
 
 <div class="wrap">
 
+  <section class="section" id="conditions">
+    <div class="section-head">
+      <span class="tag tag-accent-2">One build, three skies</span>
+      <h2>The same app, in three weathers</h2>
+      <p>Three recordings made the same afternoon against live Open-Meteo data — a clear
+        night in San Francisco, cloud over Tokyo, a thunderstorm over Guangzhou — lined
+        up on the moment each one launches. Nothing here is staged or seeded: the
+        palette, the glyphs and the falling layers are whatever the sky was doing.</p>
+    </div>
+    <div class="shot">
+      <video controls playsinline preload="metadata" poster="media/conditions-poster.jpg"
+             width="1332" height="990">
+        <source src="media/conditions.mp4" type="video/mp4">
+        <p>This browser will not play the recording.
+          <a href="media/conditions.mp4">Download it instead</a>.</p>
+      </video>
+    </div>
+  </section>
+
   <section class="section" id="skies">
     <div class="section-head">
       <span class="tag tag-accent">The fourteen skies</span>
@@ -430,7 +449,7 @@ pre code { background: none; padding: 0; font-size: inherit; }
 
   <section class="section" id="screens">
     <div class="section-head">
-      <span class="tag tag-accent-2">Six screens</span>
+      <span class="tag tag-accent-2">Seven screens</span>
       <h2>The forecast, floating over it</h2>
       <p>A 96px hero temperature over the live sky, an hourly strip whose chips expand to
         their precipitation line, a seven-day list, a day detail with a chart that draws
@@ -481,7 +500,7 @@ flutter run</code></pre>
           clone compiles without a codegen step.</div>
       </div>
       <div class="fact">
-        <div class="k">115 tests</div>
+        <div class="k">156 tests</div>
         <div class="v">Including 21 goldens: every screen once, Home across all seven
           conditions in daylight and at night, and the splash in both appearances.</div>
       </div>
