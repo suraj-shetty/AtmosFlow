@@ -8,6 +8,7 @@
 [![Dart](https://img.shields.io/badge/Dart-3.13-0175C2?logo=dart&logoColor=white)](https://dart.dev)
 [![Platforms](https://img.shields.io/badge/iOS%20%7C%20Android-native%20widgets-201E1D)](#home-screen-widgets)
 [![Data](https://img.shields.io/badge/Open--Meteo-no%20API%20key-C67139)](https://open-meteo.com)
+[![CI](https://github.com/suraj-shetty/AtmosFlow/actions/workflows/ci.yml/badge.svg)](https://github.com/suraj-shetty/AtmosFlow/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/badge/tests-156%20passing-7A8A5E)](#testing)
 [![License](https://img.shields.io/badge/license-MIT-201E1D)](LICENSE)
 
