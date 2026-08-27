@@ -12,6 +12,17 @@ enum class WidgetCondition(val key: String, val label: String) {
     SNOW("snow", "Snow"),
     STORM("storm", "Storm");
 
+    /**
+     * Whether this condition's veil is heavy enough to darken a bright sky
+     * past the point where ink still reads against it.
+     *
+     * Every condition but clear lays a veil over the sky, and most are pale
+     * or thin enough to leave a morning a morning. Rain's is
+     * rgba(52, 58, 80, .58) and the storm's rgba(24, 26, 44, .64) — those two
+     * take a bright sky down to around #7A7F8B. See [WidgetPalette].
+     */
+    val darkensSky: Boolean get() = this == RAIN || this == STORM
+
     companion object {
         fun from(key: String?) = entries.firstOrNull { it.key == key } ?: CLEAR
     }
@@ -25,7 +36,12 @@ enum class WidgetSky(val key: String, val label: String) {
     EVENING("evening", "Evening"),
     NIGHT("night", "Night");
 
-    /** The design prints white on dawn, evening and night; ink on the others. */
+    /**
+     * Whether the sky itself is dark: the design paints dawn, evening and
+     * night dark, and morning and afternoon bright. Whether the *tile* ends up
+     * dark is [WidgetPalette]'s question, because the condition paints over
+     * this.
+     */
     val isDark: Boolean get() = this != MORNING && this != AFTERNOON
 
     /**
@@ -55,11 +71,27 @@ enum class WidgetSky(val key: String, val label: String) {
             else -> floatArrayOf(0f, 1f)
         }
 
-    // ── Copy colours ───────────────────────────────────────────────────────
-    //
-    // Chosen by sky rather than by condition, as the design does: a storm at
-    // noon still prints ink, because the veil sits under the copy and the sky
-    // above it is bright.
+    companion object {
+        fun from(key: String?) = entries.firstOrNull { it.key == key } ?: AFTERNOON
+    }
+}
+
+/**
+ * The design's two sets of copy colours — white, or ink — and which set a tile
+ * takes.
+ *
+ * The design picks by sky: white on dawn, evening and night, ink on morning
+ * and afternoon. That holds wherever the sky is the last thing painted, and
+ * for five of the seven conditions it is close enough. It is not the whole
+ * story. The condition veil sits over the sky and under the copy, and rain's
+ * and the storm's are heavy enough that a bright morning arrives at the copy
+ * as dark as an evening. Ink on those measured 4.1:1 for the temperature and
+ * 2.3:1 for the caption — the four tiles where the reading disappeared.
+ *
+ * So the sky proposes and the condition can override: anything
+ * [WidgetCondition.darkensSky] takes the white set at every hour.
+ */
+class WidgetPalette private constructor(private val isDark: Boolean) {
 
     val ink: Int get() = if (isDark) Color.WHITE else 0xFF1B1F26.toInt()
 
@@ -70,9 +102,10 @@ enum class WidgetSky(val key: String, val label: String) {
         get() = alpha(Color.WHITE, if (isDark) 0.14f else 0.42f)
 
     companion object {
-        fun from(key: String?) = entries.firstOrNull { it.key == key } ?: AFTERNOON
+        fun on(condition: WidgetCondition, sky: WidgetSky) =
+            WidgetPalette(sky.isDark || condition.darkensSky)
 
-        fun alpha(color: Int, opacity: Float): Int =
+        private fun alpha(color: Int, opacity: Float): Int =
             Color.argb(
                 (Color.alpha(color) * opacity).toInt(),
                 Color.red(color), Color.green(color), Color.blue(color),

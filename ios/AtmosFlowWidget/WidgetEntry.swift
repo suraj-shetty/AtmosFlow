@@ -28,6 +28,10 @@ struct WidgetEntry: TimelineEntry {
     /// "Afternoon · Clear" — follows this entry's sky, not the app's.
     var caption: String { "\(sky.label) · \(condition.label)" }
 
+    /// Which set of copy colours this tile draws in — a question about the
+    /// sky *and* the condition, not the sky alone.
+    var palette: WidgetPalette { .on(condition, sky) }
+
     /// What the widget shows in the gallery, and before the app has ever run.
     static let placeholder = WidgetEntry(
         date: Date(),

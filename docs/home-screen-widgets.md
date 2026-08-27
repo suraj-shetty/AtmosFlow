@@ -66,6 +66,17 @@ exactly the set of families WidgetKit offers:
 There is also a real `accessoryRectangular` Lock Screen widget. It shows the
 reading in the order the design puts it in; the sky cannot come along.
 
+**Rain and storm print white at every hour.** The design carries two sets of
+copy colours and picks between them by sky — white on dawn, evening and night,
+ink on morning and afternoon. That reads as a rule about the sky, but it is
+really a rule about the tile, and for five of the seven conditions the two are
+the same thing. Rain's veil is rgba(52, 58, 80, .58) and the storm's is
+rgba(24, 26, 44, .64), heavy enough that a bright morning arrives at the copy
+as dark as an evening: ink on `Rain|Morning` measured 4.1:1 for the
+temperature and 2.3:1 for the caption, and the storm was worse. Those four
+tiles now take the white set, which is what `WidgetPalette` on each side is
+for.
+
 On Android the whole tile is painted into one bitmap rather than assembled
 from `RemoteViews`. A `RemoteViews` tree cannot draw gradients, glows or an
 arbitrary path, and cannot reach the app's bundled Figtree either. The cost is
@@ -103,7 +114,18 @@ xcodebuild test -project ios/Runner.xcodeproj -scheme Runner \
 cd android && ./gradlew :app:connectedDebugAndroidTest
 ```
 
-Each prints the directory it wrote to.
+Each prints the directory it wrote to. The sheet in the README is the iOS
+square tiles from that directory, laid out five skies across and seven
+conditions down:
+
+```bash
+python3 tool/brand/widgets.py <the directory it printed>
+```
+
+That step is worth doing with the script rather than by hand. Every tile comes
+out of `ImageRenderer` clipped to a rounded rectangle, so its corners are
+transparent; flattening them onto anything but the page's own cream leaves
+four wedges on all thirty-five.
 
 ## Regenerating the Xcode target
 

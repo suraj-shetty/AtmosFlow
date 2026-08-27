@@ -40,19 +40,19 @@ struct SmallWidgetView: View {
                     VStack(alignment: .leading, spacing: 0) {
                         Text(entry.temperature)
                             .font(Face.body(28))
-                            .foregroundStyle(entry.sky.ink)
+                            .foregroundStyle(entry.palette.ink)
                         Text(entry.caption)
                             .font(Face.body(9))
-                            .foregroundStyle(entry.sky.caption)
+                            .foregroundStyle(entry.palette.caption)
                             .padding(.top, 4)
                     }
                     Spacer(minLength: 0)
                     WeatherGlyph(condition: entry.condition, sky: entry.sky,
-                                 size: 30, color: entry.sky.ink)
+                                 size: 30, color: entry.palette.ink)
                 }
                 Spacer(minLength: 0)
                 Footnote(entry: entry, fontSize: 11, glyphSize: 11, gap: 4,
-                         color: entry.sky.footnote, glyphColor: entry.sky.footnoteGlyph)
+                         color: entry.palette.footnote, glyphColor: entry.palette.footnoteGlyph)
             }
             .padding(12)
             .frame(width: geo.size.width, height: geo.size.height, alignment: .topLeading)
@@ -74,20 +74,20 @@ struct SquareWidgetView: View {
                     VStack(alignment: .leading, spacing: 0) {
                         Text(entry.temperature)
                             .font(Face.body(42))
-                            .foregroundStyle(entry.sky.ink)
+                            .foregroundStyle(entry.palette.ink)
                         Text(entry.caption)
                             .font(Face.body(12))
-                            .foregroundStyle(entry.sky.captionLarge)
+                            .foregroundStyle(entry.palette.captionLarge)
                             .padding(.top, 6)
                     }
                     Spacer(minLength: 0)
                     WeatherGlyph(condition: entry.condition, sky: entry.sky,
-                                 size: 40, color: entry.sky.ink)
+                                 size: 40, color: entry.palette.ink)
                 }
                 Spacer(minLength: 0)
                 Footnote(entry: entry, fontSize: 11, glyphSize: 13, gap: 5,
-                         color: entry.sky.footnoteLarge,
-                         glyphColor: entry.sky.footnoteGlyphLarge)
+                         color: entry.palette.footnoteLarge,
+                         glyphColor: entry.palette.footnoteGlyphLarge)
             }
             .padding(16)
             .frame(width: geo.size.width, height: geo.size.height, alignment: .topLeading)
@@ -113,33 +113,33 @@ struct WideWidgetView: View {
                         Text("AtmosFlow · \(entry.sky.label)".uppercased())
                             .font(Face.body(10, .semibold))
                             .tracking(0.06 * 10)
-                            .foregroundStyle(entry.sky.caption)
+                            .foregroundStyle(entry.palette.caption)
                         Text("\(entry.conditionLabel) · \(entry.place)")
                             .font(Face.body(13))
-                            .foregroundStyle(entry.sky.caption)
+                            .foregroundStyle(entry.palette.caption)
                             .padding(.top, 4)
                     }
                     Spacer(minLength: 0)
                     WeatherGlyph(condition: entry.condition, sky: entry.sky,
-                                 size: 32, color: entry.sky.ink)
+                                 size: 32, color: entry.palette.ink)
                 }
                 HStack(spacing: 12) {
-                    Card(sky: entry.sky) {
+                    Card(palette: entry.palette) {
                         Text(entry.temperature)
                             .font(Face.body(24))
-                            .foregroundStyle(entry.sky.ink)
+                            .foregroundStyle(entry.palette.ink)
                         Text(entry.stamp)
                             .font(Face.body(11))
-                            .foregroundStyle(entry.sky.caption)
+                            .foregroundStyle(entry.palette.caption)
                             .padding(.top, 2)
                     }
-                    Card(sky: entry.sky) {
+                    Card(palette: entry.palette) {
                         Text("Humidity")
                             .font(Face.body(11))
-                            .foregroundStyle(entry.sky.caption)
+                            .foregroundStyle(entry.palette.caption)
                         Text(entry.humidity)
                             .font(Face.body(18))
-                            .foregroundStyle(entry.sky.ink)
+                            .foregroundStyle(entry.palette.ink)
                             .padding(.top, 2)
                     }
                 }
@@ -201,13 +201,13 @@ private struct DropletGlyph: View {
 
 /// One of the wide tile's two glass panes.
 private struct Card<Content: View>: View {
-    var sky: WidgetSky
+    var palette: WidgetPalette
     @ViewBuilder var content: Content
 
     var body: some View {
         VStack(spacing: 0) { content }
             .frame(maxWidth: .infinity)
             .padding(12)
-            .background(sky.cardFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .background(palette.cardFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 }

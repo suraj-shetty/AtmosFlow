@@ -21,6 +21,15 @@ enum WidgetCondition: String, CaseIterable {
     var label: String {
         rawValue.prefix(1).uppercased() + rawValue.dropFirst()
     }
+
+    /// Whether this condition's veil is heavy enough to darken a bright sky
+    /// past the point where ink still reads against it.
+    ///
+    /// Every condition but clear lays a veil over the sky, and most are pale
+    /// or thin enough to leave a morning a morning. Rain's is
+    /// rgba(52, 58, 80, .58) and the storm's rgba(24, 26, 44, .64) — those two
+    /// take a bright sky down to around #7A7F8B. See `WidgetPalette`.
+    var darkensSky: Bool { self == .rain || self == .storm }
 }
 
 /// The five skies the widget design paints, matching the app's `SkyTime`.
@@ -31,8 +40,10 @@ enum WidgetSky: String, CaseIterable {
         rawValue.prefix(1).uppercased() + rawValue.dropFirst()
     }
 
-    /// Whether this sky takes white copy. The design prints white on dawn,
-    /// evening and night, and ink on morning and afternoon.
+    /// Whether the sky itself is dark: the design paints dawn, evening and
+    /// night dark, and morning and afternoon bright. Whether the *tile* ends
+    /// up dark is `WidgetPalette`'s question, because the condition paints
+    /// over this.
     var isDark: Bool { self != .morning && self != .afternoon }
 
     /// The tile's background, transcribed from the design's CSS gradients.
@@ -64,12 +75,28 @@ enum WidgetSky: String, CaseIterable {
             endPoint: UnitPoint(x: 0.5 + dx, y: 0.5 + dy)
         )
     }
+}
 
-    // ── Copy colours ───────────────────────────────────────────────────────
-    //
-    // The design carries two sets and picks by sky, not by condition: a storm
-    // at noon still prints ink, because the veil sits under the copy and the
-    // sky above it is bright.
+/// The design's two sets of copy colours — white, or ink — and which set a
+/// tile takes.
+///
+/// The design picks by sky: white on dawn, evening and night, ink on morning
+/// and afternoon. That holds wherever the sky is the last thing painted, and
+/// for five of the seven conditions it is close enough. It is not the whole
+/// story. The condition veil sits over the sky and under the copy, and rain's
+/// and the storm's are heavy enough that a bright morning arrives at the copy
+/// as dark as an evening. Ink on those measured 4.1:1 for the temperature and
+/// 2.3:1 for the caption — the four tiles where the reading disappeared.
+///
+/// So the sky proposes and the condition can override: anything
+/// `WidgetCondition.darkensSky` takes the white set at every hour.
+struct WidgetPalette {
+    /// Whether this tile takes the white set.
+    let isDark: Bool
+
+    static func on(_ condition: WidgetCondition, _ sky: WidgetSky) -> WidgetPalette {
+        WidgetPalette(isDark: sky.isDark || condition.darkensSky)
+    }
 
     /// The temperature, and any other full-strength copy.
     var ink: Color { isDark ? .white : .hex(0x1b1f26) }

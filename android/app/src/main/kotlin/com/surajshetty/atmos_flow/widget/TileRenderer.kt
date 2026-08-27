@@ -35,6 +35,7 @@ object TileRenderer {
         val w = widthPx.toFloat()
         val h = heightPx.toFloat()
         val sky = snapshot.sky
+        val palette = WidgetPalette.on(snapshot.condition, sky)
 
         // The launcher rounds the widget's own corners on modern Android, but
         // older hosts do not, so the tile carries the design's own radius.
@@ -68,7 +69,7 @@ object TileRenderer {
         text.typeface = semiBold
         text.textSize = pt(10f)
         text.letterSpacing = 0.06f
-        text.color = sky.caption
+        text.color = palette.caption
         val kickerBaseline = padding - text.fontMetrics.ascent
         canvas.drawText(
             "AtmosFlow · ${sky.label}".uppercase(),
@@ -88,7 +89,7 @@ object TileRenderer {
         WeatherGlyph.draw(
             canvas, snapshot.condition, sky,
             left = w - padding - glyphSize, top = padding,
-            size = glyphSize, color = sky.ink,
+            size = glyphSize, color = palette.ink,
         )
 
         // ── The two cards ─────────────────────────────────────────────────
@@ -100,13 +101,13 @@ object TileRenderer {
         val cardHeight = (h - padding - cardsTop).coerceAtLeast(pt(60f))
 
         drawCard(
-            canvas, context, sky,
+            canvas, context, palette,
             RectF(padding, cardsTop, padding + cardWidth, cardsTop + cardHeight),
             big = snapshot.temperature, bigSize = pt(24f), bigOnTop = true,
             small = snapshot.stamp, smallSize = pt(11f), unit = unit,
         )
         drawCard(
-            canvas, context, sky,
+            canvas, context, palette,
             RectF(w - padding - cardWidth, cardsTop, w - padding, cardsTop + cardHeight),
             big = snapshot.humidity, bigSize = pt(18f), bigOnTop = false,
             small = "Humidity", smallSize = pt(11f), unit = unit,
@@ -120,11 +121,11 @@ object TileRenderer {
      * card and below it on the right, which [bigOnTop] carries.
      */
     private fun drawCard(
-        canvas: Canvas, context: Context, sky: WidgetSky, rect: RectF,
+        canvas: Canvas, context: Context, palette: WidgetPalette, rect: RectF,
         big: String, bigSize: Float, bigOnTop: Boolean,
         small: String, smallSize: Float, unit: Float,
     ) {
-        val fill = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = sky.cardFill }
+        val fill = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = palette.cardFill }
         val radius = 12f * unit
         canvas.drawRoundRect(rect, radius, radius, fill)
 
@@ -132,13 +133,13 @@ object TileRenderer {
         val bigPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             typeface = regular
             textSize = bigSize
-            color = sky.ink
+            color = palette.ink
             textAlign = Paint.Align.CENTER
         }
         val smallPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             typeface = regular
             textSize = smallSize
-            color = sky.caption
+            color = palette.caption
             textAlign = Paint.Align.CENTER
         }
 

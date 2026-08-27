@@ -121,6 +121,6 @@ if __name__ == '__main__':
     grid([[f'home_{c}_day.png' for c in CONDITIONS],
           [f'home_{c}_night.png' for c in CONDITIONS]], 'skies.png')
     # docs/images/widgets.png is not rebuilt here: the widget tiles are drawn
-    # by the platforms themselves, so they come from the render harnesses in
-    # docs/home-screen-widgets.md rather than from anything in this repo.
+    # by the platforms themselves, so they need a simulator running first.
+    # tool/brand/widgets.py lays them out once the harness has written them.
     print('done')
